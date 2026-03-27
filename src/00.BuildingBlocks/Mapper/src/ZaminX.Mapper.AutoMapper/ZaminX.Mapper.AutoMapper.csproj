@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZaminX.Mapper.Abstractions\ZaminX.Mapper.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
