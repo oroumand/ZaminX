@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/ZaminX.Mapper.Abstractions/ZaminX.Mapper.Abstractions.csproj" />
+    <Project Path="src/ZaminX.Mapper.AutoMapper/ZaminX.Mapper.AutoMapper.csproj" />
   </Folder>
 </Solution>
