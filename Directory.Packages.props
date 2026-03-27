@@ -4,7 +4,8 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-
-    
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="AutoMapper" Version="16.1.1" />
   </ItemGroup>
 </Project>
