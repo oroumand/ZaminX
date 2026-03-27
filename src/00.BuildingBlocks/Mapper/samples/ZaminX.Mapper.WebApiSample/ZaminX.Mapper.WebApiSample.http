@@ -1,0 +1,6 @@
+@ZaminX.Mapper.WebApiSample_HostAddress = http://localhost:5012
+
+GET {{ZaminX.Mapper.WebApiSample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
