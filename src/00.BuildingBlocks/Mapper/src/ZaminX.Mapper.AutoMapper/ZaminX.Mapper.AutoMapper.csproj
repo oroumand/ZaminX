@@ -2,8 +2,6 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 	</PropertyGroup>
-
-
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" />
 	</ItemGroup>
