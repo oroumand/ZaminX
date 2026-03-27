@@ -6,18 +6,17 @@
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Authors>Alireza Oroumand</Authors>
 		<Company>َARO Mind</Company>
 		<RepositoryUrl>https://github.com/oroumand/ZaminX</RepositoryUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<IncludeSymbols>false</IncludeSymbols>
 		<NoWarn>1591</NoWarn>  
-		<PackageProjectUrl>https://github.com/oroumand/Zamin</PackageProjectUrl>
-		<PackageTags>ZaminX;Framework;DDD;CQRS;Onion,ModularMonolith</PackageTags>
+		<PackageProjectUrl>https://github.com/oroumand/ZaminX</PackageProjectUrl>
+		<PackageTags>ZaminX;Framework;DDD;CQRS;Onion;ModularMonolith</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>  
-		<Company>َARO Mind</Company>
   	</PropertyGroup>
 
    <PropertyGroup>
