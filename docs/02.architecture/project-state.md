@@ -64,3 +64,63 @@ Zamin X در فاز طراحی محصول و معماری قرار دارد.
   vision, architecture, modules, adr, backlog, guidelines, reference
 - docs به عنوان source of truth پروژه در نظر گرفته شد
 - ترتیب تولید مستندات به صورت مرحله‌ای تعریف شد
+
+## تصمیم‌های جدید
+
+### تعریف taxonomy پروژه
+
+پروژه Zamin X بر اساس پنج دسته اصلی سازمان‌دهی می‌شود:
+
+- BuildingBlocks
+- ApplicationPatterns
+- Integrations
+- Foundations
+- Applications
+
+---
+
+### تعریف BuildingBlocks
+
+BuildingBlocks اجزای مستقل، reusable و self-contained هستند که می‌توانند به‌تنهایی استفاده و پکیج شوند.
+
+ویژگی‌ها:
+- ممکن است abstraction داشته باشند یا نداشته باشند
+- ممکن است به تکنولوژی خاص وابسته باشند
+- می‌توانند provider-based باشند
+- می‌توانند شامل setup و registration باشند
+
+معیار اصلی: استقلال مصرف
+
+---
+
+### تعریف ApplicationPatterns
+
+ApplicationPatterns الگوهای پرکاربرد سطح اپلیکیشن هستند که معمولاً از چند BuildingBlock استفاده می‌کنند.
+
+---
+
+### تعریف Integrations
+
+Integrations مسئول اتصال به سیستم‌ها و سرویس‌های بیرونی هستند.
+
+---
+
+### تعریف Foundations
+
+Foundations شامل ساختارهای آماده و scaffoldها برای شروع پروژه‌ها هستند.
+
+---
+
+### تعریف Applications
+
+Applications شامل اپلیکیشن‌های کوچک، runnable و قابل استفاده هستند که بر پایه Zamin X ساخته می‌شوند و به adoption سریع کمک می‌کنند.
+
+---
+
+### قواعد تصمیم‌گیری برای جایگذاری
+
+- اگر یک جزء مستقل و قابل استفاده است → BuildingBlocks
+- اگر یک الگوی تکرارشونده است → ApplicationPatterns
+- اگر اتصال به بیرون است → Integrations
+- اگر ساختار پروژه است → Foundations
+- اگر اپ runnable است → Applications
