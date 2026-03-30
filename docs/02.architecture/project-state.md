@@ -108,6 +108,29 @@
 - Mapper اولین ماژول کامل پروژه است و نقش مرجع طراحی را دارد
 - مستندسازی و تحلیل Mapper مبنای تصمیم‌های معماری برای سایر ماژول‌ها خواهد بود
 
+
+
+### مدل provider-based برای capabilityهای عمومی و بین‌برشی
+- در capabilityهای عمومی و بین‌برشی، اگر نیاز واقعی به مرز انتزاعی وجود داشته باشد، از مدل «انتزاع + provider» استفاده می‌شود
+- در این مدل، مصرف‌کننده به قرارداد capability وابسته می‌شود، نه به ابزار بیرونی
+- registration هر provider در خود همان provider نگه داشته می‌شود
+- ابزار بیرونی نباید به API مصرفی capability نشت کند
+- READMEهای محلی نقش فنی و ورود سریع دارند، اما مرجع اصلی تصمیم‌های معماری و محصولی بخش docs است
+
+### دو نوع قرارداد در capabilityها
+- در capabilityهای این خانواده، قراردادها می‌توانند در دو دسته قرار بگیرند:
+  - قراردادهای مصرفی capability برای استفاده توسعه‌دهنده
+  - قراردادهای درونی capability برای نیازهای داخلی خود capability
+- این تفکیک برای capabilityهایی مانند Translation حیاتی است، چون خود capability ممکن است برای دسترسی به sourceها یا providerهای داده به قراردادهای درونی نیاز داشته باشد
+- این تفکیک از مخلوط شدن API مصرفی capability با dependencyهای درونی آن جلوگیری می‌کند
+
+### جایگاه و naming رسمی Object Mapper
+- نام این capability در سطح محصول `Object Mapper` است
+- سند این capability در مسیر `docs/03.modules/00.BuildingBlocks/01.CrossCutting/object-mappers.md` نگهداری می‌شود
+- naming فنی پروژه‌ها، پوشه‌ها و فضای نام‌های این capability باید با taxonomy رسمی زمین X هم‌راستا شود
+- الگوی مطلوب naming فنی این capability از جنس این ساختار است:
+  - `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions`
+  - `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper`
 ---
 
 ## تصمیم‌های باز
