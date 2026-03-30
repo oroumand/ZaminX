@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Reflection;
 
-namespace ZaminX.Mapper.AutoMapper.Configurations;
+namespace ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper.Configurations;
 
 public sealed class ZaminXAutoMapperOptions
 {

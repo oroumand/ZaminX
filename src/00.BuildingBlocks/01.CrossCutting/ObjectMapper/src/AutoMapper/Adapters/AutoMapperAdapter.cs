@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using ZaminX.Mapper.Abstractions.Contracts;
+using ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.Contracts;
 
-namespace ZaminX.Mapper.AutoMapper.Adapters;
+namespace ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper.Adapters;
 
 public sealed class AutoMapperAdapter(IMapper mapper) : IMapperAdapter
 {

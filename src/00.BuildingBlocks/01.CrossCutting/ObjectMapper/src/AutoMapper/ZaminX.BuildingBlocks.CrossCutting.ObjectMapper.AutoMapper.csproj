@@ -6,6 +6,6 @@
 		<PackageReference Include="AutoMapper" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\ZaminX.Mapper.Abstractions\ZaminX.Mapper.Abstractions.csproj" />
+	  <ProjectReference Include="..\Abstractions\ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.csproj" />
 	</ItemGroup>
 </Project>

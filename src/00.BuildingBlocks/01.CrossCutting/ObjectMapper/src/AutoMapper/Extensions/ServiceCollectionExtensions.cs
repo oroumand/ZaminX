@@ -1,10 +1,8 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using ZaminX.Mapper.Abstractions.Contracts;
-using ZaminX.Mapper.AutoMapper.Adapters;
-using ZaminX.Mapper.AutoMapper.Configurations;
+﻿using ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.Contracts;
+using ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper.Adapters;
+using ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper.Configurations;
 
-namespace ZaminX.Mapper.AutoMapper.Extensions;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

@@ -91,7 +91,7 @@ APIها و setup باید ساده، شفاف و قابل فهم باشند.
 
 نمونه‌هایی از capabilityها در زمین X:
 
-- Mapper
+- Object Mapper
 - Translator
 - Logger
 - DependencyInjection
@@ -101,6 +101,8 @@ APIها و setup باید ساده، شفاف و قابل فهم باشند.
 - Entity
 - AggregateRoot
 - Mediator
+
+در این میان، `Object Mapper` یکی از capabilityهای مرجع در خانواده قابلیت‌های عمومی و بین‌برشی است و به‌عنوان نمونه‌ای از طراحی مبتنی بر «انتزاع + provider» در نظر گرفته می‌شود.
 
 ---
 

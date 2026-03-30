@@ -6,10 +6,9 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ZaminX.Mapper.Abstractions\ZaminX.Mapper.Abstractions.csproj" />
-    <ProjectReference Include="..\..\src\ZaminX.Mapper.AutoMapper\ZaminX.Mapper.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\src\Abstractions\ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\AutoMapper\ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper.csproj" />
   </ItemGroup>
 
 </Project>
