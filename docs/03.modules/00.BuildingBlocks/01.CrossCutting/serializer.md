@@ -242,3 +242,14 @@ provider اصلی این capability نباید برای هر فراخوانی se
 * docs/04.decision-records/adr/adr-001-cross-cutting-capabilities-provider-model.md
 * docs/04.decision-records/adr/adr-006-product-naming-vs-technical-naming.md
 * docs/04.decision-records/adr/adr-009-provider-options-diagnostics-and-exception-boundary.md
+
+## وضعیت فعلی
+
+در وضعیت فعلی:
+- طراحی capability انجام شده است
+- مستندات اصلی capability تکمیل شده‌اند
+- ADR مرتبط ثبت شده است
+- provider مایکروسافتی و provider نیوتن‌سافتی پیاده‌سازی شده‌اند
+- یک Web API sample برای نمایش registration و مصرف capability ایجاد شده است
+- ساختار داخلی پروژه‌ها بر پایه `Configurations`، `Services` و `Extensions` تثبیت شده است
+- namespace مربوط به registration برابر `Microsoft.Extensions.DependencyInjection` در نظر گرفته شده است

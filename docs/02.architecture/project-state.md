@@ -14,8 +14,7 @@
 * ریپو تمیز شده است
 * ساختار اصلی ریشه حفظ شده است
 * ماژول `Mapper` در `00.BuildingBlocks` وجود دارد و مرجع سبک ساخت capabilityها است
-* طراحی capability `Serializer` در خانواده `01.CrossCutting` آغاز شده و تصمیم‌های معماری اصلی آن تثبیت شده است
-
+- capability `Serializer` در خانواده `01.CrossCutting` طراحی، مستندسازی و پیاده‌سازی اولیه شد
 ---
 
 ## ساختار فعلی src
@@ -33,8 +32,7 @@
 ### BuildingBlocks
 
 * `Mapper` ✅ تکمیل شده
-* `Serializer` 🟡 طراحی معماری و مستندات در حال تثبیت
-
+- `Serializer` ✅ طراحی، مستندسازی و پیاده‌سازی اولیه انجام شد
 ---
 
 ## ماژول‌های در دست طراحی
@@ -171,6 +169,13 @@
 * providerهای اصلی نباید logging روتین per-call انجام دهند
 * debug اصلی باید در caller و boundary انجام شود و در صورت نیاز از decorator تشخیصی یا سازوکار observability بیرونی استفاده شود
 
+- ساختار فنی این capability بر پایه solution با نام `Prism` تثبیت شد
+- پروژه‌های این capability شامل `Abstractions`، provider مایکروسافتی، provider نیوتن‌سافتی و Web API sample هستند
+- در ساختار داخلی پروژه‌ها:
+  - options در فولدر `Configurations` قرار می‌گیرند
+  - پیاده‌سازی‌ها در فولدر `Services` قرار می‌گیرند
+  - registration در فولدر `Extensions` قرار می‌گیرد
+  - namespace مربوط به registration برابر `Microsoft.Extensions.DependencyInjection` است
 ---
 
 ## تصمیم‌های باز
@@ -182,7 +187,6 @@
 * بررسی و تصمیم‌گیری نهایی درباره `MicroserviceModule`
 * تعیین مرز دقیق بعضی capabilityها در نقشه ماژول‌ها
 * ساختار backlog و roadmap
-* تکمیل ساختار اجرایی Serializer و providerهای آن
 
 ---
 
@@ -242,3 +246,8 @@
 * `Serializer` دومین capability مرجع در خانواده `01.CrossCutting` است که با الگوی provider-based طراحی می‌شود
 * هر تصمیم مهم باید هم‌زمان در اسناد مرتبط و در این فایل ثبت شود
 * تصمیم‌های عمیق و ماندگار باید به ADR منتقل شوند
+- capability `Serializer` از فاز طراحی وارد فاز پیاده‌سازی اولیه شد
+- solution این capability با نام `Prism` تثبیت شد
+- provider مایکروسافتی و provider نیوتن‌سافتی برای `Serializer` پیاده‌سازی شدند
+- Web API sample برای `Serializer` ایجاد شد
+- conventionهای داخلی این capability برای `Configurations`، `Services` و `Extensions` تثبیت شد

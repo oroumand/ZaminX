@@ -230,7 +230,7 @@ Applications مصرف‌کننده مستقیم این capabilityها هستند
 
 * Object Mapper به‌عنوان capability مرجع این خانواده مستند شده است
 * Object Mapper نمونه فعلی مدل provider-based در این خانواده است
-* Serializer به‌عنوان capability بعدی این خانواده وارد طراحی رسمی شده است
+- Serializer به‌عنوان دومین capability مرجع این خانواده طراحی، مستندسازی و پیاده‌سازی اولیه شد
 * نام محصولی Serializer در زمین X، `Prism` است
 * سایر ماژول‌های این خانواده هنوز در حال طراحی یا تثبیت مستندات هستند
 
