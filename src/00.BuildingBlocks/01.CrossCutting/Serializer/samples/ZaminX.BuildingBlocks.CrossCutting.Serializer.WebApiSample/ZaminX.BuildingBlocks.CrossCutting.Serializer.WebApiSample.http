@@ -1,0 +1,6 @@
+@ZaminX.BuildingBlocks.CrossCutting.Serializer.WebApiSample_HostAddress = http://localhost:5287
+
+GET {{ZaminX.BuildingBlocks.CrossCutting.Serializer.WebApiSample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/ZaminX.BuildingBlocks.CrossCutting.Serializer.WebApiSample/ZaminX.BuildingBlocks.CrossCutting.Serializer.WebApiSample.csproj" Id="5ad84f07-fc5f-4fb0-9930-8d970bd6362c" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Abstractions/ZaminX.BuildingBlocks.CrossCutting.Serializer.Abstractions.csproj" />
+    <Project Path="src/Microsoft/ZaminX.BuildingBlocks.CrossCutting.Serializer.Microsoft.csproj" />
+    <Project Path="src/Newtonsoft/ZaminX.BuildingBlocks.CrossCutting.Serializer.Newtonsoft.csproj" />
+  </Folder>
+</Solution>
