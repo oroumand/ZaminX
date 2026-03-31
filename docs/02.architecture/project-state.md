@@ -1,192 +1,244 @@
 # وضعیت پروژه زمین X
 
 ## وضعیت کلی
+
 زمین X در فاز طراحی محصول و معماری قرار دارد.
 
-در این فاز، تمرکز بر تعریف محصول، taxonomy، دسته‌های اصلی، مرز ماژول‌ها، ADRها و backlog است.  
+در این فاز، تمرکز بر تعریف محصول، taxonomy، دسته‌های اصلی، مرز ماژول‌ها، ADRها و backlog است.
 فعلاً توسعه کد به‌جز بخش Mapper مبنا نیست.
 
 ---
 
 ## وضعیت ریپو
-- ریپو تمیز شده است
-- ساختار اصلی ریشه حفظ شده است
-- ماژول `Mapper` در `00.BuildingBlocks` وجود دارد و مرجع سبک ساخت capabilityها است
+
+* ریپو تمیز شده است
+* ساختار اصلی ریشه حفظ شده است
+* ماژول `Mapper` در `00.BuildingBlocks` وجود دارد و مرجع سبک ساخت capabilityها است
+* طراحی capability `Serializer` در خانواده `01.CrossCutting` آغاز شده و تصمیم‌های معماری اصلی آن تثبیت شده است
 
 ---
 
 ## ساختار فعلی src
-- `00.BuildingBlocks`
-- `01.ApplicationPatterns`
-- `02.Integrations`
-- `03.Foundations`
-- `04.Applications`
+
+* `00.BuildingBlocks`
+* `01.ApplicationPatterns`
+* `02.Integrations`
+* `03.Foundations`
+* `04.Applications`
 
 ---
 
 ## ماژول‌های موجود
 
 ### BuildingBlocks
-- `Mapper` ✅ تکمیل شده
+
+* `Mapper` ✅ تکمیل شده
+* `Serializer` 🟡 طراحی معماری و مستندات در حال تثبیت
 
 ---
 
 ## ماژول‌های در دست طراحی
-- `Translator`
-- `ApplicationPatterns`
-- `Integrations`
-- `Foundations`
-- `Applications`
-- نقشه اولیه ماژول‌ها
+
+* `Translator`
+* `ApplicationPatterns`
+* `Integrations`
+* `Foundations`
+* `Applications`
+* نقشه اولیه ماژول‌ها
+* تکمیل خانواده `01.CrossCutting`
 
 ---
 
 ## تصمیم‌های تثبیت‌شده
 
-- taxonomy پروژه بر اساس پنج دسته اصلی `BuildingBlocks`, `ApplicationPatterns`, `Integrations`, `Foundations`, `Applications` سازمان‌دهی می‌شود
-- هر capability تا حد امکان مستقل، ماژولار و قابل بازاستفاده طراحی می‌شود
-- مستندسازی بخشی از فرایند اصلی توسعه است
-- فعلاً طراحی محصول و معماری مقدم بر توسعه ماژول‌های جدید است
-- docs به‌عنوان source of truth پروژه در نظر گرفته می‌شود
+* taxonomy پروژه بر اساس پنج دسته اصلی `BuildingBlocks`, `ApplicationPatterns`, `Integrations`, `Foundations`, `Applications` سازمان‌دهی می‌شود
+* هر capability تا حد امکان مستقل، ماژولار و قابل بازاستفاده طراحی می‌شود
+* مستندسازی بخشی از فرایند اصلی توسعه است
+* فعلاً طراحی محصول و معماری مقدم بر توسعه ماژول‌های جدید است
+* docs به‌عنوان source of truth پروژه در نظر گرفته می‌شود
 
 ### تعریف BuildingBlocks
-- معیار اصلی قرارگیری در `BuildingBlocks` استقلال مصرف، خودبسندگی و قابل بازاستفاده بودن است
-- یک جزء می‌تواند در `BuildingBlocks` قرار بگیرد حتی اگر به تکنولوژی خاص وابسته باشد، مادامی که به‌صورت مستقل قابل استفاده باشد
-- وجود انتزاع الزامی نیست؛ فقط در صورت نیاز ایجاد می‌شود
-- اگر انتزاع مناسبی از قبل در بستر .NET وجود داشته باشد، از همان استفاده می‌شود
-- setup، registration و providerها نیز در صورت مستقل بودن می‌توانند در همین دسته قرار بگیرند
+
+* معیار اصلی قرارگیری در `BuildingBlocks` استقلال مصرف، خودبسندگی و قابل بازاستفاده بودن است
+* یک جزء می‌تواند در `BuildingBlocks` قرار بگیرد حتی اگر به تکنولوژی خاص وابسته باشد، مادامی که به‌صورت مستقل قابل استفاده باشد
+* وجود انتزاع الزامی نیست؛ فقط در صورت نیاز ایجاد می‌شود
+* اگر انتزاع مناسبی از قبل در بستر .NET وجود داشته باشد، از همان استفاده می‌شود
+* setup، registration و providerها نیز در صورت مستقل بودن می‌توانند در همین دسته قرار بگیرند
 
 ### تعریف اجزای pattern-like در BuildingBlocks
-- الگوهای پایه مانند `Entity`، `AggregateRoot`، `ValueObject`، `DomainEvent` و `Mediator` در صورت ارائه به‌عنوان جزء مستقل و قابل بازاستفاده، در `BuildingBlocks` قرار می‌گیرند
-- وجود ماهیت الگویی، آن‌ها را الزاماً در `ApplicationPatterns` قرار نمی‌دهد
+
+* الگوهای پایه مانند `Entity`، `AggregateRoot`، `ValueObject`، `DomainEvent` و `Mediator` در صورت ارائه به‌عنوان جزء مستقل و قابل بازاستفاده، در `BuildingBlocks` قرار می‌گیرند
+* وجود ماهیت الگویی، آن‌ها را الزاماً در `ApplicationPatterns` قرار نمی‌دهد
 
 ### تعریف ApplicationPatterns
-- `ApplicationPatterns` الگوهای پرکاربرد سطح اپلیکیشن هستند که معمولاً از چند BuildingBlock استفاده می‌کنند
-- این دسته برای ارائه جریان‌ها و رفتارهای تکرارشونده در سطح اپلیکیشن استفاده می‌شود
+
+* `ApplicationPatterns` الگوهای پرکاربرد سطح اپلیکیشن هستند که معمولاً از چند BuildingBlock استفاده می‌کنند
+* این دسته برای ارائه جریان‌ها و رفتارهای تکرارشونده در سطح اپلیکیشن استفاده می‌شود
 
 ### تعریف Integrations
-- `Integrations` مسئول اتصال به سیستم‌ها و سرویس‌های بیرونی هستند
-- معیار اصلی این دسته، اتصال به boundary بیرونی است، نه صرفاً وابستگی به تکنولوژی خاص
+
+* `Integrations` مسئول اتصال به سیستم‌ها و سرویس‌های بیرونی هستند
+* معیار اصلی این دسته، اتصال به boundary بیرونی است، نه صرفاً وابستگی به تکنولوژی خاص
 
 ### تعریف Foundations
-- `Foundations` شامل ساختارهای آماده و scaffoldها برای شروع پروژه‌ها هستند
-- این دسته شامل artifact قابل اجرا نیست
-- جهت‌گیری فعلی این دسته بر پایه `MonolithStructure` و `ModularMonolith` است
-- `MicroserviceModule` فعلاً به‌عنوان گزینه باز برای آینده ثبت می‌شود
+
+* `Foundations` شامل ساختارهای آماده و scaffoldها برای شروع پروژه‌ها هستند
+* این دسته شامل artifact قابل اجرا نیست
+* جهت‌گیری فعلی این دسته بر پایه `MonolithStructure` و `ModularMonolith` است
+* `MicroserviceModule` فعلاً به‌عنوان گزینه باز برای آینده ثبت می‌شود
 
 ### تعریف Applications
-- `Applications` شامل اپلیکیشن‌های کوچک، قابل اجرا و قابل استفاده هستند که بر پایه زمین X ساخته می‌شوند و به شروع سریع توسعه و adoption کمک می‌کنند
-- این دسته بخشی از ارزش محصول است، نه صرفاً demo
+
+* `Applications` شامل اپلیکیشن‌های کوچک، قابل اجرا و قابل استفاده هستند که بر پایه زمین X ساخته می‌شوند و به شروع سریع توسعه و adoption کمک می‌کنند
+* این دسته بخشی از ارزش محصول است، نه صرفاً demo
 
 ### تعریف Auditing
-- در حوزه داده و ماندگاری، `Auditing` یکی از capabilityهای اصلی در نظر گرفته می‌شود
-- `Auditing` شامل ثبت خودکار اطلاعات ایجاد و تغییر، و در صورت نیاز ثبت تاریخچه کامل تغییرات است
-- برای مشاهده و تحلیل تاریخچه تغییرات، یک اپلیکیشن در دسته `Applications` در نظر گرفته می‌شود
+
+* در حوزه داده و ماندگاری، `Auditing` یکی از capabilityهای اصلی در نظر گرفته می‌شود
+* `Auditing` شامل ثبت خودکار اطلاعات ایجاد و تغییر، و در صورت نیاز ثبت تاریخچه کامل تغییرات است
+* برای مشاهده و تحلیل تاریخچه تغییرات، یک اپلیکیشن در دسته `Applications` در نظر گرفته می‌شود
 
 ### قواعد تصمیم‌گیری برای جایگذاری
-- اگر یک جزء مستقل و قابل استفاده است → `BuildingBlocks`
-- اگر یک الگوی تکرارشونده در سطح اپلیکیشن است → `ApplicationPatterns`
-- اگر اتصال به بیرون است → `Integrations`
-- اگر ساختار پروژه، قالب یا scaffold است → `Foundations`
-- اگر اپلیکیشن قابل اجرا و ارزشمند برای استفاده مستقیم است → `Applications`
+
+* اگر یک جزء مستقل و قابل استفاده است → `BuildingBlocks`
+* اگر یک الگوی تکرارشونده در سطح اپلیکیشن است → `ApplicationPatterns`
+* اگر اتصال به بیرون است → `Integrations`
+* اگر ساختار پروژه، قالب یا scaffold است → `Foundations`
+* اگر اپلیکیشن قابل اجرا و ارزشمند برای استفاده مستقیم است → `Applications`
 
 ### ساختار خانواده‌ای BuildingBlocks
-- BuildingBlocks به خانواده‌های مشخص تقسیم می‌شوند
-- هر خانواده دارای یک پوشه مستقل در مستندات است
-- هر خانواده یک فایل index برای تعریف کلی دارد
-- هر ماژول دارای مستند مستقل خود در همان خانواده است
-- این ساختار به‌عنوان ساختار استاندارد مستندسازی BuildingBlocks تثبیت شده است
+
+* BuildingBlocks به خانواده‌های مشخص تقسیم می‌شوند
+* هر خانواده دارای یک پوشه مستقل در مستندات است
+* هر خانواده یک فایل index برای تعریف کلی دارد
+* هر ماژول دارای مستند مستقل خود در همان خانواده است
+* این ساختار به‌عنوان ساختار استاندارد مستندسازی BuildingBlocks تثبیت شده است
 
 ### الگوی مستندسازی ماژول‌ها
-- برای مستندسازی هر ماژول یک template استاندارد تعریف شده است
-- این template شامل تعریف، مسئله، جایگاه، تصمیم‌های طراحی و نحوه استفاده است
-- این الگو برای تمام دسته‌ها (BuildingBlocks، ApplicationPatterns، Integrations و ...) استفاده می‌شود
-- هدف این الگو حفظ consistency و جلوگیری از تکرار است
+
+* برای مستندسازی هر ماژول یک template استاندارد تعریف شده است
+* این template شامل تعریف، مسئله، جایگاه، تصمیم‌های طراحی و نحوه استفاده است
+* این الگو برای تمام دسته‌ها (BuildingBlocks، ApplicationPatterns، Integrations و ...) استفاده می‌شود
+* هدف این الگو حفظ consistency و جلوگیری از تکرار است
 
 ### جایگاه Mapper
-- Mapper به‌عنوان یک BuildingBlock در خانواده CrossCutting در نظر گرفته می‌شود
-- Mapper اولین ماژول کامل پروژه است و نقش مرجع طراحی را دارد
-- مستندسازی و تحلیل Mapper مبنای تصمیم‌های معماری برای سایر ماژول‌ها خواهد بود
 
-
+* Mapper به‌عنوان یک BuildingBlock در خانواده CrossCutting در نظر گرفته می‌شود
+* Mapper اولین ماژول کامل پروژه است و نقش مرجع طراحی را دارد
+* مستندسازی و تحلیل Mapper مبنای تصمیم‌های معماری برای سایر ماژول‌ها خواهد بود
 
 ### مدل provider-based برای capabilityهای عمومی و بین‌برشی
-- در capabilityهای عمومی و بین‌برشی، اگر نیاز واقعی به مرز انتزاعی وجود داشته باشد، از مدل «انتزاع + provider» استفاده می‌شود
-- در این مدل، مصرف‌کننده به قرارداد capability وابسته می‌شود، نه به ابزار بیرونی
-- registration هر provider در خود همان provider نگه داشته می‌شود
-- ابزار بیرونی نباید به API مصرفی capability نشت کند
-- READMEهای محلی نقش فنی و ورود سریع دارند، اما مرجع اصلی تصمیم‌های معماری و محصولی بخش docs است
+
+* در capabilityهای عمومی و بین‌برشی، اگر نیاز واقعی به مرز انتزاعی وجود داشته باشد، از مدل «انتزاع + provider» استفاده می‌شود
+* در این مدل، مصرف‌کننده به قرارداد capability وابسته می‌شود، نه به ابزار بیرونی
+* registration هر provider در خود همان provider نگه داشته می‌شود
+* ابزار بیرونی نباید به API مصرفی capability نشت کند
+* READMEهای محلی نقش فنی و ورود سریع دارند، اما مرجع اصلی تصمیم‌های معماری و محصولی بخش docs است
 
 ### دو نوع قرارداد در capabilityها
-- در capabilityهای این خانواده، قراردادها می‌توانند در دو دسته قرار بگیرند:
-  - قراردادهای مصرفی capability برای استفاده توسعه‌دهنده
-  - قراردادهای درونی capability برای نیازهای داخلی خود capability
-- این تفکیک برای capabilityهایی مانند Translation حیاتی است، چون خود capability ممکن است برای دسترسی به sourceها یا providerهای داده به قراردادهای درونی نیاز داشته باشد
-- این تفکیک از مخلوط شدن API مصرفی capability با dependencyهای درونی آن جلوگیری می‌کند
+
+* در capabilityهای این خانواده، قراردادها می‌توانند در دو دسته قرار بگیرند:
+
+  * قراردادهای مصرفی capability برای استفاده توسعه‌دهنده
+  * قراردادهای درونی capability برای نیازهای داخلی خود capability
+* این تفکیک برای capabilityهایی مانند Translation حیاتی است، چون خود capability ممکن است برای دسترسی به sourceها یا providerهای داده به قراردادهای درونی نیاز داشته باشد
+* این تفکیک از مخلوط شدن API مصرفی capability با dependencyهای درونی آن جلوگیری می‌کند
 
 ### جایگاه و naming رسمی Object Mapper
-- نام این capability در سطح محصول `Object Mapper` است
-- سند این capability در مسیر `docs/03.modules/00.BuildingBlocks/01.CrossCutting/object-mappers.md` نگهداری می‌شود
-- naming فنی پروژه‌ها، پوشه‌ها و فضای نام‌های این capability باید با taxonomy رسمی زمین X هم‌راستا شود
-- الگوی مطلوب naming فنی این capability از جنس این ساختار است:
-  - `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions`
-  - `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper`
+
+* نام این capability در سطح محصول `Object Mapper` است
+* سند این capability در مسیر `docs/03.modules/00.BuildingBlocks/01.CrossCutting/object-mappers.md` نگهداری می‌شود
+* naming فنی پروژه‌ها، پوشه‌ها و فضای نام‌های این capability باید با taxonomy رسمی زمین X هم‌راستا شود
+* الگوی مطلوب naming فنی این capability از جنس این ساختار است:
+
+  * `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions`
+  * `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper`
+
+### جایگاه و طراحی رسمی Serializer
+
+* `Serializer` به‌عنوان یک BuildingBlock در خانواده `01.CrossCutting` در نظر گرفته می‌شود
+* نام محصولی این capability `Prism` است
+* naming فنی این capability در پروژه‌ها، packageها، پوشه‌ها و namespaceها باید با taxonomy رسمی زمین X هم‌راستا بماند
+* این capability در فاز فعلی روی JSON متمرکز است
+* قرارداد مصرفی این capability باید مینیمال و provider-agnostic بماند
+* providerهای اولیه این capability:
+
+  * Microsoft
+  * Newtonsoft
+* registration هر provider در خود همان provider نگه داشته می‌شود
+* options provider فقط در registration مجازند و نباید وارد قرارداد مصرفی capability شوند
+* exceptionهای ابزار بیرونی باید در provider جذب و به exception capability-level تبدیل شوند
+* providerهای اصلی نباید logging روتین per-call انجام دهند
+* debug اصلی باید در caller و boundary انجام شود و در صورت نیاز از decorator تشخیصی یا سازوکار observability بیرونی استفاده شود
+
 ---
 
 ## تصمیم‌های باز
-- فهرست اولیه ماژول‌های هر دسته
-- تعیین فهرست اولیه Applications
-- نهایی‌سازی ساختار `MonolithStructure`
-- نهایی‌سازی ساختار `ModularMonolith`
-- بررسی و تصمیم‌گیری نهایی درباره `MicroserviceModule`
-- تعیین مرز دقیق بعضی capabilityها در نقشه ماژول‌ها
-- ساختار backlog و roadmap
+
+* فهرست اولیه ماژول‌های هر دسته
+* تعیین فهرست اولیه Applications
+* نهایی‌سازی ساختار `MonolithStructure`
+* نهایی‌سازی ساختار `ModularMonolith`
+* بررسی و تصمیم‌گیری نهایی درباره `MicroserviceModule`
+* تعیین مرز دقیق بعضی capabilityها در نقشه ماژول‌ها
+* ساختار backlog و roadmap
+* تکمیل ساختار اجرایی Serializer و providerهای آن
 
 ---
 
 ## فاز فعلی
+
 فاز ۱: Product Definition & Architecture Design
 
 ---
 
 ## خروجی‌های مورد انتظار این فاز
-- Product Vision
-- Consumer Entry Points
-- Repository Taxonomy
-- Layer Definitions
-- Module Map
-- Initial Applications Map
-- ADRهای کلیدی
-- Backlog اولیه
-- Roadmap اولیه
+
+* Product Vision
+* Consumer Entry Points
+* Repository Taxonomy
+* Layer Definitions
+* Module Map
+* Initial Applications Map
+* ADRهای کلیدی
+* Backlog اولیه
+* Roadmap اولیه
 
 ---
 
 ## آخرین به‌روزرسانی مهم
-- ریپو به وضعیت تمیز بعد از Mapper بازگردانده شد
-- تصمیم گرفته شد ادامه کار از طراحی محصول و معماری شروع شود، نه از توسعه ماژول‌های جدید
-- ساختار نهایی docs تعریف شد
-- مستندسازی به 7 بخش اصلی تقسیم شد:
-  - vision
-  - architecture
-  - modules
-  - adr
-  - backlog
-  - guidelines
-  - reference
-- ترتیب تولید مستندات به‌صورت مرحله‌ای تعریف شد
-- taxonomy پروژه از مدل چهار دسته‌ای به مدل پنج دسته‌ای توسعه یافت
-- `Applications` به‌عنوان دسته مستقل به taxonomy پروژه اضافه شد
-- ساختار مستندات `03.modules` به‌صورت خانواده‌محور برای BuildingBlocks نهایی شد
-- برای هر خانواده یک index مستقل تعریف شد
-- ساختار مستندات ماژول‌ها به‌صورت فایل مستقل برای هر ماژول تثبیت شد
-- template استاندارد برای مستندات ماژول‌ها تعریف شد
+
+* ریپو به وضعیت تمیز بعد از Mapper بازگردانده شد
+* تصمیم گرفته شد ادامه کار از طراحی محصول و معماری شروع شود، نه از توسعه ماژول‌های جدید
+* ساختار نهایی docs تعریف شد
+* مستندسازی به 7 بخش اصلی تقسیم شد:
+
+  * vision
+  * architecture
+  * modules
+  * adr
+  * backlog
+  * guidelines
+  * reference
+* ترتیب تولید مستندات به‌صورت مرحله‌ای تعریف شد
+* taxonomy پروژه از مدل چهار دسته‌ای به مدل پنج دسته‌ای توسعه یافت
+* `Applications` به‌عنوان دسته مستقل به taxonomy پروژه اضافه شد
+* ساختار مستندات `03.modules` به‌صورت خانواده‌محور برای BuildingBlocks نهایی شد
+* برای هر خانواده یک index مستقل تعریف شد
+* ساختار مستندات ماژول‌ها به‌صورت فایل مستقل برای هر ماژول تثبیت شد
+* template استاندارد برای مستندات ماژول‌ها تعریف شد
+* capability `Serializer` به‌عنوان capability بعدی خانواده `01.CrossCutting` وارد طراحی رسمی شد
+* نام محصولی `Prism` برای capability `Serializer` انتخاب شد
+* تصمیم معماری مربوط به مرز options، diagnostics و exception در capabilityهای provider-based ثبت شد
 
 ---
 
 ## نکات اجرایی فعلی
-- `Mapper` مرجع سبک طراحی capabilityها در پروژه است
-- `Mapper` به‌عنوان reference implementation برای خانواده CrossCutting در نظر گرفته می‌شود
-- الگوی طراحی Mapper مبنای طراحی ماژول‌های بعدی مانند Translator، Serializer و ... خواهد بود- `03.modules/index.md` مرجع نقشه اولیه ماژول‌ها است
-- هر تصمیم مهم باید هم‌زمان در اسناد مرتبط و در این فایل ثبت شود
-- تصمیم‌های عمیق و ماندگار باید به ADR منتقل شوند
+
+* `Mapper` مرجع سبک طراحی capabilityها در پروژه است
+* `Mapper` به‌عنوان reference implementation برای خانواده CrossCutting در نظر گرفته می‌شود
+* الگوی طراحی Mapper مبنای طراحی ماژول‌های بعدی مانند Translator، Serializer و ... خواهد بود
+* `03.modules/index.md` مرجع نقشه اولیه ماژول‌ها است
+* `Serializer` دومین capability مرجع در خانواده `01.CrossCutting` است که با الگوی provider-based طراحی می‌شود
+* هر تصمیم مهم باید هم‌زمان در اسناد مرتبط و در این فایل ثبت شود
+* تصمیم‌های عمیق و ماندگار باید به ADR منتقل شوند

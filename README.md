@@ -10,11 +10,11 @@
 
 زمین X تلاش می‌کند:
 
-- پیچیدگی‌های تکراری در توسعه نرم‌افزار را کاهش دهد
-- یک معماری یکدست و قابل توسعه ارائه دهد
-- امکان انتخاب و جایگزینی پیاده‌سازی‌ها را فراهم کند
-- توسعه سیستم‌های ماژولار را ساده‌تر کند
-- شروع پروژه‌های جدید را سریع‌تر و کم‌هزینه‌تر کند
+* پیچیدگی‌های تکراری در توسعه نرم‌افزار را کاهش دهد
+* یک معماری یکدست و قابل توسعه ارائه دهد
+* امکان انتخاب و جایگزینی پیاده‌سازی‌ها را فراهم کند
+* توسعه سیستم‌های ماژولار را ساده‌تر کند
+* شروع پروژه‌های جدید را سریع‌تر و کم‌هزینه‌تر کند
 
 ---
 
@@ -23,36 +23,43 @@
 زمین X از پنج دسته اصلی تشکیل شده است:
 
 ### BuildingBlocks
+
 اجزای مستقل، خودبسنده و قابل بازاستفاده که می‌توانند به‌تنهایی استفاده و بسته‌بندی شوند.
 
 نکته مهم:
-- وابستگی به تکنولوژی مانع قرارگیری در این دسته نیست
-- وجود انتزاع الزامی نیست
-- معیار اصلی: استقلال مصرف
+
+* وابستگی به تکنولوژی مانع قرارگیری در این دسته نیست
+* وجود انتزاع الزامی نیست
+* معیار اصلی: استقلال مصرف
 
 ---
 
 ### ApplicationPatterns
+
 الگوهای پرکاربرد سطح اپلیکیشن که معمولاً از چند BuildingBlock استفاده می‌کنند و یک رفتار تکرارشونده را استاندارد می‌کنند.
 
 ---
 
 ### Integrations
+
 اجزایی که مسئول اتصال به سرویس‌ها، سیستم‌ها و boundaryهای بیرونی هستند.
 
 ---
 
 ### Foundations
+
 ساختارهای آماده و opinionated برای شروع پروژه‌ها.
 
 نمونه‌های هدف:
-- MonolithStructure
-- ModularMonolith
-- MicroserviceModule (در حال بررسی)
+
+* MonolithStructure
+* ModularMonolith
+* MicroserviceModule (در حال بررسی)
 
 ---
 
 ### Applications
+
 اپلیکیشن‌های کوچک، قابل اجرا و ارزشمند که با استفاده از زمین X ساخته می‌شوند و برای استفاده مستقیم یا شروع سریع توسعه کاربرد دارند.
 
 ---
@@ -60,29 +67,34 @@
 ## فلسفه طراحی
 
 ### 1. استقلال اجزا
+
 هر capability تا حد امکان باید مستقل، خودبسنده و قابل بازاستفاده باشد.
 
 ---
 
 ### 2. انتزاع فقط در صورت نیاز
+
 در زمین X ایجاد انتزاع یک الزام پیش‌فرض نیست.
 
-اگر برای یک capability نیاز واقعی وجود داشته باشد، قرارداد مستقل تعریف می‌شود.  
+اگر برای یک capability نیاز واقعی وجود داشته باشد، قرارداد مستقل تعریف می‌شود.
 اگر بستر .NET انتزاع مناسبی داشته باشد، از همان استفاده می‌شود.
 
 ---
 
 ### 3. سادگی در استفاده
+
 APIها و setup باید ساده، شفاف و قابل فهم باشند.
 
 ---
 
 ### 4. قابلیت توسعه و جایگزینی
+
 در صورت نیاز، پیاده‌سازی‌ها باید قابل جایگزینی باشند.
 
 ---
 
 ### 5. مستندسازی به‌عنوان بخشی از محصول
+
 مستندسازی بخشی از خود محصول است، نه خروجی جانبی.
 
 ---
@@ -91,18 +103,20 @@ APIها و setup باید ساده، شفاف و قابل فهم باشند.
 
 نمونه‌هایی از capabilityها در زمین X:
 
-- Object Mapper
-- Translator
-- Logger
-- DependencyInjection
-- Serializer
-- ApplicationPartDetector
-- Auditing
-- Entity
-- AggregateRoot
-- Mediator
+* Object Mapper
+* Translator
+* Logger
+* DependencyInjection
+* Serializer
+* ApplicationPartDetector
+* Auditing
+* Entity
+* AggregateRoot
+* Mediator
 
-در این میان، `Object Mapper` یکی از capabilityهای مرجع در خانواده قابلیت‌های عمومی و بین‌برشی است و به‌عنوان نمونه‌ای از طراحی مبتنی بر «انتزاع + provider» در نظر گرفته می‌شود.
+در این میان، `Object Mapper` و `Serializer` از capabilityهای مرجع در خانواده قابلیت‌های عمومی و بین‌برشی هستند و به‌عنوان نمونه‌هایی از طراحی مبتنی بر «انتزاع + provider» در نظر گرفته می‌شوند.
+
+نام محصولی capability `Serializer` در زمین X، `Prism` است.
 
 ---
 
@@ -111,11 +125,11 @@ APIها و setup باید ساده، شفاف و قابل فهم باشند.
 ساختار کلی پروژه:
 
 src/
-  00.BuildingBlocks
-  01.ApplicationPatterns
-  02.Integrations
-  03.Foundations
-  04.Applications
+00.BuildingBlocks
+01.ApplicationPatterns
+02.Integrations
+03.Foundations
+04.Applications
 
 ---
 
@@ -127,11 +141,11 @@ docs/
 
 برای شروع:
 
-- README.md
-- docs/index.md
-- docs/01.vision/index.md
-- docs/02.architecture/project-state.md
-- docs/02.architecture/index.md
+* README.md
+* docs/index.md
+* docs/01.vision/index.md
+* docs/02.architecture/project-state.md
+* docs/02.architecture/index.md
 
 ---
 
@@ -141,24 +155,25 @@ docs/
 
 تمرکز فعلی:
 
-- تثبیت taxonomy پروژه
-- تعریف معماری کلان
-- طراحی نقشه ماژول‌ها
-- ثبت تصمیم‌های کلیدی
-- ایجاد backlog اولیه
+* تثبیت taxonomy پروژه
+* تعریف معماری کلان
+* طراحی نقشه ماژول‌ها
+* ثبت تصمیم‌های کلیدی
+* ایجاد backlog اولیه
 
 ---
 
 ## نقشه راه کوتاه‌مدت
 
-- تثبیت معماری
-- تعریف BuildingBlockهای اصلی
-- طراحی ApplicationPatterns
-- تعریف Foundations (MonolithStructure و ModularMonolith)
-- طراحی Applications اولیه:
-  - مدیریت ترجمه
-  - مشاهده تاریخچه تغییرات (Auditing)
-- ایجاد backlog و roadmap
+* تثبیت معماری
+* تعریف BuildingBlockهای اصلی
+* طراحی ApplicationPatterns
+* تعریف Foundations (MonolithStructure و ModularMonolith)
+* طراحی Applications اولیه:
+
+  * مدیریت ترجمه
+  * مشاهده تاریخچه تغییرات (Auditing)
+* ایجاد backlog و roadmap
 
 ---
 
