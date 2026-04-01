@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Abstractions\ZaminX.BuildingBlocks.CrossCutting.Translator.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

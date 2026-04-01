@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/WebApi/ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Abstractions/ZaminX.BuildingBlocks.CrossCutting.Translator.Abstractions.csproj" />
+    <Project Path="src/Parrot/ZaminX.BuildingBlocks.CrossCutting.Translator.Parrot.csproj" />
+    <Project Path="src/SqlServer/ZaminX.BuildingBlocks.CrossCutting.Translator.SqlServer.csproj" />
+  </Folder>
+</Solution>
