@@ -239,7 +239,6 @@ Applications مصرف‌کننده مستقیم این capabilityها هستند
 ## تصمیم‌های باز
 
 * تعیین ساختار نهایی Translation
-* تکمیل ساختار اجرایی Serializer و مستندات providerهای آن
 * تعیین scope دقیق DependencyInjection
 * تعیین ساختار Caching
 * تعیین مدل Sinks و نسبت آن با Logging
