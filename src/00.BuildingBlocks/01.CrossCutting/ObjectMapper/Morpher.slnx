@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/samples/">
-    <Project Path="samples/WebApiSample/ZaminX.BuildingBlocks.CrossCutting.ObjectMapper..WebApiSample.csproj" />
+    <Project Path="samples/WebApiSample/ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.WebApiSample.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Abstractions/ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.csproj" />

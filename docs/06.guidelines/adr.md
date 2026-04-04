@@ -19,7 +19,7 @@ ADR بخشی از محصول است، نه مستند جانبی.
 
 تمام ADRها در مسیر زیر نگهداری می‌شوند:
 
-docs/02.architecture/adr/
+docs/04.decision-records/adr/
 
 ---
 

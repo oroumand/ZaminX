@@ -37,13 +37,15 @@ capabilityهای این خانواده:
 
 ---
 
-### Object Mapper
+### Object Mapper (Morpher)
 
 وضعیت: تثبیت‌شده
 
 - طراحی کامل شده
 - پیاده‌سازی انجام شده
-- به‌عنوان مرجع طراحی سایر capabilityها استفاده می‌شود
+- نام محصولی `Morpher` برای این capability تثبیت شده است
+- نام فنی این capability همچنان `Object Mapper` باقی می‌ماند
+- این capability به‌عنوان مرجع طراحی سایر capabilityها استفاده می‌شود
 
 ---
 

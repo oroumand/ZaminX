@@ -103,6 +103,8 @@
 
 قابلیتی برای نگاشت بین آبجکت‌ها که تصمیم استفاده از ابزار mapping را پشت یک مرز انتزاعی محصور می‌کند.
 
+نام محصولی این capability در زمین X، `Morpher` است و نام فنی آن `Object Mapper` است.
+
 برای جزئیات بیشتر:
 
 * `object-mappers.md`
@@ -232,7 +234,7 @@ Applications مصرف‌کننده مستقیم این capabilityها هستند
 
 در وضعیت فعلی پروژه:
 
-* Object Mapper به‌عنوان capability مرجع این خانواده مستند شده است
+* Object Mapper با نام محصولی `Morpher` به‌عنوان capability مرجع این خانواده مستند شده است
 * Object Mapper نمونه فعلی مدل provider-based در این خانواده است
 * Serializer به‌عنوان دومین capability مرجع این خانواده طراحی، مستندسازی و پیاده‌سازی اولیه شد
 * نام محصولی Serializer در زمین X، `Prism` است

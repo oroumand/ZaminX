@@ -1,40 +1,82 @@
 # Object Mapper
 
-Object Mapper یکی از capabilityهای عمومی و بین‌برشی در زمین X است.
+Object Mapper یکی از capabilityهای خانواده CrossCutting در زمین X است.
 
-هدف این capability این است که تصمیم استفاده از ابزار mapping در سطح پروژه پخش نشود و مصرف‌کننده‌ها به‌جای وابستگی مستقیم به ابزار بیرونی، به یک قرارداد پایدار وابسته شوند.
+نام فنی این capability Object Mapper و نام محصولی آن Morpher است.
 
-## پروژه‌های این capability
+Morpher برای هم‌راستایی با الگوی naming محصولی در capabilityهای مرجع CrossCutting انتخاب شده است و در عین حال به‌گونه‌ای نام‌گذاری شده که با مفهوم Reflection در اکوسیستم .NET اشتباه گرفته نشود.
 
-این capability در وضعیت فعلی شامل این پروژه‌هاست:
+این capability یک مرز انتزاعی برای عملیات mapping بین objectها فراهم می‌کند و وابستگی به ابزارهای بیرونی mapping را از مصرف‌کننده جدا می‌کند.
 
-- `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions`
-- `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper`
-- `ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.WebApiSample`
+---
 
-## ساختار
+## هدف
 
-### Abstractions
-قرارداد اصلی capability را تعریف می‌کند.
+هدف Object Mapper:
 
-### AutoMapper
-provider فعلی capability را بر پایه AutoMapper ارائه می‌کند.
+* ساده‌سازی mapping بین objectها
+* جلوگیری از نشت API کتابخانه‌های mapping به لایه‌های بالاتر
+* فراهم کردن امکان جایگزینی providerهای مختلف
+* ایجاد یک API یکنواخت و پایدار برای مصرف‌کننده
 
-### WebApiSample
-نمونه اجرایی برای نمایش registration و استفاده از capability است.
+---
 
-## نقش این README
+## پروژه‌ها
 
-این README برای معرفی سریع capability، ساختار پروژه‌ها و ورود اولیه به آن نگه داشته می‌شود.
+این capability در وضعیت فعلی شامل پروژه‌های زیر است:
 
-برای چرایی وجود capability، جایگاه آن در taxonomy، تصمیم‌های معماری و مرزهای آن، به سند اصلی در docs مراجعه کنید:
+* ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions
+  قراردادهای اصلی capability
 
-- `docs/03.modules/00.BuildingBlocks/01.CrossCutting/object-mappers.md`
+* ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.AutoMapper
+  provider مبتنی بر AutoMapper
+
+* ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.WebApiSample
+  نمونه مصرف capability در یک Web API
+
+---
+
+## نحوه استفاده (خلاصه)
+
+ابتدا provider مورد نظر را register کنید:
+
+services.AddAutoMapperAdapter(...);
+
+سپس در کد مصرف‌کننده:
+
+public class MyService
+{
+private readonly IMapperAdapter _mapper;
+
+```
+public MyService(IMapperAdapter mapper)
+{
+    _mapper = mapper;
+}
+
+public Target Map(Source source)
+{
+    return _mapper.Map<Target>(source);
+}
+```
+
+}
+
+جزئیات کامل usage و سناریوهای مختلف در docs و sample ارائه شده است.
+
+---
+
+## مستندات اصلی
+
+مرجع اصلی طراحی و مستندات این capability در docs پروژه نگهداری می‌شود:
+
+* docs/03.modules/00.BuildingBlocks/01.CrossCutting/object-mappers.md
+* docs/06.guidelines/crosscutting-design.md
+
+این README فقط برای معرفی سریع capability و ساختار آن است و جایگزین docs اصلی نیست.
+
+---
 
 ## وضعیت فعلی
 
-در وضعیت فعلی:
-- قرارداد اصلی capability تعریف شده است
-- provider مبتنی بر AutoMapper وجود دارد
-- sample اجرایی وجود دارد
-- naming فنی در حال هم‌راستاسازی با taxonomy رسمی زمین X است
+این capability به‌عنوان یکی از capabilityهای مرجع خانواده CrossCutting در زمین X در نظر گرفته می‌شود و مبنایی برای طراحی capabilityهای مشابه در این خانواده است.

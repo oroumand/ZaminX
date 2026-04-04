@@ -1,229 +1,168 @@
-# Translator (Parrot)
+# Translator
 
-## نمای کلی
+Translator یکی از capabilityهای خانواده CrossCutting در زمین X است.
 
-Translator در زمین X یک capability قابل بازاستفاده در خانواده CrossCutting است که مسئول ترجمه و تبدیل کلیدهای معنایی به متن نهایی است.
+نام فنی این capability `Translator` و نام محصولی آن `Parrot` است.
 
-این capability با نام محصولی Parrot ارائه می‌شود.
-
-Parrot این امکان را فراهم می‌کند که:
-
-- متن‌ها به‌صورت key-based تعریف شوند
-- ترجمه‌ها از sourceهای مختلف تأمین شوند
-- رفتار fallback به‌صورت استاندارد اعمال شود
-- formatting و ترکیب متن‌ها به‌صورت ساده انجام شود
-- بدون restart، داده‌های ترجمه به‌روزرسانی شوند
+Parrot برای هم‌راستایی با الگوی naming محصولی در capabilityهای مرجع CrossCutting انتخاب شده است و نمایانگر تکرار و بازتولید متن در contextهای مختلف است.
 
 ---
 
-## مسئله‌ای که حل می‌کند
+## هدف
 
-در بسیاری از سیستم‌ها:
+هدف Translator:
 
-- متن‌ها به‌صورت hard-coded نوشته می‌شوند
-- ترجمه‌ها به‌سختی مدیریت می‌شوند
-- تغییر ترجمه نیاز به deploy دارد
-- چند source داده به‌سختی ترکیب می‌شوند
-
-Parrot این مشکلات را حل می‌کند و یک لایه انتزاعی برای ترجمه فراهم می‌کند که:
-
-- مستقل از storage است
-- قابل توسعه است
-- و در runtime قابل تغییر است
+* مدیریت ترجمه‌ها در سطح application
+* جلوگیری از پراکندگی منطق ترجمه در کد
+* فراهم کردن abstraction برای منابع مختلف ترجمه
+* پشتیبانی از چند provider به‌صورت هم‌زمان
+* امکان refresh و به‌روزرسانی runtime ترجمه‌ها
 
 ---
 
-## مفاهیم اصلی
+## جایگاه در CrossCutting
 
-### کلید ترجمه
+Translator یک capability عمومی و بین‌برشی است که:
 
-هر متن با یک key شناخته می‌شود:
-
-Common.Hello  
-User.DisplayName  
-Message.Greeting  
+* به دامنه خاصی وابسته نیست
+* به لایه خاصی محدود نیست
+* در بخش‌های مختلف سیستم قابل استفاده است
 
 ---
 
-### Culture
+## مدل طراحی
 
-Parrot از culture پشتیبانی می‌کند:
+Translator از الگوی **core-orchestrated provider capability** استفاده می‌کند.
 
-- en-US
-- fa-IR
-- یا culture خالی (default)
+در این مدل:
 
----
-
-### رفتار fallback
-
-اگر ترجمه‌ای پیدا نشود:
-
-1. ابتدا culture کامل بررسی می‌شود
-2. سپس parent culture
-3. در نهایت culture عمومی (بدون culture)
-4. اگر همچنان پیدا نشد، خود key برگردانده می‌شود
+* یک core capability وجود دارد
+* providerها به core داده می‌دهند
+* consumer فقط با core کار می‌کند
 
 ---
 
-## API مصرفی
+## ساختار capability
 
-مصرف‌کننده فقط با ITranslator کار می‌کند.
+این capability شامل اجزای زیر است:
 
-### دریافت ساده
+### قرارداد مصرفی
 
-translator["Common.Hello"]  
-translator.GetString("Common.Hello")  
+```csharp
+ITranslator
+```
 
----
-
-### با culture
-
-translator.GetString(new CultureInfo("fa-IR"), "Common.Hello")
+API اصلی برای دریافت ترجمه‌ها.
 
 ---
 
-### با آرگومان‌های ترجمه‌شونده
+### Core (Parrot)
 
-translator.GetString(
-    "Message.Greeting",
-    "User.DisplayName")
+Core capability مسئول:
 
-در این حالت:
-
-- آرگومان‌ها ابتدا ترجمه می‌شوند
-- سپس در متن قرار می‌گیرند
+* نگهداری ترجمه‌ها در حافظه
+* merge داده‌ها از providerها
+* ارائه API مصرفی
+* مدیریت lifecycle
 
 ---
 
-### با آرگومان‌های خام
+### Providerها
 
-translator.GetFormattedString(
-    "Message.Price",
-    1250.75,
-    "IRR",
-    DateTime.UtcNow)
+providerها مسئول:
 
-در این حالت:
+* تأمین داده ترجمه
+* اتصال به منابع مختلف (SQL، فایل، API و ...)
 
-- آرگومان‌ها مستقیم استفاده می‌شوند
-- ترجمه نمی‌شوند
+نمونه:
+
+* SqlServerTranslationProvider
 
 ---
 
-### ترکیب چند کلید
+### قراردادهای درونی
 
-translator.GetConcatString('-', "Common.Hello", "Common.World")
+برای ارتباط بین core و providerها:
 
----
+* ITranslationDataProvider
+* ITranslationRefreshService
+* ITranslationMissingKeyRegistrar
 
-## مدل provider
-
-Parrot از مدل provider-based استفاده می‌کند.
-
-- مصرف‌کننده فقط به ITranslator وابسته است
-- داده‌ها توسط providerها تأمین می‌شوند
-- چند provider می‌توانند هم‌زمان فعال باشند
+این قراردادها بخشی از API مصرفی نیستند.
 
 ---
 
-### ترتیب providerها
+## الگوی اجرا
 
-- providerها به ترتیب registration اجرا می‌شوند
-- providerهای بعدی می‌توانند داده‌های قبلی را override کنند
+### در startup
 
----
-
-## کش و به‌روزرسانی
-
-- داده‌ها در حافظه نگه‌داری می‌شوند
-- دسترسی به ترجمه‌ها بسیار سریع است
-- امکان refresh بدون restart وجود دارد
-
-providerها می‌توانند:
-
-- به‌صورت دوره‌ای refresh انجام دهند
-- یا در آینده مبتنی بر تغییر باشند
+* providerها register می‌شوند
+* Parrot ساخته می‌شود
+* ترجمه‌ها load می‌شوند
 
 ---
 
-## ثبت کلیدهای جاافتاده
+### در runtime
 
-Parrot به‌صورت اختیاری از ثبت کلیدهای جاافتاده پشتیبانی می‌کند.
-
-اگر کلیدی پیدا نشود:
-
-- می‌تواند در source داده ثبت شود
-- مقدار اولیه برای آن تعیین شود
-
-این رفتار:
-
-- اختیاری است
-- وابسته به provider است
-- در API مصرفی دیده نمی‌شود
+* ترجمه‌ها از memory خوانده می‌شوند
+* در صورت نیاز refresh انجام می‌شود
 
 ---
 
-## ساختار پروژه
+## مدیریت refresh
 
-این capability شامل این پروژه‌هاست:
+در Parrot:
 
-- Abstractions → قراردادها
-- Parrot → پیاده‌سازی اصلی
-- SqlServer → provider نمونه
-- Sample → مثال استفاده
+* منطق refresh در `ParrotRefreshService` متمرکز است
+* این سرویس hosted service نیست
+* hosted serviceها فقط trigger هستند
 
----
+### triggerها
 
-## نحوه استفاده
-
-### ثبت در DI
-
-builder.Services.AddParrot(parrot =>
-{
-    parrot.UseSqlServer(options =>
-    {
-        options.ConnectionString = "...";
-        options.EnsureTableCreated = true;
-    });
-});
+* ParrotStartupHostedService → برای startup
+* SqlServerTranslationReloadHostedService → برای reload
 
 ---
 
-### استفاده در کد
+## registration
 
-public class MyService
-{
-    private readonly ITranslator _translator;
+الگوی registration:
 
-    public MyService(ITranslator translator)
-    {
-        _translator = translator;
-    }
-
-    public string GetMessage()
-    {
-        return _translator["Common.Hello"];
-    }
-}
+```
+services.AddParrot(...)
+        .UseSqlServer(...)
+```
 
 ---
 
-## نکات طراحی
+## ویژگی‌های کلیدی
 
-- API مصرفی ساده نگه داشته شده است
-- dependency به ابزارهای بیرونی نشت نمی‌کند
-- providerها مستقل هستند
-- logging در سطح capability انجام نمی‌شود
-- خطاها از طریق exception مدیریت می‌شوند
+* پشتیبانی از چند provider
+* جداسازی کامل consumer از provider
+* in-memory caching
+* refresh runtime
+* extensibility بالا
 
 ---
 
-## جمع‌بندی
+## محدودیت‌ها
 
-Parrot یک capability سبک، سریع و قابل توسعه برای ترجمه در زمین X است که:
+* نیاز به provider برای کارکرد کامل
+* پیچیدگی بیشتر نسبت به capabilityهای ساده
+* نیاز به مدیریت صحیح lifecycle
 
-- abstraction مناسب ارائه می‌دهد
-- از چند source پشتیبانی می‌کند
-- runtime-friendly است
-- و developer experience خوبی فراهم می‌کند
+---
+
+## ارتباط با guideline
+
+این capability نمونه مرجع برای:
+
+* core-orchestrated design
+* builder pattern در CrossCutting
+* separation بین consumer API و internal contracts
+
+---
+
+## وضعیت فعلی
+
+این capability به‌عنوان یکی از capabilityهای مرجع CrossCutting در زمین X در نظر گرفته می‌شود.
