@@ -82,6 +82,7 @@
 ---
 
 ### 3. سادگی در استفاده
+
 تمامی APIها و setup باید ساده، شفاف و قابل فهم باشند.
 
 ---
@@ -102,20 +103,27 @@
 
 نمونه‌هایی از capabilityها در زمین X:
 
+### CrossCutting
+
 * Object Mapper
-* Translator
+* Serializer (Prism)
+* Translator (Parrot)
 * Logger
 * DependencyInjection
-* Serializer
 * ApplicationPartDetector
-* Auditing
+
+### Domain و Application Primitives
+
 * Entity
 * AggregateRoot
 * Mediator
 
-در این میان، `Object Mapper` و `Serializer` از capabilityهای مرجع در خانواده قابلیت‌های عمومی و بین‌برشی هستند و به‌عنوان نمونه‌هایی از طراحی مبتنی بر «انتزاع + provider» در نظر گرفته می‌شوند.
+### Data و Persistence
 
-نام محصولی capability `Serializer` در زمین X، `Prism` است.
+* Auditing
+
+در میان capabilityهای عمومی و بین‌برشی، `Object Mapper` به‌عنوان capability مرجع این خانواده در نظر گرفته می‌شود.
+همچنین `Serializer` با نام محصولی `Prism` و `Translator` با نام محصولی `Parrot` به‌عنوان capabilityهای مرجع بعدی این خانواده طراحی و پیاده‌سازی اولیه شده‌اند.
 
 ---
 
@@ -150,7 +158,7 @@ docs/
 
 ## وضعیت پروژه
 
-پروژه در فاز طراحی محصول و معماری قرار دارد.
+پروژه در فاز طراحی محصول، معماری و پیاده‌سازی تدریجی capabilityهای اصلی قرار دارد.
 
 تمرکز فعلی:
 
@@ -159,6 +167,7 @@ docs/
 * طراحی نقشه ماژول‌ها
 * ثبت تصمیم‌های کلیدی
 * ایجاد backlog اولیه
+* پیاده‌سازی capabilityهای مرجع در خانواده CrossCutting
 
 ---
 
@@ -168,6 +177,7 @@ docs/
 * تعریف BuildingBlockهای اصلی
 * طراحی ApplicationPatterns
 * تعریف Foundations (MonolithStructure و ModularMonolith)
+* توسعه capabilityهای مرجع CrossCutting
 * طراحی Applications اولیه:
 
   * مدیریت ترجمه

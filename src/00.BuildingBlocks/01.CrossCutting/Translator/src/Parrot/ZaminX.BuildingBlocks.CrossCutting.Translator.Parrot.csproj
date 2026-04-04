@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
+		<Description>Parrot is the Translator capability of ZaminX for key-based translation with provider-based architecture.</Description>
+		<PackageTags>translation;localization;zaminx;parrot</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Abstractions\ZaminX.BuildingBlocks.CrossCutting.Translator.Abstractions.csproj" />

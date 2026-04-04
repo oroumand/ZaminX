@@ -1,9 +1,5 @@
 @ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress = https://localhost:7116
 
-GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-
 
 ###
 GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Common.Hello?culture=en-US
