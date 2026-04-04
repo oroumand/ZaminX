@@ -1,6 +1,34 @@
-@ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress = http://localhost:5066
+@ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress = https://localhost:7116
 
 GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
+
+
 ###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Common.Hello?culture=en-US
+
+###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Common.Hello?culture=fa-IR
+
+
+
+###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Message.Greeting/translated-args?culture=en-US&firstArgument=User.DisplayName
+
+
+###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Message.DoubleGreeting/translated-args?culture=fa-IR&firstArgument=User.DisplayName&secondArgument=Common.Welcome
+
+
+
+###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Message.Price/formatted?culture=en-US&amount=1234.56&currency=USD
+
+
+###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/Message.Price/formatted?culture=fa-IR&amount=98000&currency=IRR
+
+
+###
+GET {{ZaminX.BuildingBlocks.CrossCutting.Translator.Sample.WebApi_HostAddress}}/api/translations/missing/New.Dynamic.Key?culture=en-US
