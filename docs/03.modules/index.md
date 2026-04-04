@@ -82,7 +82,7 @@ BuildingBlocks هسته قابل بازاستفاده زمین X هستند.
 اگر بستر .NET یا اکوسیستم موجود انتزاع مناسبی داشته باشد، از همان استفاده می‌شود.
 
 در دسته BuildingBlocks، خانواده `01.CrossCutting` برای capabilityهای عمومی و بین‌برشی در نظر گرفته شده است.
-در این خانواده، `Object Mapper` به‌عنوان capability مرجع تثبیت شده و `Serializer` نیز به‌عنوان capability بعدی با نام محصولی `Prism` وارد طراحی رسمی شده است.
+در این خانواده، `Object Mapper` به‌عنوان capability مرجع تثبیت شده، `Serializer` نیز به‌عنوان capability بعدی با نام محصولی `Prism` وارد طراحی رسمی شده، و `Translator` با نام محصولی `Parrot` به‌عنوان capability بعدی این خانواده طراحی، مستندسازی و پیاده‌سازی اولیه شده است.
 
 ---
 
@@ -110,6 +110,9 @@ BuildingBlocks هسته قابل بازاستفاده زمین X هستند.
 * `Caching`
 * `DependencyInjection`
 * `Sinks`
+
+توضیح:
+در این خانواده، `Prism` نام محصولی capability فنی `Serializer` است و `Parrot` نام محصولی capability فنی `Translator` است. این naming محصولی باید از naming فنی ماژول‌ها و پروژه‌ها جدا بماند.
 
 ---
 
@@ -228,7 +231,7 @@ BuildingBlocks هسته قابل بازاستفاده زمین X هستند.
 توضیح:
 نام بعضی capabilityها در سطح محصول با naming فنی فعلی آن‌ها یکسان نیست.
 برای نمونه، capability محصولی `Object Mapper` ممکن است در بعضی دارایی‌های فعلی هنوز با naming قدیمی‌تر دیده شود و باید به‌تدریج با taxonomy رسمی هم‌راستا شود.
-همین‌طور، `Prism` نام محصولی capability فنی `Serializer` است و این دو سطح باید از هم جدا باقی بمانند.
+همین‌طور، `Prism` نام محصولی capability فنی `Serializer` است و `Parrot` نام محصولی capability فنی `Translator` است و این سطوح باید از هم جدا باقی بمانند.
 
 ---
 
