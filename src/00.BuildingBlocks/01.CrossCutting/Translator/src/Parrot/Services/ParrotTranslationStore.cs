@@ -10,10 +10,17 @@ internal sealed class ParrotTranslationStore
 
     public void ReplaceAll(IEnumerable<TranslationEntry> entries)
     {
+        ArgumentNullException.ThrowIfNull(entries);
+
         var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var entry in entries)
         {
+            if (string.IsNullOrWhiteSpace(entry.Key))
+            {
+                continue;
+            }
+
             var compositeKey = BuildCompositeKey(entry.Culture, entry.Key);
             dictionary[compositeKey] = entry.Value;
         }
@@ -26,6 +33,8 @@ internal sealed class ParrotTranslationStore
 
     public bool TryGetValue(CultureInfo? culture, string key, out string? value)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(key);
+
         Dictionary<string, string> snapshot;
 
         lock (_syncRoot)
@@ -54,9 +63,12 @@ internal sealed class ParrotTranslationStore
 
             while (true)
             {
-                yield return current.Name;
+                if (!string.IsNullOrWhiteSpace(current.Name))
+                {
+                    yield return current.Name;
+                }
 
-                if (current.Equals(CultureInfo.InvariantCulture) || string.IsNullOrWhiteSpace(current.Name))
+                if (current.Equals(CultureInfo.InvariantCulture))
                 {
                     break;
                 }

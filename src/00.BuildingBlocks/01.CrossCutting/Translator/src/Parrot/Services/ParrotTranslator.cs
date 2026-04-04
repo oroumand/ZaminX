@@ -29,12 +29,13 @@ internal sealed class ParrotTranslator(
         ArgumentNullException.ThrowIfNull(culture);
         ArgumentException.ThrowIfNullOrWhiteSpace(key);
 
-        if (store.TryGetValue(culture, key, out var translatedValue) && !string.IsNullOrWhiteSpace(translatedValue))
+        if (store.TryGetValue(culture, key, out var translatedValue) &&
+            !string.IsNullOrWhiteSpace(translatedValue))
         {
             return translatedValue;
         }
 
-        _ = missingKeyRegistrar.RegisterIfNeededAsync(key, culture);
+        TryRegisterMissingKey(key, culture);
 
         return key;
     }
@@ -46,6 +47,7 @@ internal sealed class ParrotTranslator(
 
     public string GetString(CultureInfo culture, string key, params string[] arguments)
     {
+        ArgumentNullException.ThrowIfNull(culture);
         ArgumentNullException.ThrowIfNull(arguments);
 
         var format = GetString(culture, key);
@@ -83,5 +85,17 @@ internal sealed class ParrotTranslator(
 
         var translatedValues = keys.Select(key => GetString(culture, key));
         return string.Join(separator, translatedValues);
+    }
+
+    private void TryRegisterMissingKey(string key, CultureInfo culture)
+    {
+        try
+        {
+            _ = missingKeyRegistrar.RegisterIfNeededAsync(key, culture);
+        }
+        catch
+        {
+            // deliberately ignored
+        }
     }
 }

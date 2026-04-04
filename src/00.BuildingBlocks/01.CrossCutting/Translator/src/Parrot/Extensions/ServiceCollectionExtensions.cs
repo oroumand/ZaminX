@@ -18,8 +18,7 @@ public static class ServiceCollectionExtensions
 
         services.TryAddSingleton<ParrotTranslationStore>();
         services.TryAddSingleton<ParrotTranslationProviderCoordinator>();
-        services.TryAddSingleton<ParrotRefreshService>();
-        services.TryAddSingleton<ITranslationRefreshService>(sp => sp.GetRequiredService<ParrotRefreshService>());
+        services.TryAddSingleton<ITranslationRefreshService, ParrotRefreshService>();
         services.TryAddSingleton<ITranslationMissingKeyRegistrar, NullTranslationMissingKeyRegistrar>();
         services.TryAddSingleton<ITranslator, ParrotTranslator>();
         services.AddHostedService<ParrotStartupHostedService>();
