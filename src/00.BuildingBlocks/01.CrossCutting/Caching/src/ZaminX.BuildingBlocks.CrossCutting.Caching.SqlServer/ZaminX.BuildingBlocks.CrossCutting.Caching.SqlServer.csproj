@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ZaminX.BuildingBlocks.CrossCutting.Caching.Abstractions\ZaminX.BuildingBlocks.CrossCutting.Caching.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Data.SqlClient" />
+	  <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+	</ItemGroup>
+</Project>

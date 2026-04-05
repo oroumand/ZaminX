@@ -1,0 +1,6 @@
+@ZaminX.BuildingBlocks.CrossCutting.Caching.Sample_HostAddress = http://localhost:5031
+
+GET {{ZaminX.BuildingBlocks.CrossCutting.Caching.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

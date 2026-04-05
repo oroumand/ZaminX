@@ -140,7 +140,12 @@ provider اولیه این capability، نسخه SQL Server است.
 
 ### Caching
 
-قابلیتی برای نگهداری داده‌ها به‌صورت موقت برای بهبود عملکرد.
+قابلیتی برای نگهداری موقت داده‌ها با هدف بهبود performance و کاهش وابستگی مستقیم مصرف‌کننده‌ها به backendهای مختلف cache.
+
+نام محصولی این capability در زمین X، `StashX` است.
+این capability با مدل **replacement-based provider capability** طراحی شده و یک contract مصرفی کوچک و پایدار با نام `IStashX` ارائه می‌کند.
+providerهای اولیه آن شامل نسخه InMemory، Redis و SqlServer هستند.
+در provider مربوط به SqlServer، setup storage به‌صورت explicit و opt-in پشتیبانی می‌شود.
 
 برای جزئیات بیشتر:
 
@@ -200,7 +205,7 @@ provider اولیه این capability، نسخه SQL Server است.
 * یک یا چند provider پشت آن قرار می‌گیرند
 * ابزار بیرونی از سطح مصرف‌کننده پنهان می‌ماند
 
-Object Mapper نمونه فعلی این الگو است، Serializer دومین capability مرجع این خانواده است که با همین رویکرد طراحی شد، و Translator با نام محصولی `Parrot` سومین capability این خانواده است که با همین رویکرد طراحی و پیاده‌سازی اولیه شد.
+Object Mapper نمونه فعلی این الگو است، Serializer دومین capability مرجع این خانواده است که با همین رویکرد طراحی شد، Translator با نام محصولی `Parrot` نمونه مرجع الگوی core-orchestrated در این خانواده است، و Caching با نام محصولی `StashX` نمونه capability provider-based از نوع replacement-based در این خانواده است.
 
 ---
 
@@ -215,60 +220,3 @@ ApplicationPatterns ممکن است از این capabilityها استفاده ک
 ### نسبت با Integrations
 
 در بعضی موارد، یک Integration ممکن است از این capabilityها استفاده کند، اما این خانواده خودش مسئول اتصال به بیرون نیست.
-
----
-
-### نسبت با Foundations
-
-Foundations ممکن است این capabilityها را به‌صورت پیش‌فرض در پروژه نصب و فعال کنند.
-
----
-
-### نسبت با Applications
-
-Applications مصرف‌کننده مستقیم این capabilityها هستند.
-
----
-
-## وضعیت فعلی
-
-در وضعیت فعلی پروژه:
-
-* Object Mapper با نام محصولی `Morpher` به‌عنوان capability مرجع این خانواده مستند شده است
-* Object Mapper نمونه فعلی مدل provider-based در این خانواده است
-* Serializer به‌عنوان دومین capability مرجع این خانواده طراحی، مستندسازی و پیاده‌سازی اولیه شد
-* نام محصولی Serializer در زمین X، `Prism` است
-* Translator به‌عنوان capability بعدی این خانواده طراحی، مستندسازی و پیاده‌سازی اولیه شد
-* نام محصولی Translator در زمین X، `Parrot` است
-* سایر ماژول‌های این خانواده هنوز در حال طراحی یا تثبیت مستندات هستند
-
----
-
-## تصمیم‌های باز
-
-* تکمیل providerهای بعدی Translation
-* تکمیل ساختار اجرایی Serializer و مستندات providerهای آن
-* تعیین scope دقیق DependencyInjection
-* تعیین ساختار Caching
-* تعیین مدل Sinks و نسبت آن با Logging
-
----
-
-## ارتباط با سایر اسناد
-
-* تعریف BuildingBlocks در `../index.md`
-* نقشه ماژول‌ها در `../../index.md`
-* تصمیم‌های کلان در `docs/02.architecture/project-state.md`
-* ADRهای معماری در `docs/04.decision-records/adr`
-* جزئیات هر ماژول در فایل مستقل همان ماژول
-
----
-
-## نگهداری این سند
-
-این سند باید:
-
-* با اضافه شدن capabilityهای جدید در این خانواده به‌روزرسانی شود
-* با تثبیت مستندات هر capability، ارجاع‌هایش بازبینی شود
-* از تکرار جزئیات فایل‌های مستقل capabilityها پرهیز کند
-* با `project-state.md` و ADRهای ثبت‌شده هم‌راستا بماند
