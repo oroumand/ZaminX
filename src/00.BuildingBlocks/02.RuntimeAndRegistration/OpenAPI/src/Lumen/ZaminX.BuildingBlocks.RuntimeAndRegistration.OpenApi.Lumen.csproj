@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>ZaminX Lumen core project for OpenAPI registration and runtime composition.</Description>
+    <AssemblyName>ZaminX.BuildingBlocks.RuntimeAndRegistration.OpenApi.Lumen</AssemblyName>
+    <RootNamespace>ZaminX.BuildingBlocks.RuntimeAndRegistration.OpenApi.Lumen</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+  </ItemGroup>
+</Project>

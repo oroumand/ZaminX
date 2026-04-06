@@ -1,216 +1,177 @@
-# نمای کلی قابلیت‌های اجرا، ثبت و کشف ساختار
+# Runtime And Registration
 
-## هدف این سند
-این سند خانواده «قابلیت‌های اجرا، ثبت و کشف ساختار» را در دسته BuildingBlocks تعریف می‌کند.
+## معرفی
 
-نقش این سند:
-- تعریف دقیق این خانواده
-- مشخص کردن مرز آن با سایر خانواده‌ها
-- معرفی اعضای این خانواده
-- ثبت تصمیم‌های مشترک
-- ایجاد ورودی برای مستندات مستقل هر ماژول
+این بخش شامل capabilityهایی است که مسئول:
 
-این سند وارد جزئیات تفصیلی هر ماژول نمی‌شود.
+* setup سیستم
+* service registration
+* runtime composition
 
----
+هستند.
 
-## تعریف این خانواده
-
-این خانواده شامل capabilityهایی است که:
-
-- به راه‌اندازی سیستم کمک می‌کنند
-- کشف ساختار نرم‌افزار را ساده می‌کنند
-- registration و wiring را استاندارد می‌کنند
-- کار با اجزای مختلف سیستم را در زمان startup یا composition ساده‌تر می‌کنند
-
-این خانواده معمولاً مستقیماً مسئله دامنه، داده یا پیام را حل نمی‌کند؛  
-بلکه روی «شناخت اجزا»، «ثبت اجزا» و «آماده‌سازی بستر اجرا» تمرکز دارد.
+این capabilityها در زمان startup اجرا می‌شوند و رفتار سیستم را در سطح زیرساختی تنظیم می‌کنند.
 
 ---
 
-## چرا این خانواده در BuildingBlocks قرار می‌گیرد
+## تعریف
 
-اعضای این خانواده:
+RuntimeAndRegistration شامل capabilityهایی است که:
 
-- به‌صورت مستقل قابل استفاده‌اند
-- self-contained هستند
-- بدون وابستگی به یک flow خاص در سطح اپلیکیشن قابل مصرف‌اند
-- می‌توانند در پروژه‌های مختلف بازاستفاده شوند
-- هرکدام یک capability مستقل برای setup، registration یا discovery ارائه می‌دهند
-
-بنابراین این خانواده، بخشی از BuildingBlocks است و نه ApplicationPatterns یا Foundations.
+* قبل از اجرای اصلی application فعال می‌شوند
+* dependencyها را register می‌کنند
+* و wiring سیستم را انجام می‌دهند
 
 ---
 
-## مرز این خانواده با سایر خانواده‌ها
+## ویژگی‌های کلیدی
 
-### تفاوت با CrossCutting
-- CrossCutting بیشتر روی capabilityهای مصرفی عمومی تمرکز دارد
-- این خانواده روی startup، کشف و registration تمرکز دارد
-
-مثال:
-- `DependencyInjection` در خانواده CrossCutting قرار می‌گیرد
-- `SoftwarePartDetector` در این خانواده قرار می‌گیرد
+* execution در startup
+* تمرکز روی configuration و wiring
+* وابستگی به runtime (مثل ASP.NET Core)
+* APIهای ساده و مستقیم
 
 ---
 
-### تفاوت با Data و Persistence
-- Data و Persistence به context، ماندگاری، interceptor و رفتارهای ذخیره‌سازی مربوط است
-- این خانواده به startup، wiring و کشف ساختار مربوط است
+## تفاوت با CrossCutting
+
+CrossCutting:
+
+* behavior ارائه می‌دهد
+* در طول اجرای برنامه استفاده می‌شود
+
+RuntimeAndRegistration:
+
+* setup انجام می‌دهد
+* در startup اجرا می‌شود
 
 ---
 
-### تفاوت با Domain و Application Primitives
-- Domain primitives مفاهیم مدل‌سازی و primitiveهای اپلیکیشن را ارائه می‌دهند
-- این خانواده ابزار راه‌اندازی و ثبت را فراهم می‌کند
+## capabilityها
+
+### DependencyInjection (Axon)
+
+Axon capability مربوط به DI است.
+
+مسئول:
+
+* حذف wiring دستی
+* assembly scanning
+* استانداردسازی registration
 
 ---
 
-### تفاوت با Foundations
-- Foundations ساختار آماده پروژه، قالب و scaffold ارائه می‌دهند
-- این خانواده capability مستقل برای registration و discovery ارائه می‌دهد
+### OpenApi (Lumen)
 
-به‌عبارت دیگر:
-- Foundation می‌تواند از این خانواده استفاده کند
-- اما این خانواده خودش Foundation نیست
+Lumen capability مربوط به API documentation است.
 
 ---
 
-### تفاوت با Integrations
-- Integrations روی اتصال به boundaryهای بیرونی تمرکز دارند
-- این خانواده روی registration و کشف ساختار داخلی سیستم تمرکز دارد
+## تعریف Lumen
+
+Lumen مسئول:
+
+* ثبت OpenAPI
+* expose کردن document endpoint
+* مدیریت configuration document
+* ترکیب UIهای نمایش API
+
+است.
 
 ---
 
-## اعضای این خانواده
+## مدل طراحی Lumen
 
-در وضعیت فعلی، این خانواده شامل این ماژول‌هاست:
+Lumen شامل:
 
-- `SoftwarePartDetector`
-- `ScalarRegistration`
-- `SerilogRegistration`
+* Core (OpenAPI registration)
+* UI integrations:
 
-این فهرست اولیه است و در ادامه ممکن است اصلاح یا تکمیل شود.
-
----
-
-## توضیح کوتاه اعضا
-
-### SoftwarePartDetector
-قابلیتی برای شناسایی بخش‌های نرم‌افزار، استخراج ساختار اپلیکیشن و کمک به ثبت یا مصرف خودکار آن‌ها.
-
-برای جزئیات بیشتر:
-- `software-part-detector.md`
+  * Scalar
+  * Swagger UI
+  * ReDoc
 
 ---
 
-### ScalarRegistration
-قابلیتی برای ساده‌سازی registration یا wiring مربوط به Scalar.
+## اصول طراحی این خانواده
 
-برای جزئیات بیشتر:
-- `scalar-registration.md`
+### 1. سادگی
 
----
+APIها باید:
 
-### SerilogRegistration
-قابلیتی برای ساده‌سازی registration و فعال‌سازی Serilog و اجزای مرتبط با آن.
-
-برای جزئیات بیشتر:
-- `serilog-registration.md`
+* کوتاه باشند
+* واضح باشند
+* قابل فهم باشند
 
 ---
 
-## تصمیم‌های مشترک این خانواده
+### 2. عدم پیچیدگی غیرضروری
 
-در وضعیت فعلی، این تصمیم‌ها برای کل خانواده مبنا هستند:
+از موارد زیر اجتناب می‌شود:
 
-- اعضای این خانواده باید مستقل و self-contained باقی بمانند
-- registration و setup بخشی معتبر از خود capability محسوب می‌شود
-- وابستگی به تکنولوژی مانع قرارگیری در این خانواده نیست
-- این خانواده نباید به flowهای سطح اپلیکیشن وابسته شود
-- هدف این خانواده ساده‌سازی startup، wiring و discovery است، نه ساخت patternهای سطح بالا
+* abstraction غیرضروری
+* provider model پیچیده
 
 ---
 
-## الگوی طراحی در این خانواده
+### 3. separation بین registration و runtime
 
-در این خانواده معمولاً یکی از این حالت‌ها رخ می‌دهد:
-
-### حالت ۱: کشف ساختار
-ماژول ساختار سیستم را می‌شناسد، اجزا را شناسایی می‌کند و اطلاعات لازم را برای مصرف بعدی فراهم می‌کند.
-
-مثال:
-- شناسایی کنترلرها
-- شناسایی اکشن‌ها
-- شناسایی بخش‌های نرم‌افزاری
+* `Add...` برای setup
+* `Use...` برای runtime
 
 ---
 
-### حالت ۲: registration و wiring
-ماژول setup و registration را ساده می‌کند و سازوکارهای تکراری راه‌اندازی را به‌شکل استاندارد ارائه می‌دهد.
+### 4. Options استاندارد
 
-مثال:
-- فعال‌سازی logging
-- ثبت سرویس‌ها
-- wiring قابلیت‌های خاص
+از:
 
----
+* AddOptions
+* Bind
+* Configure
 
-## نسبت با سایر دسته‌ها
+استفاده می‌شود
 
-### نسبت با ApplicationPatterns
-این خانواده مستقیماً pattern ارائه نمی‌دهد، اما ApplicationPatterns ممکن است از این capabilityها برای setup یا registration استفاده کنند.
+و از:
 
----
+* OptionsWrapper
+* Replace
 
-### نسبت با Integrations
-Integrations ممکن است برای registration یا wiring از این خانواده استفاده کنند، اما مسئله اصلی این خانواده اتصال به بیرون نیست.
+اجتناب می‌شود
 
 ---
 
-### نسبت با Foundations
-Foundations از این خانواده استفاده زیادی خواهند داشت، چون برای ساخت ساختارهای آماده پروژه به registration و discovery نیاز دارند.
+## ساختار پروژه
+
+```
+OpenApi/
+  Lumen/
+  Scalar/
+  Swagger/
+  Redoc/
+```
 
 ---
 
-### نسبت با Applications
-Applications نیز می‌توانند از این خانواده برای startup ساده‌تر و wiring استاندارد استفاده کنند.
+## مسیر مطالعه پیشنهادی
+
+1. Axon (DependencyInjection)
+2. Lumen (OpenApi)
 
 ---
 
 ## وضعیت فعلی
 
-در وضعیت فعلی پروژه:
-
-- این خانواده به‌عنوان یک خانواده مستقل در BuildingBlocks شناسایی شده است
-- `SoftwarePartDetector` به‌عنوان یکی از ماژول‌های مهم این خانواده در نقشه ماژول‌ها ثبت شده است
-- بخشی از registrationهای موجود مانند `SerilogRegistration` و `ScalarRegistration` به‌عنوان capability مستقل در همین خانواده دیده می‌شوند
+* Axon تثبیت شده
+* Lumen در حال تکمیل و refinement است
 
 ---
 
-## تصمیم‌های باز
+## جمع‌بندی
 
-- تعیین مرز دقیق بین `DependencyInjection` و capabilityهای registration
-- تعیین ساختار دقیق `SoftwarePartDetector`
-- تعیین اینکه کدام registrationها BuildingBlock مستقل محسوب می‌شوند و کدام‌ها فقط بخشی از ماژول‌های دیگر هستند
-- تعیین naming نهایی بعضی ماژول‌ها
-- تعیین سطح پوشش startup و discovery در نسخه اول مستندات
+این خانواده:
 
----
+* پایه setup سیستم است
+* wiring را استاندارد می‌کند
+* و نقش مهمی در سادگی startup دارد
 
-## ارتباط با سایر اسناد
-
-- تعریف کلی BuildingBlocks در `../index.md`
-- نقشه ماژول‌ها در `../../index.md`
-- تصمیم‌های کلان در `docs/02.architecture/project-state.md`
-- جزئیات هر ماژول در فایل مستقل همان ماژول
-
----
-
-## نگهداری این سند
-
-این سند باید:
-- با اضافه شدن capability جدید به این خانواده به‌روزرسانی شود
-- با تغییر در مرز این خانواده اصلاح شود
-- از ورود به جزئیات تفصیلی هر ماژول پرهیز کند
-- با فایل‌های مستقل ماژول‌ها هم‌راستا بماند
+Lumen به‌عنوان capability اصلی API documentation، بخش مهمی از این خانواده محسوب می‌شود.

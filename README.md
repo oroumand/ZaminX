@@ -4,17 +4,20 @@
 
 این پروژه با هدف ارائه مجموعه‌ای از BuildingBlockها، الگوهای کاربردی، یکپارچه‌سازی‌ها، ساختارهای آماده و اپلیکیشن‌های کوچک قابل استفاده برای ساخت سیستم‌های مدرن بر پایه .NET طراحی شده است.
 
+زمین X تلاش می‌کند بین **سادگی در استفاده** و **قدرت در توسعه‌پذیری** تعادل ایجاد کند و به توسعه‌دهندگان اجازه دهد بدون درگیر شدن با پیچیدگی‌های تکراری، روی حل مسئله تمرکز کنند.
+
 ---
 
 ## هدف پروژه
 
-زمین X تلاش می‌کند:
+زمین X با اهداف زیر طراحی شده است:
 
-* پیچیدگی‌های تکراری در توسعه نرم‌افزار را کاهش دهد
-* یک معماری یکدست و قابل توسعه ارائه دهد
-* امکان انتخاب و جایگزینی پیاده‌سازی‌ها را فراهم کند
-* توسعه سیستم‌های ماژولار را ساده‌تر کند
-* شروع پروژه‌های جدید را سریع‌تر و کم‌هزینه‌تر کند
+* کاهش پیچیدگی‌های تکراری در توسعه نرم‌افزار
+* ایجاد یک معماری یکدست و قابل توسعه
+* فراهم کردن امکان انتخاب و جایگزینی پیاده‌سازی‌ها
+* تسهیل توسعه سیستم‌های ماژولار
+* کاهش هزینه شروع پروژه‌های جدید
+* استانداردسازی الگوهای رایج در پروژه‌های .NET
 
 ---
 
@@ -22,101 +25,118 @@
 
 زمین X از پنج دسته اصلی تشکیل شده است:
 
-### BuildingBlocks
+### 1. BuildingBlocks
 
-اجزای مستقل، خودبسنده و قابل بازاستفاده که می‌توانند به‌تنهایی استفاده و بسته‌بندی شوند.
+اجزای مستقل، self-contained و قابل reuse که می‌توانند بدون وابستگی به سایر بخش‌ها استفاده شوند.
+
+ویژگی‌ها:
+
+* مستقل از context اپلیکیشن
+* قابل publish به‌صورت package
+* قابل استفاده در پروژه‌های مختلف
+* تمرکز روی یک concern مشخص
 
 نکته مهم:
 
-* وابستگی به تکنولوژی مانع قرارگیری در این دسته نیست
-* وجود انتزاع الزامی نیست
-* معیار اصلی: استقلال مصرف
+* وابستگی به تکنولوژی مانع BuildingBlock بودن نیست
+* abstraction پیش‌فرض نیست
+* معیار اصلی: **استقلال مصرف**
 
 ---
 
-### ApplicationPatterns
+### 2. ApplicationPatterns
 
-الگوهای پرکاربرد سطح اپلیکیشن که معمولاً از چند BuildingBlock استفاده می‌کنند و یک رفتار تکرارشونده را استاندارد می‌کنند.
-
----
-
-### Integrations
-
-اجزایی که مسئول اتصال به سرویس‌ها، سیستم‌ها و boundaryهای بیرونی هستند.
+الگوهای سطح اپلیکیشن که معمولاً از چند BuildingBlock تشکیل شده‌اند و یک رفتار تکرارشونده را استاندارد می‌کنند.
 
 ---
 
-### Foundations
+### 3. Integrations
 
-ساختارهای آماده و opinionated برای شروع پروژه‌ها.
+اجزایی که مسئول ارتباط با سیستم‌های خارجی هستند:
 
-نمونه‌های هدف:
+* APIها
+* سرویس‌های third-party
+* message brokers
+* storage providers
+
+---
+
+### 4. Foundations
+
+ساختارهای آماده و opinionated برای شروع سریع پروژه‌ها.
+
+نمونه‌ها:
 
 * MonolithStructure
 * ModularMonolith
-* MicroserviceModule (در حال بررسی)
+* (در آینده) MicroserviceModule
 
 ---
 
-### Applications
+### 5. Applications
 
-اپلیکیشن‌های کوچک، قابل اجرا و ارزشمند که با استفاده از زمین X ساخته می‌شوند و برای استفاده مستقیم یا شروع سریع توسعه کاربرد دارند.
+اپلیکیشن‌های آماده، قابل اجرا و ارزشمند که با استفاده از زمین X ساخته می‌شوند.
 
 ---
 
 ## فلسفه طراحی
 
-### 1. استقلال اجزا
+### استقلال اجزا
 
-هر capability تا حد امکان باید مستقل، خودبسنده و قابل بازاستفاده باشد.
-
----
-
-### 2. انتزاع فقط در صورت نیاز
-
-در زمین X ایجاد انتزاع یک الزام پیش‌فرض نیست.
-
-اگر برای یک capability نیاز واقعی وجود داشته باشد، قرارداد مستقل تعریف می‌شود.
-اگر بستر .NET انتزاع مناسبی داشته باشد، از همان استفاده می‌شود.
+هر capability باید تا حد امکان self-contained باشد.
 
 ---
 
-### 3. سادگی در استفاده
+### انتزاع فقط در صورت نیاز
 
-تمامی APIها و setup باید ساده، شفاف و قابل فهم باشند.
+abstraction زمانی ایجاد می‌شود که:
 
----
-
-### 4. قابلیت توسعه و جایگزینی
-
-در صورت نیاز، پیاده‌سازی‌ها باید قابل جایگزینی باشند.
+* چند پیاده‌سازی واقعی وجود داشته باشد
+* یا نیاز به decoupling وجود داشته باشد
 
 ---
 
-### 5. مستندسازی به‌عنوان بخشی از محصول
+### سادگی در استفاده
 
-مستندسازی بخشی از خود محصول است، نه خروجی جانبی.
+APIها باید:
+
+* قابل فهم باشند
+* predictable باشند
+* کم‌پیچیدگی باشند
+
+---
+
+### قابلیت توسعه
+
+در صورت نیاز، امکان replace یا extend کردن behavior وجود داشته باشد.
+
+---
+
+### مستندسازی به‌عنوان بخشی از محصول
+
+docs بخشی از خود capability است، نه چیز جداگانه.
 
 ---
 
 ## نمونه capabilityها
 
-نمونه‌هایی از capabilityها در زمین X:
-
 ### CrossCutting
 
-* Object Mapper
+* Object Mapper (مرجع طراحی)
 * Serializer (Prism)
 * Translator (Parrot)
 * Logger
 * ApplicationPartDetector
 
-> نکته:
-> DependencyInjection دیگر در این خانواده قرار نمی‌گیرد و به خانواده RuntimeAndRegistration منتقل شده است.
+این capabilityها:
+
+* reusable هستند
+* runtime dependency ندارند
+* abstraction در آن‌ها در صورت نیاز استفاده شده
 
 ---
 
-### RuntimeAndRegistration
+## RuntimeAndRegistration
 
 این خانواده شامل capabilityهایی است که مربوط به:
 
@@ -126,101 +146,152 @@
 
 هستند.
 
-#### DependencyInjection (Axon)
+---
 
-Axon نام محصولی capability مربوط به DependencyInjection است.
+### DependencyInjection (Axon)
 
-این capability برای:
+Axon capability مربوط به DI است.
 
-* ثبت خودکار سرویس‌ها
+مسئولیت‌ها:
+
 * حذف wiring دستی
+* استانداردسازی registration
 * assembly scanning
-* registration standardization
-* startup simplification
+* ساده‌سازی startup
 
-طراحی شده است.
+ویژگی مهم:
 
-Axon به‌جای ایجاد abstraction جدید، روی ساده‌سازی registration در `IServiceCollection` تمرکز دارد و با استفاده از marker interfaceها و policyهای مشخص، رفتار سیستم را قابل پیش‌بینی می‌کند.
-
----
-
-### Domain و Application Primitives
-
-* Entity
-* AggregateRoot
-* Mediator
+Axon abstraction جدید ایجاد نمی‌کند و روی `IServiceCollection` کار می‌کند.
 
 ---
 
-### Data و Persistence
+### OpenApi (Lumen)
 
-* Auditing
+**Lumen** capability مربوط به OpenAPI در زمین X است.
 
 ---
 
-در میان capabilityهای عمومی و بین‌برشی، `Object Mapper` به‌عنوان capability مرجع این خانواده در نظر گرفته می‌شود.
-همچنین `Serializer` با نام محصولی `Prism` و `Translator` با نام محصولی `Parrot` به‌عنوان capabilityهای مرجع بعدی این خانواده طراحی و پیاده‌سازی اولیه شده‌اند.
+## تعریف Lumen
+
+Lumen مسئول این موارد است:
+
+* ثبت OpenAPI در ASP.NET Core
+* expose کردن document endpoint
+* مدیریت مسیر و naming document
+* ترکیب UIهای مختلف برای نمایش API
+* ساده‌سازی setup برای API documentation
+
+---
+
+## ویژگی‌های Lumen
+
+* استفاده از OpenAPI built-in در ASP.NET Core (.NET 10)
+* استفاده کامل از Options pattern استاندارد
+* عدم استفاده از hackهایی مثل:
+
+  * OptionsWrapper
+  * Options.Create
+  * Replace
+* طراحی minimal و قابل توسعه
+* امکان فعال‌سازی چند UI به‌صورت همزمان
+* separation کامل بین registration و runtime
+
+---
+
+## UIهای پشتیبانی‌شده
+
+Lumen از UIهای زیر پشتیبانی می‌کند:
+
+* Scalar
+* Swagger UI
+* ReDoc
+
+---
+
+## مدل طراحی Lumen
+
+### Core + UI Integration
+
+Lumen شامل:
+
+* یک Core capability
+* چند UI integration
+
+---
+
+### نکته مهم
+
+UIها capability مستقل نیستند.
+
+بلکه:
+
+* بخشی از Lumen هستند
+* فقط presentation layer محسوب می‌شوند
+* concern اصلی Lumen نیستند
 
 ---
 
 ## ساختار پروژه
 
-ساختار کلی پروژه:
-
+```
 src/
-00.BuildingBlocks
-01.ApplicationPatterns
-02.Integrations
-03.Foundations
-04.Applications
+  00.BuildingBlocks
+    02.RuntimeAndRegistration
+      OpenApi
+        Lumen
+        Scalar
+        Swagger
+        Redoc
+```
 
 ---
 
 ## مستندات
 
-مستندات در مسیر زیر قرار دارند:
+تمام مستندات در مسیر زیر قرار دارند:
 
+```
 docs/
+```
 
-برای شروع:
+ساختار docs:
 
-* README.md
-* docs/index.md
-* docs/01.vision/index.md
-* docs/02.architecture/project-state.md
-* docs/02.architecture/index.md
+* vision
+* architecture
+* modules
+* decisions
+* project-state
 
 ---
 
 ## وضعیت پروژه
 
-پروژه در فاز طراحی محصول، معماری و پیاده‌سازی تدریجی capabilityهای اصلی قرار دارد.
+زمین X در حال حاضر در فاز:
 
-تمرکز فعلی:
+* تثبیت معماری
+* توسعه capabilityهای اصلی
+* ایجاد consistency در design
 
-* تثبیت taxonomy پروژه
-* تعریف معماری کلان
-* طراحی نقشه ماژول‌ها
-* ثبت تصمیم‌های کلیدی
-* ایجاد backlog اولیه
-* پیاده‌سازی capabilityهای مرجع در خانواده CrossCutting
-* آغاز توسعه capabilityهای خانواده RuntimeAndRegistration (Axon)
+قرار دارد.
+
+---
+
+## تمرکز فعلی
+
+* تثبیت CrossCutting
+* تکمیل Axon
+* طراحی و تثبیت Lumen
+* تعریف ApplicationPatterns
 
 ---
 
 ## نقشه راه کوتاه‌مدت
 
-* تثبیت معماری
-* تعریف BuildingBlockهای اصلی
-* طراحی ApplicationPatterns
-* تعریف Foundations (MonolithStructure و ModularMonolith)
-* توسعه capabilityهای مرجع CrossCutting
-* توسعه و تکمیل Axon (DependencyInjection)
-* طراحی Applications اولیه:
-
-  * مدیریت ترجمه
-  * مشاهده تاریخچه تغییرات (Auditing)
-* ایجاد backlog و roadmap
+* تثبیت کامل taxonomy
+* تکمیل BuildingBlockها
+* توسعه Foundations
+* توسعه Applications اولیه
+* publish اولیه capabilityها
 
 ---
 

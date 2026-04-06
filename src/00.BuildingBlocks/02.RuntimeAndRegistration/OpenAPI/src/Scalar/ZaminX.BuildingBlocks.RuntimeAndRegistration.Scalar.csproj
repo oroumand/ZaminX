@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>ZaminX Scalar UI integration for Lumen.</Description>
+    <AssemblyName>ZaminX.BuildingBlocks.RuntimeAndRegistration.Scalar</AssemblyName>
+    <RootNamespace>ZaminX.BuildingBlocks.RuntimeAndRegistration.Scalar</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Scalar.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lumen\ZaminX.BuildingBlocks.RuntimeAndRegistration.OpenApi.Lumen.csproj" />
+  </ItemGroup>
+</Project>

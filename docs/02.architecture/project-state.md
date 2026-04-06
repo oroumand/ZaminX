@@ -1,215 +1,190 @@
-# وضعیت فعلی پروژه زمین X
+# Project State - Zamin X
 
-## نمای کلی
+## وضعیت کلی پروژه
 
-زمین X در حال توسعه به‌عنوان یک پلتفرم ماژولار برای ساخت سیستم‌های enterprise است.
+زمین X در حال حاضر در مرحله:
 
-تمرکز فعلی پروژه:
+* طراحی معماری
+* تثبیت ساختار
+* پیاده‌سازی تدریجی capabilityها
 
-* تثبیت معماری
-* طراحی capabilityها در سطح BuildingBlocks
-* مستندسازی دقیق تصمیم‌ها
-* پیاده‌سازی تدریجی capabilityهای کلیدی
+قرار دارد.
 
----
-
-## ساختار کلان پروژه
-
-taxonomy پروژه شامل 5 دسته اصلی است:
-
-* BuildingBlocks
-* ApplicationPatterns
-* Integrations
-* Foundations
-* Applications
-
-در حال حاضر تمرکز روی BuildingBlocks است.
+تمرکز روی ایجاد یک foundation پایدار برای توسعه آینده است.
 
 ---
 
 ## وضعیت BuildingBlocks
 
-### 01.CrossCutting
+### CrossCutting
 
-خانواده CrossCutting شامل capabilityهای عمومی و بین‌برشی است.
+Capabilityهای اصلی:
 
-capabilityهای این خانواده:
+* Mapper
+* Serializer (Prism)
+* Translator (Parrot)
 
----
+وضعیت:
 
-### Object Mapper (Morpher)
-
-وضعیت: تثبیت‌شده
-
-* طراحی کامل شده
-* پیاده‌سازی انجام شده
-* نام محصولی `Morpher` برای این capability تثبیت شده است
-* نام فنی این capability همچنان `Object Mapper` باقی می‌ماند
-* این capability به‌عنوان مرجع طراحی سایر capabilityها استفاده می‌شود
-
----
-
-### Serializer (Prism)
-
-وضعیت: تثبیت‌شده (نسخه اولیه)
-
-* طراحی کامل شده
+* طراحی تثبیت شده
 * پیاده‌سازی اولیه انجام شده
-* الگوی provider-based تثبیت شده
-* ساختار داخلی پروژه‌ها مشخص شده
+* در حال consolidation و بهبود consistency
 
 ---
 
-### Translator (Parrot)
+## RuntimeAndRegistration
 
-وضعیت: پیاده‌سازی شده (نسخه اولیه)
+این خانواده شامل capabilityهای مربوط به:
 
-* طراحی capability کامل شده
-* تصمیم‌های معماری از طریق ADR ثبت شده‌اند
-* مدل provider-based پیاده‌سازی شده
-* پشتیبانی از چند فراهم‌کننده داده (multi-provider) وجود دارد
-* رفتار override بر اساس ترتیب registration پیاده‌سازی شده
-* کش درون‌حافظه‌ای برای عملکرد سریع پیاده‌سازی شده
-* امکان refresh داده‌ها بدون restart فراهم شده است
-* SQL Server provider به‌عنوان provider اولیه پیاده‌سازی شده
-* ثبت کلیدهای جاافتاده به‌صورت اختیاری پشتیبانی می‌شود
-* sample Web API برای نمایش نحوه استفاده اضافه شده است
+* registration
+* runtime setup
+* wiring
+
+است.
 
 ---
 
-### Caching (StashX)
+### DependencyInjection (Axon)
 
-وضعیت: پیاده‌سازی شده (نسخه اولیه)
+وضعیت:
 
-* طراحی capability کامل شده
-* جایگاه آن در `01.CrossCutting` تثبیت شده است
-* مدل طراحی آن به‌صورت provider-based و replacement-based تثبیت شده است
-* نام فنی capability برابر `Caching` و نام محصولی آن برابر `StashX` است
-* contract مصرفی `IStashX` تعریف شده است
-* providerهای اولیه InMemory، Redis و SqlServer پیاده‌سازی شده‌اند
-* setup مربوط به SqlServer به‌صورت explicit و opt-in طراحی شده است
-* sample واحد برای نمایش switching بین providerها اضافه شده است
-* تست اولیه هر سه provider انجام شده است
+* طراحی کامل
+* پیاده‌سازی انجام شده
+* در حال استفاده به‌عنوان reference capability
 
 ---
 
-### نکته مهم درباره CrossCutting
+### OpenApi (Lumen)
 
-* capability مربوط به DependencyInjection از این خانواده خارج شده است
-* این capability به خانواده جدید RuntimeAndRegistration منتقل شده است
-* دلیل این تغییر، تفاوت ماهیت setup-time در مقابل usage-time است
+وضعیت فعلی:
 
----
-
-### 02.RuntimeAndRegistration
-
-این خانواده برای capabilityهایی تعریف شده است که مربوط به:
-
-* runtime composition
-* service registration
-* startup setup
-
-هستند.
-
-این دسته از capabilityها با CrossCutting متفاوت هستند زیرا:
-
-* در زمان setup عمل می‌کنند
-* behavior مصرفی مستقیم ارائه نمی‌دهند
-* و نقش آن‌ها آماده‌سازی runtime است
+* طراحی معماری کامل
+* scope مشخص
+* implementation اولیه انجام شده
+* در حال refinement
 
 ---
 
-#### DependencyInjection (Axon)
+## تعریف Lumen
 
-وضعیت: طراحی و آغاز پیاده‌سازی
+Lumen capability مربوط به:
 
-* طراحی capability کامل شده
-* جایگاه معماری آن در RuntimeAndRegistration تثبیت شده است
-* نام محصولی `Axon` برای این capability انتخاب شده است
-* نام فنی capability همچنان `DependencyInjection` باقی می‌ماند
-* marker-based registration به‌عنوان مسیر اصلی طراحی تثبیت شده است
-* convention-based registration به‌صورت opt-in تعریف شده است
-* facade ساده روی `IServiceCollection` به‌عنوان entry point در نظر گرفته شده است
-* policyهای مهم شامل duplicate handling، filtering و validation تعریف شده‌اند
-* هدف اصلی این capability حذف wiring دستی و استانداردسازی registration است
+* OpenAPI registration
+* API documentation exposure
+* UI composition
+
+است.
 
 ---
 
-## وضعیت مستندات
+## تصمیم‌های معماری Lumen
 
-* ساختار docs تثبیت شده است
-* ADRها به‌عنوان ابزار رسمی ثبت تصمیم‌ها پذیرفته شده‌اند
-* docs به‌عنوان source of truth در نظر گرفته می‌شوند
-* برای capabilityهای اصلی BuildingBlocks، مستندات مستقل در حال تکمیل و تثبیت هستند
-* guidelineهای طراحی CrossCutting تثبیت شده‌اند و به‌عنوان مبنای capabilityهای بعدی استفاده می‌شوند
-* مستندات مربوط به خانواده RuntimeAndRegistration و capability Axon در حال اضافه شدن و تثبیت هستند
+### 1. جایگاه
+
+* خانواده: RuntimeAndRegistration
+* دلیل: تمرکز روی setup و runtime
 
 ---
 
-## تصمیم‌های تثبیت‌شده مهم
+### 2. مدل طراحی
 
-در وضعیت فعلی، این تصمیم‌ها تثبیت شده‌اند:
-
-* taxonomy پنج‌بخشی پروژه
-
-* خانواده‌محور بودن BuildingBlocks
-
-* قرارگیری capabilityهای عمومی در `01.CrossCutting`
-
-* docs as source of truth
-
-* جداسازی نام فنی و نام محصولی در capabilityهای اصلی CrossCutting
-
-* وجود دو الگوی رسمی طراحی برای capabilityهای provider-based در CrossCutting:
-
-  * replacement-based
-  * core-orchestrated
-
-* انتقال DependencyInjection از CrossCutting به RuntimeAndRegistration
-
-* تعریف خانواده RuntimeAndRegistration
-
-* انتخاب نام محصولی Axon برای DependencyInjection
-
-* تثبیت marker-based registration به‌عنوان مسیر اصلی
-
-* تعریف convention-based registration به‌صورت opt-in
+* بدون abstraction مصرفی
+* بدون provider model
+* builder سبک
+* separation بین registration و runtime
 
 ---
 
-## اولویت‌های نزدیک
+### 3. Options
 
-تمرکز نزدیک پروژه:
+Lumen از Options pattern استاندارد استفاده می‌کند:
 
-* تکمیل و تثبیت capabilityهای اصلی خانواده CrossCutting
-* آغاز و تکمیل implementation capability Axon
-* ادامه توسعه BuildingBlockهای داده و ماندگاری
-* تکمیل مستندات capabilityها
-* تعریف backlog دقیق برای ApplicationPatterns
-* تثبیت Foundations اولیه
+* Bind از IConfiguration
+* Configure از code
+* Validation
+
+و از موارد زیر استفاده نمی‌کند:
+
+* OptionsWrapper
+* Options.Create
+* Replace
 
 ---
 
-## نکات باز
+### 4. UIها
 
-برخی موضوع‌ها هنوز نیازمند تصمیم‌گیری یا توسعه بیشتر هستند:
+UIها:
 
-* مرز دقیق بعضی capabilityهای RuntimeAndRegistration
-* نحوه تعامل RuntimeAndRegistration با سایر خانواده‌ها
-* اولویت‌بندی capabilityهای بعدی در این خانواده
-* تعیین scope دقیق بعضی ApplicationPatternها
-* strategy انتشار و بسته‌بندی capabilityها
-* تکمیل ADRهای مرتبط با capabilityهای جدید در صورت نیاز
+* capability مستقل نیستند
+* integration داخلی هستند
+
+---
+
+### 5. ساختار
+
+* Core project (Lumen)
+* UI projects:
+
+  * Scalar
+  * Swagger
+  * Redoc
+* Sample
+
+---
+
+### 6. اهداف نسخه اول
+
+* ثبت OpenAPI
+* expose document
+* فعال‌سازی UIها
+* setup ساده
+
+---
+
+### 7. Non-goals
+
+* abstraction پیچیده
+* provider model
+* multi-document پیچیده
+* customization عمیق
+
+---
+
+## تصمیم‌های اخیر
+
+* انتقال DI به RuntimeAndRegistration
+* تثبیت Axon
+* حذف Scalar به‌عنوان capability مستقل
+* تعریف Lumen
+* استانداردسازی Options usage
+
+---
+
+## ریسک‌ها
+
+* over-engineering
+* پیچیده شدن runtime capabilityها
+* misuse از abstraction
+
+---
+
+## مسیر آینده
+
+* تثبیت Lumen
+* تست UI integration
+* بهبود docs
+* publish
 
 ---
 
 ## جمع‌بندی
 
-پروژه از مرحله تعریف خام taxonomy عبور کرده و وارد مرحله تثبیت capabilityهای مرجع، اجرای نسخه‌های اولیه و ثبت رسمی تصمیم‌های معماری شده است.
+زمین X در حال حرکت به سمت:
 
-در وضعیت فعلی:
+* سادگی
+* modularity
+* consistency
 
-* Object Mapper، Serializer، Translator و Caching مهم‌ترین capabilityهای پیاده‌سازی‌شده یا تثبیت‌شده در خانواده CrossCutting هستند
-* Axon به‌عنوان اولین capability خانواده RuntimeAndRegistration در حال طراحی و پیاده‌سازی است
-* docs و ADRها نقش محوری در حفظ یکپارچگی تصمیم‌ها دارند
-* مسیر توسعه پروژه به‌سمت تکمیل BuildingBlocks، تثبیت Foundations و سپس توسعه ApplicationPatterns و Applications ادامه پیدا می‌کند
+است.
+
+Lumen نقش مهمی در استانداردسازی API documentation در این مسیر دارد.

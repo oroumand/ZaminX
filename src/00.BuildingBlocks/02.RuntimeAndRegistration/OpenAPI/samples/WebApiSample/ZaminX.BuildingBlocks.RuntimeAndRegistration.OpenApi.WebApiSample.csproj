@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <Description>Web API sample for ZaminX Lumen.</Description>
+    <AssemblyName>ZaminX.BuildingBlocks.RuntimeAndRegistration.OpenApi.WebApiSample</AssemblyName>
+    <RootNamespace>ZaminX.BuildingBlocks.RuntimeAndRegistration.OpenApi.WebApiSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Lumen\ZaminX.BuildingBlocks.RuntimeAndRegistration.OpenApi.Lumen.csproj" />
+    <ProjectReference Include="..\..\src\Scalar\ZaminX.BuildingBlocks.RuntimeAndRegistration.Scalar.csproj" />
+    <ProjectReference Include="..\..\src\Swagger\ZaminX.BuildingBlocks.RuntimeAndRegistration.Swagger.csproj" />
+    <ProjectReference Include="..\..\src\Redoc\ZaminX.BuildingBlocks.RuntimeAndRegistration.Redoc.csproj" />
+  </ItemGroup>
+</Project>

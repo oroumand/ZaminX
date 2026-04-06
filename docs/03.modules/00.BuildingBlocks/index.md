@@ -1,218 +1,191 @@
-# نمای کلی BuildingBlocks
+# BuildingBlocks
 
-## هدف این سند
+## معرفی
 
-این سند دسته `BuildingBlocks` را در زمین X تعریف می‌کند و خانواده‌های اصلی آن را معرفی می‌کند.
+BuildingBlockها اجزای پایه‌ای و اصلی زمین X هستند.
 
-نقش این سند:
+این اجزا:
 
-* تعریف دقیق جایگاه BuildingBlocks در taxonomy پروژه
-* مشخص کردن خانواده‌های اصلی این دسته
-* روشن کردن مرز هر خانواده با خانواده‌های دیگر
-* معرفی ماژول‌های اولیه هر خانواده
-* ارائه ورودی برای مستندات مستقل هر خانواده و ماژول
+* مستقل هستند
+* self-contained هستند
+* قابل reuse هستند
+* و می‌توانند بدون وابستگی به سایر بخش‌ها استفاده شوند
 
-این سند وارد طراحی تفصیلی capabilityهای هر خانواده نمی‌شود.
-
----
-
-## BuildingBlocks چیست
-
-BuildingBlocks در زمین X اجزایی هستند که:
-
-* مستقل‌اند
-* خودبسنده‌اند
-* قابل بازاستفاده‌اند
-* می‌توانند به‌تنهایی مصرف شوند
-* لزوماً به یک اپلیکیشن یا یک ساختار خاص وابسته نیستند
-
-معیار اصلی قرارگیری در BuildingBlocks:
-
-* استقلال مصرف
-
-وجود abstraction در این دسته الزامی نیست.
-اگر نیاز واقعی وجود داشته باشد، abstraction تعریف می‌شود.
-اگر بستر .NET یا اکوسیستم انتزاع مناسبی داشته باشد، از همان استفاده می‌شود.
+BuildingBlockها foundation کل سیستم را تشکیل می‌دهند و سایر لایه‌ها بر روی آن‌ها ساخته می‌شوند.
 
 ---
 
-## خانواده‌های BuildingBlocks
+## تعریف BuildingBlock
 
-### 1. انتزاع‌های پایه مشترک
+یک BuildingBlock در زمین X:
 
-این خانواده شامل قراردادها و انتزاع‌های پایه‌ای است که چند BuildingBlock دیگر به آن نیاز دارند.
-
-مسیر این خانواده:
-
-* `00.Abstractions`
+* یک capability مشخص را ارائه می‌دهد
+* scope محدود و واضح دارد
+* به application خاص وابسته نیست
+* و قابل استفاده در contextهای مختلف است
 
 ---
 
-### 2. قابلیت‌های عمومی و بین‌برشی
+## ویژگی‌های کلیدی
 
-این خانواده شامل capabilityهایی است که در پروژه‌های مختلف و در چندین لایه قابل استفاده هستند.
+### استقلال مصرف
+
+BuildingBlock باید بتواند:
+
+* بدون نیاز به سایر BuildingBlockها استفاده شود (در حد ممکن)
+* در پروژه‌های مختلف reuse شود
+
+---
+
+### self-contained بودن
+
+هر BuildingBlock باید:
+
+* dependencyهای خود را مدیریت کند
+* setup خود را ارائه دهد
+* و نیاز به wiring پیچیده نداشته باشد
+
+---
+
+### تمرکز روی یک concern
+
+هر BuildingBlock باید:
+
+* یک مسئله مشخص را حل کند
+* از scope خود خارج نشود
+
+---
+
+### عدم وابستگی به application
+
+BuildingBlock نباید:
+
+* به business logic خاص وابسته باشد
+* یا نیاز به context خاصی داشته باشد
+
+---
+
+## دسته‌بندی BuildingBlocks
+
+BuildingBlockها در زمین X به چند خانواده تقسیم می‌شوند:
+
+---
+
+### CrossCutting
+
+این دسته شامل capabilityهایی است که:
+
+* در بخش‌های مختلف سیستم استفاده می‌شوند
+* behavior مشترک ارائه می‌دهند
+* معمولاً reusable و abstraction-friendly هستند
 
 نمونه‌ها:
 
-* ObjectMappers
-* Translations
-* Serializers
-* Caching
-* DependencyInjection
-* Sinks
-
-مسیر این خانواده:
-
-* `01.CrossCutting`
-
-توضیح:
-در وضعیت فعلی، `Object Mapper` capability مرجع این خانواده است، `Serializer` با نام محصولی `Prism` به‌عنوان capability مرجع دوم تثبیت شده، `Translator` با نام محصولی `Parrot` به‌عنوان capability بعدی این خانواده طراحی و پیاده‌سازی اولیه شده، و `Caching` با نام محصولی `StashX` نیز به‌عنوان capability پیاده‌سازی‌شده این خانواده ثبت شده است.
+* Object Mapper
+* Serializer (Prism)
+* Translator (Parrot)
 
 ---
 
-### 3. قابلیت‌های راه‌اندازی، ثبت و کشف ساختار
+### RuntimeAndRegistration
 
-این خانواده شامل اجزایی است که نصب، راه‌اندازی، کشف بخش‌های نرم‌افزار یا ثبت خودکار قابلیت‌ها را ساده می‌کنند.
+این دسته شامل capabilityهایی است که:
+
+* مسئول setup سیستم هستند
+* در startup اجرا می‌شوند
+* wiring و registration را مدیریت می‌کنند
 
 نمونه‌ها:
 
-* SoftwarePartDetector
-* ScalarRegistration
-* SerilogRegistration
-
-مسیر این خانواده:
-
-* `02.RuntimeAndRegistration`
+* DependencyInjection (Axon)
+* OpenApi (Lumen)
 
 ---
 
-### 4. الگوهای پایه دامنه و اپلیکیشن
+## تفاوت CrossCutting و RuntimeAndRegistration
 
-این خانواده شامل اجزایی است که با وجود ماهیت الگویی، به‌صورت مستقل و قابل بازاستفاده ارائه می‌شوند.
-
-نمونه‌ها:
-
-* Entity
-* AggregateRoot
-* ValueObject
-* DomainEvent
-* Command
-* Query
-* CommandHandler
-* QueryHandler
-* Mediator
-
-مسیر این خانواده:
-
-* `03.DomainAndApplicationPrimitives`
+| ویژگی          | CrossCutting          | RuntimeAndRegistration |
+| -------------- | --------------------- | ---------------------- |
+| نوع مسئله      | behavior              | setup                  |
+| زمان استفاده   | runtime (در طول اجرا) | startup                |
+| abstraction    | رایج                  | معمولاً unnecessary    |
+| provider model | رایج                  | معمولاً ندارد          |
 
 ---
 
-### 5. داده و ماندگاری
+## اصول طراحی BuildingBlock
 
-این خانواده شامل اجزایی است که برای contextهای پایه، interceptorها، helperهای ماندگاری و capabilityهای داده‌ای استفاده می‌شوند.
+### 1. abstraction پیش‌فرض نیست
 
-نمونه‌ها:
+فقط زمانی abstraction ایجاد می‌شود که:
 
-* Databases
-* DbContext
-* Interceptors
-* Auditing
-
-مسیر این خانواده:
-
-* `04.DataAndPersistence`
+* چند implementation وجود داشته باشد
+* یا نیاز واقعی به decoupling باشد
 
 ---
 
-### 6. پیام و رویداد
+### 2. setup باید ساده باشد
 
-این خانواده پایه لازم برای رویدادها، پیام‌ها و بعضی سناریوهای پیام‌محور را فراهم می‌کند.
-
-نمونه‌ها:
-
-* Events
-* MessageBus
-
-مسیر این خانواده:
-
-* `05.Messaging`
+* registration باید واضح باشد
+* API باید minimal باشد
+* رفتار باید قابل پیش‌بینی باشد
 
 ---
 
-### 7. هویت و کاربر
+### 3. dependency به تکنولوژی مجاز است
 
-این خانواده برای سناریوهای هویت، امنیت، کاربر و مدیریت اطلاعات کاربری استفاده می‌شود.
+BuildingBlock می‌تواند:
 
-نمونه‌ها:
+* به ASP.NET Core وابسته باشد
+* یا به library خاصی متکی باشد
 
-* Auth
-* UsersManagement
+تا زمانی که:
 
-مسیر این خانواده:
-
-* `06.IdentityAndUsers`
-
----
-
-## نسبت BuildingBlocks با سایر دسته‌ها
-
-### نسبت با ApplicationPatterns
-
-ApplicationPatterns معمولاً از چند BuildingBlock برای ساخت یک رفتار تکرارشونده در سطح اپلیکیشن استفاده می‌کنند.
-
-به‌عبارت دیگر:
-
-* BuildingBlocks capability خام و مستقل می‌دهند
-* ApplicationPatterns از آن capabilityها برای ساخت flow و pattern استفاده می‌کنند
+* مسئله را درست حل کند
+* و قابل reuse باشد
 
 ---
 
-### نسبت با Integrations
+### 4. naming باید مبتنی بر مسئله باشد
 
-Integrations زمانی معنا پیدا می‌کنند که مسئله اصلی، اتصال به بیرون باشد.
+نه implementation.
 
-بنابراین:
+مثال:
 
-* یک جزء مستقل و قابل بازاستفاده حتی اگر به تکنولوژی خاص وابسته باشد، می‌تواند BuildingBlock باشد
-* اما اگر مسئله اصلی اتصال به سرویس یا سیستم بیرونی باشد، در Integrations قرار می‌گیرد
-
----
-
-### نسبت با Foundations
-
-Foundations از BuildingBlocks برای ساخت ساختارهای آماده پروژه استفاده می‌کنند.
-
-یعنی:
-
-* Foundations مصرف‌کننده BuildingBlocks هستند
-* BuildingBlocks نباید به Foundations وابسته شوند
+* `OpenApi` بهتر از `ScalarRegistration`
+* چون مسئله را درست بیان می‌کند
 
 ---
 
-### نسبت با Applications
+## ساختار پیشنهادی
 
-Applications برای استفاده مستقیم و شروع سریع توسعه ساخته می‌شوند و می‌توانند از BuildingBlocks استفاده کنند.
-
-Applications مصرف‌کننده BuildingBlocks هستند، نه برعکس.
+```
+00.BuildingBlocks/
+  CrossCutting/
+  RuntimeAndRegistration/
+```
 
 ---
 
-## نحوه مستندسازی در این دسته
+## مسیر مطالعه پیشنهادی
 
-مستندات BuildingBlocks در دو سطح نگهداری می‌شوند:
+1. CrossCutting (برای درک reusable behaviorها)
+2. RuntimeAndRegistration (برای درک setup سیستم)
 
-### سطح اول: خانواده
+---
 
-هر خانواده یک `index.md` دارد که در آن این موارد ثبت می‌شود:
+## وضعیت فعلی
 
-* تعریف کلی خانواده
-* مسئله‌ای که آن خانواده پوشش می‌دهد
-* مرز آن خانواده با خانواده‌های دیگر
-* فهرست ماژول‌های آن خانواده
-* تصمیم‌های مشترک
-* ارجاع به فایل‌های مستقل اعضا
+* CrossCutting تثبیت شده
+* RuntimeAndRegistration در حال تکمیل است
+* Lumen به‌عنوان capability جدید اضافه شده است
 
-### سطح دوم: ماژول
+---
 
-هر ماژول یا جزء مستقل، فایل مستند مستقل خودش را دارد.
+## جمع‌بندی
+
+BuildingBlockها:
+
+* پایه سیستم هستند
+* باید ساده و مستقل باشند
+* و نقش کلیدی در consistency پروژه دارند
