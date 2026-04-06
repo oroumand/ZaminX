@@ -109,8 +109,40 @@
 * Serializer (Prism)
 * Translator (Parrot)
 * Logger
-* DependencyInjection
 * ApplicationPartDetector
+
+> نکته:
+> DependencyInjection دیگر در این خانواده قرار نمی‌گیرد و به خانواده RuntimeAndRegistration منتقل شده است.
+
+---
+
+### RuntimeAndRegistration
+
+این خانواده شامل capabilityهایی است که مربوط به:
+
+* runtime composition
+* service registration
+* startup setup
+
+هستند.
+
+#### DependencyInjection (Axon)
+
+Axon نام محصولی capability مربوط به DependencyInjection است.
+
+این capability برای:
+
+* ثبت خودکار سرویس‌ها
+* حذف wiring دستی
+* assembly scanning
+* registration standardization
+* startup simplification
+
+طراحی شده است.
+
+Axon به‌جای ایجاد abstraction جدید، روی ساده‌سازی registration در `IServiceCollection` تمرکز دارد و با استفاده از marker interfaceها و policyهای مشخص، رفتار سیستم را قابل پیش‌بینی می‌کند.
+
+---
 
 ### Domain و Application Primitives
 
@@ -118,9 +150,13 @@
 * AggregateRoot
 * Mediator
 
+---
+
 ### Data و Persistence
 
 * Auditing
+
+---
 
 در میان capabilityهای عمومی و بین‌برشی، `Object Mapper` به‌عنوان capability مرجع این خانواده در نظر گرفته می‌شود.
 همچنین `Serializer` با نام محصولی `Prism` و `Translator` با نام محصولی `Parrot` به‌عنوان capabilityهای مرجع بعدی این خانواده طراحی و پیاده‌سازی اولیه شده‌اند.
@@ -168,6 +204,7 @@ docs/
 * ثبت تصمیم‌های کلیدی
 * ایجاد backlog اولیه
 * پیاده‌سازی capabilityهای مرجع در خانواده CrossCutting
+* آغاز توسعه capabilityهای خانواده RuntimeAndRegistration (Axon)
 
 ---
 
@@ -178,6 +215,7 @@ docs/
 * طراحی ApplicationPatterns
 * تعریف Foundations (MonolithStructure و ModularMonolith)
 * توسعه capabilityهای مرجع CrossCutting
+* توسعه و تکمیل Axon (DependencyInjection)
 * طراحی Applications اولیه:
 
   * مدیریت ترجمه

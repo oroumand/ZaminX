@@ -93,6 +93,48 @@ capabilityهای این خانواده:
 
 ---
 
+### نکته مهم درباره CrossCutting
+
+* capability مربوط به DependencyInjection از این خانواده خارج شده است
+* این capability به خانواده جدید RuntimeAndRegistration منتقل شده است
+* دلیل این تغییر، تفاوت ماهیت setup-time در مقابل usage-time است
+
+---
+
+### 02.RuntimeAndRegistration
+
+این خانواده برای capabilityهایی تعریف شده است که مربوط به:
+
+* runtime composition
+* service registration
+* startup setup
+
+هستند.
+
+این دسته از capabilityها با CrossCutting متفاوت هستند زیرا:
+
+* در زمان setup عمل می‌کنند
+* behavior مصرفی مستقیم ارائه نمی‌دهند
+* و نقش آن‌ها آماده‌سازی runtime است
+
+---
+
+#### DependencyInjection (Axon)
+
+وضعیت: طراحی و آغاز پیاده‌سازی
+
+* طراحی capability کامل شده
+* جایگاه معماری آن در RuntimeAndRegistration تثبیت شده است
+* نام محصولی `Axon` برای این capability انتخاب شده است
+* نام فنی capability همچنان `DependencyInjection` باقی می‌ماند
+* marker-based registration به‌عنوان مسیر اصلی طراحی تثبیت شده است
+* convention-based registration به‌صورت opt-in تعریف شده است
+* facade ساده روی `IServiceCollection` به‌عنوان entry point در نظر گرفته شده است
+* policyهای مهم شامل duplicate handling، filtering و validation تعریف شده‌اند
+* هدف اصلی این capability حذف wiring دستی و استانداردسازی registration است
+
+---
+
 ## وضعیت مستندات
 
 * ساختار docs تثبیت شده است
@@ -100,6 +142,7 @@ capabilityهای این خانواده:
 * docs به‌عنوان source of truth در نظر گرفته می‌شوند
 * برای capabilityهای اصلی BuildingBlocks، مستندات مستقل در حال تکمیل و تثبیت هستند
 * guidelineهای طراحی CrossCutting تثبیت شده‌اند و به‌عنوان مبنای capabilityهای بعدی استفاده می‌شوند
+* مستندات مربوط به خانواده RuntimeAndRegistration و capability Axon در حال اضافه شدن و تثبیت هستند
 
 ---
 
@@ -108,14 +151,29 @@ capabilityهای این خانواده:
 در وضعیت فعلی، این تصمیم‌ها تثبیت شده‌اند:
 
 * taxonomy پنج‌بخشی پروژه
+
 * خانواده‌محور بودن BuildingBlocks
+
 * قرارگیری capabilityهای عمومی در `01.CrossCutting`
+
 * docs as source of truth
+
 * جداسازی نام فنی و نام محصولی در capabilityهای اصلی CrossCutting
+
 * وجود دو الگوی رسمی طراحی برای capabilityهای provider-based در CrossCutting:
 
   * replacement-based
   * core-orchestrated
+
+* انتقال DependencyInjection از CrossCutting به RuntimeAndRegistration
+
+* تعریف خانواده RuntimeAndRegistration
+
+* انتخاب نام محصولی Axon برای DependencyInjection
+
+* تثبیت marker-based registration به‌عنوان مسیر اصلی
+
+* تعریف convention-based registration به‌صورت opt-in
 
 ---
 
@@ -124,6 +182,7 @@ capabilityهای این خانواده:
 تمرکز نزدیک پروژه:
 
 * تکمیل و تثبیت capabilityهای اصلی خانواده CrossCutting
+* آغاز و تکمیل implementation capability Axon
 * ادامه توسعه BuildingBlockهای داده و ماندگاری
 * تکمیل مستندات capabilityها
 * تعریف backlog دقیق برای ApplicationPatterns
@@ -136,7 +195,8 @@ capabilityهای این خانواده:
 برخی موضوع‌ها هنوز نیازمند تصمیم‌گیری یا توسعه بیشتر هستند:
 
 * مرز دقیق بعضی capabilityهای RuntimeAndRegistration
-* اولویت‌بندی خانواده‌های بعدی BuildingBlocks
+* نحوه تعامل RuntimeAndRegistration با سایر خانواده‌ها
+* اولویت‌بندی capabilityهای بعدی در این خانواده
 * تعیین scope دقیق بعضی ApplicationPatternها
 * strategy انتشار و بسته‌بندی capabilityها
 * تکمیل ADRهای مرتبط با capabilityهای جدید در صورت نیاز
@@ -150,5 +210,6 @@ capabilityهای این خانواده:
 در وضعیت فعلی:
 
 * Object Mapper، Serializer، Translator و Caching مهم‌ترین capabilityهای پیاده‌سازی‌شده یا تثبیت‌شده در خانواده CrossCutting هستند
+* Axon به‌عنوان اولین capability خانواده RuntimeAndRegistration در حال طراحی و پیاده‌سازی است
 * docs و ADRها نقش محوری در حفظ یکپارچگی تصمیم‌ها دارند
 * مسیر توسعه پروژه به‌سمت تکمیل BuildingBlocks، تثبیت Foundations و سپس توسعه ApplicationPatterns و Applications ادامه پیدا می‌کند
