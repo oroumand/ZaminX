@@ -150,13 +150,133 @@ UIها:
 
 ---
 
+## 🆕 Logging
+
+### وضعیت فعلی
+
+* طراحی معماری کامل
+* scope مشخص
+* implementation انجام شده
+* sample آماده
+* در حال تثبیت docs
+
+---
+
+### تعریف Logging
+
+Logging capability مربوط به:
+
+* Serilog registration
+* logging pipeline setup
+* enrichment
+* contextual logging
+* request logging
+* startup logging
+
+است.
+
+---
+
+### تصمیم‌های معماری Logging
+
+#### 1. جایگاه
+
+* خانواده: RuntimeAndRegistration
+* دلیل: تمرکز روی setup و runtime
+
+---
+
+#### 2. مدل طراحی
+
+* بدون abstraction
+* بدون provider model
+* builder سبک
+* integration مستقیم با Serilog
+
+---
+
+#### 3. Options
+
+* استفاده از Options pattern استاندارد
+* Bind از IConfiguration
+* Configure از code
+* بدون:
+
+  * OptionsWrapper
+  * Options.Create
+  * Replace
+
+---
+
+#### 4. Enrichment
+
+پشتیبانی از:
+
+* MachineName
+* EnvironmentName
+* ThreadId
+* CorrelationId
+* TraceId / SpanId
+* Application metadata
+
+---
+
+#### 5. Contextual Logging
+
+پشتیبانی از:
+
+* UserId / UserName
+* claim-based helpers
+* properties سفارشی
+* resolver-based per-request model
+
+---
+
+#### 6. Sinks
+
+نسخه اول:
+
+* Console
+* File
+* Seq
+
+---
+
+#### 7. Startup Logging
+
+* bootstrap logger
+* run wrapper
+* fatal exception handling
+
+---
+
+### اهداف نسخه اول
+
+* setup ساده logging
+* یکپارچه‌سازی Serilog
+* کاهش boilerplate
+* ارائه API قابل فهم
+
+---
+
+### Non-goals
+
+* abstraction logging
+* multi-provider
+* plugin system پیچیده
+* sinkهای متعدد خارج از scope
+
+---
+
 ## تصمیم‌های اخیر
 
 * انتقال DI به RuntimeAndRegistration
 * تثبیت Axon
 * حذف Scalar به‌عنوان capability مستقل
 * تعریف Lumen
+* تعریف Logging
 * استانداردسازی Options usage
+* حذف over-engineering در runtime capabilityها
 
 ---
 
@@ -171,7 +291,7 @@ UIها:
 ## مسیر آینده
 
 * تثبیت Lumen
-* تست UI integration
+* تثبیت Logging
 * بهبود docs
 * publish
 
@@ -187,4 +307,4 @@ UIها:
 
 است.
 
-Lumen نقش مهمی در استانداردسازی API documentation در این مسیر دارد.
+Logging نقش مهمی در استانداردسازی logging در این مسیر دارد.

@@ -231,6 +231,53 @@ UIها capability مستقل نیستند.
 
 ---
 
+## 🆕 Logging
+
+Capability مربوط به Logging در زمین X با تمرکز بر:
+
+* setup و registration ساده Serilog
+* استانداردسازی logging در سطح application
+* فراهم کردن تجربه یکپارچه برای:
+
+  * sinks
+  * enrichers
+  * contextual logging
+  * request logging
+  * startup logging
+
+طراحی شده است.
+
+### ویژگی‌ها
+
+* استفاده از Serilog به‌عنوان implementation اصلی
+* بدون abstraction اضافی
+* builder سبک برای configuration
+* پشتیبانی از:
+
+  * Console
+  * File
+  * Seq
+* پشتیبانی از:
+
+  * CorrelationId
+  * TraceId / SpanId
+  * Application metadata
+* پشتیبانی از contextual logging:
+
+  * UserId / UserName
+  * properties سفارشی
+* startup logging ساده‌شده (bootstrap + run)
+
+### نکته مهم
+
+Logging در این فاز:
+
+* provider-based نیست
+* abstraction جدید معرفی نمی‌کند
+* minimal و setup-oriented است
+
+---
+
 ## ساختار پروژه
 
 ```
@@ -242,6 +289,7 @@ src/
         Scalar
         Swagger
         Redoc
+      Logging
 ```
 
 ---
@@ -281,6 +329,7 @@ docs/
 * تثبیت CrossCutting
 * تکمیل Axon
 * طراحی و تثبیت Lumen
+* طراحی و تثبیت Logging
 * تعریف ApplicationPatterns
 
 ---
