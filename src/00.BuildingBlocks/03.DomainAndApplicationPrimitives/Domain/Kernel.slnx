@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ZaminX.BuildingBlocks.Domain/ZaminX.BuildingBlocks.Domain.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ZaminX.BuildingBlocks.Domain.Tests/ZaminX.BuildingBlocks.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
