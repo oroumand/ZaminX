@@ -282,7 +282,24 @@ Logging در این فاز:
 
 ```
 src/
-  00.BuildingBlocks
+  00.BuildingBlocks/
+    01.CrossCutting
+      Caching
+        Abstractions
+        Inmemory
+        Redis
+        SqlServer
+      ObjectMapper
+        Abstractions
+        AutoMapper    
+      Serializer
+        Abstractions
+        Microsoft
+        Newtonsoft    
+      Translations
+        Abstractions
+        Parrot
+        SqlServer             
     02.RuntimeAndRegistration
       OpenApi
         Lumen
@@ -290,6 +307,23 @@ src/
         Swagger
         Redoc
       Logging
+    03.DomainAndApplicationPrimitives/
+      01.Domain/
+        Kernel.slnx
+        src/
+          ZaminX.BuildingBlocks.Domain/
+        tests/
+          ZaminX.BuildingBlocks.Domain.Tests/
+```
+
+این بخش شامل primitiveهای پایه دامنه است:
+
+* Entity
+* AggregateRoot
+* ValueObject
+* DomainEvent
+* DomainException
+
 ```
 
 ---
@@ -330,6 +364,7 @@ docs/
 * تکمیل Axon
 * طراحی و تثبیت Lumen
 * طراحی و تثبیت Logging
+- تثبیت Domain primitives (Kernel)
 * تعریف ApplicationPatterns
 
 ---

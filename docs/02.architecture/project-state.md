@@ -288,12 +288,41 @@ Logging capability مربوط به:
 
 ---
 
+## Domain Primitives (Kernel)
+
+وضعیت: ✅ پیاده‌سازی شده (نسخه اولیه)
+
+این خانواده شامل primitiveهای پایه دامنه است:
+
+* Entity
+* AggregateRoot
+* ValueObject
+* DomainEvent
+* DomainException
+
+ویژگی‌ها:
+
+* طراحی minimal و بدون over-engineering
+* بدون وابستگی به application یا infrastructure
+* آماده برای استفاده در application layer
+
+نکات مهم:
+
+* DomainEvent به‌صورت marker interface طراحی شده
+* AggregateRoot مسئول نگهداری eventها است (نه dispatch)
+* ValueObject از الگوی self-referencing generic استفاده می‌کند
+* DomainException دارای Code متنی است (بدون key یا numeric id)
+
+وضعیت بعدی:
+
+➡️ ورود به Application Primitives (Relay)
+
 ## مسیر آینده
 
 * تثبیت Lumen
 * تثبیت Logging
 * بهبود docs
-* publish
+* ورود به Application Primitives (Relay)
 
 ---
 
