@@ -1,4 +1,5 @@
 ﻿using ZaminX.BuildingBlocks.Application.Configurations;
+using ZaminX.BuildingBlocks.Application.Mediation;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ public static class ServiceCollectionExtensions
 
         var configuration = new RelayConfiguration();
         configure?.Invoke(configuration);
+
+        services.AddScoped<IMediator, Mediator>();
 
         return services;
     }
