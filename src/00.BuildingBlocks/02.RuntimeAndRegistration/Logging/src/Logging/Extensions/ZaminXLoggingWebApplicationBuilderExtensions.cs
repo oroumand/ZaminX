@@ -4,9 +4,7 @@ using ZaminX.BuildingBlocks.RuntimeAndRegistration.Logging.Configurations;
 using ZaminX.BuildingBlocks.RuntimeAndRegistration.Logging.Enrichers;
 using ZaminX.BuildingBlocks.RuntimeAndRegistration.Logging.Runtime;
 
-
 namespace Microsoft.Extensions.DependencyInjection;
-
 public static class ZaminXLoggingWebApplicationBuilderExtensions
 {
     public static WebApplicationBuilder AddZaminXLogging(
@@ -25,7 +23,7 @@ public static class ZaminXLoggingWebApplicationBuilderExtensions
         Validate(loggingBuilder.Options);
 
         builder.Services.AddSingleton(loggingBuilder.Options);
-        builder.Services.AddSingleton<IOptions<ZaminXLoggingOptions>>(Options.Create(loggingBuilder.Options));
+        IServiceCollection serviceCollection = builder.Services.AddSingleton<IOptions<ZaminXLoggingOptions>>(Options.Options.Create(loggingBuilder.Options));
         builder.Services.AddHttpContextAccessor();
 
         var applicationMetadataEnricher = new ApplicationMetadataEnricher(loggingBuilder.Options.Application);
