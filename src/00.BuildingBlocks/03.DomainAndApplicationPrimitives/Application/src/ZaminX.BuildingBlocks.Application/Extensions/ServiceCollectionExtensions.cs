@@ -22,6 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMediator, Mediator>();
 
         RegisterBuiltInBehaviors(services, configuration);
+        RegisterCustomBehaviors(services, configuration);
 
         return services;
     }
@@ -76,6 +77,19 @@ public static class ServiceCollectionExtensions
             services.AddScoped(
                 typeof(IMessageBehavior<,>),
                 typeof(ExceptionToResultBehavior<,>));
+        }
+    }
+
+    private static void RegisterCustomBehaviors(
+        IServiceCollection services,
+        RelayConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
+        foreach (var openBehaviorType in configuration.OpenBehaviorTypes)
+        {
+            services.AddScoped(typeof(IMessageBehavior<,>), openBehaviorType);
         }
     }
 
