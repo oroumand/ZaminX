@@ -21,7 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Mediation\" />
 	  <Folder Include="Validation\" />
 	</ItemGroup>
 
