@@ -1,0 +1,6 @@
+@ZaminX.BuildingBlocks.Application.WebApiSample_HostAddress = http://localhost:5276
+
+GET {{ZaminX.BuildingBlocks.Application.WebApiSample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

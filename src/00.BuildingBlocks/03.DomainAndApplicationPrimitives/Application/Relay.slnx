@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/ZaminX.BuildingBlocks.Application.WebApiSample/ZaminX.BuildingBlocks.Application.WebApiSample.csproj" Id="596d042c-012b-479f-a535-9b3a7963b79a" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/ZaminX.BuildingBlocks.Application/ZaminX.BuildingBlocks.Application.csproj" />
   </Folder>
