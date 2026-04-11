@@ -4,7 +4,8 @@ using ZaminX.BuildingBlocks.RuntimeAndRegistration.Logging.Configurations;
 using ZaminX.BuildingBlocks.RuntimeAndRegistration.Logging.Enrichers;
 using ZaminX.BuildingBlocks.RuntimeAndRegistration.Logging.Runtime;
 
-namespace Microsoft.AspNetCore.Builder;
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ZaminXLoggingWebApplicationBuilderExtensions
 {
