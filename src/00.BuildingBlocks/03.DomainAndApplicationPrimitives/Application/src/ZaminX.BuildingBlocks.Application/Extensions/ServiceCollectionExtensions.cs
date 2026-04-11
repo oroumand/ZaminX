@@ -3,6 +3,7 @@ using ZaminX.BuildingBlocks.Application.Commands;
 using ZaminX.BuildingBlocks.Application.Configurations;
 using ZaminX.BuildingBlocks.Application.Events;
 using ZaminX.BuildingBlocks.Application.Mediation;
+using ZaminX.BuildingBlocks.Application.Mediation.Behaviors;
 using ZaminX.BuildingBlocks.Application.Queries;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,8 @@ public static class ServiceCollectionExtensions
         configure?.Invoke(configuration);
 
         services.AddScoped<IMediator, Mediator>();
+
+        RegisterBuiltInBehaviors(services, configuration);
 
         return services;
     }
@@ -45,6 +48,35 @@ public static class ServiceCollectionExtensions
         RegisterHandlers(services, assemblies);
 
         return services;
+    }
+
+    private static void RegisterBuiltInBehaviors(
+        IServiceCollection services,
+        RelayConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
+        if (configuration.EnableRequestTelemetryBehavior)
+        {
+            services.AddScoped(
+                typeof(IMessageBehavior<,>),
+                typeof(RequestTelemetryBehavior<,>));
+        }
+
+        if (configuration.EnableValidationBehavior)
+        {
+            services.AddScoped(
+                typeof(IMessageBehavior<,>),
+                typeof(ValidationBehavior<,>));
+        }
+
+        if (configuration.EnableExceptionToResultBehavior)
+        {
+            services.AddScoped(
+                typeof(IMessageBehavior<,>),
+                typeof(ExceptionToResultBehavior<,>));
+        }
     }
 
     private static void RegisterHandlers(
