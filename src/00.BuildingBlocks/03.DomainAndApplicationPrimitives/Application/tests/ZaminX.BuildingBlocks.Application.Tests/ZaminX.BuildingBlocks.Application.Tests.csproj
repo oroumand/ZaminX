@@ -20,4 +20,9 @@
 		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Application\ZaminX.BuildingBlocks.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Mediation\" />
+	  <Folder Include="Validation\" />
+	</ItemGroup>
+
 </Project>
