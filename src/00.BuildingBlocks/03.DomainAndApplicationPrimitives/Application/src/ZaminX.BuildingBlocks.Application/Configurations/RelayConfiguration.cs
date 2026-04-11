@@ -1,13 +1,8 @@
-﻿using System.Reflection;
-
-namespace ZaminX.BuildingBlocks.Application.Configurations;
+﻿namespace ZaminX.BuildingBlocks.Application.Configurations;
 
 public sealed class RelayConfiguration
 {
-    private readonly List<Assembly> _assemblies = [];
     private readonly List<Type> _openBehaviorTypes = [];
-
-    public IReadOnlyCollection<Assembly> Assemblies => _assemblies.AsReadOnly();
 
     public IReadOnlyCollection<Type> OpenBehaviorTypes => _openBehaviorTypes.AsReadOnly();
 
@@ -16,29 +11,6 @@ public sealed class RelayConfiguration
     public bool EnableValidationBehavior { get; set; } = true;
 
     public bool EnableExceptionToResultBehavior { get; set; } = true;
-
-    public RelayConfiguration AddAssembly(Assembly assembly)
-    {
-        ArgumentNullException.ThrowIfNull(assembly);
-
-        if (_assemblies.Contains(assembly))
-            return this;
-
-        _assemblies.Add(assembly);
-        return this;
-    }
-
-    public RelayConfiguration AddAssemblies(IEnumerable<Assembly> assemblies)
-    {
-        ArgumentNullException.ThrowIfNull(assemblies);
-
-        foreach (var assembly in assemblies)
-        {
-            AddAssembly(assembly);
-        }
-
-        return this;
-    }
 
     public RelayConfiguration AddOpenBehavior(Type openBehaviorType)
     {
