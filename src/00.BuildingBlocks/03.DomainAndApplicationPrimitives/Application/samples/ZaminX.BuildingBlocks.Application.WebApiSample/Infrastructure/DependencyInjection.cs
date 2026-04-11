@@ -1,44 +1,36 @@
 ﻿using FluentValidation;
 using Relay.SampleWebApi.Features.Orders.Contracts;
-using ZaminX.BuildingBlocks.Application.Commands;
-using ZaminX.BuildingBlocks.Application.Events;
-using ZaminX.BuildingBlocks.Application.Mediation;
-using ZaminX.BuildingBlocks.Application.Mediation.Behaviors;
-using ZaminX.BuildingBlocks.Application.Queries;
-using ZaminX.BuildingBlocks.Application.Results;
 using ZaminX.BuildingBlocks.Application.Validation;
+using ZaminX.BuildingBlocks.Application.WebApiSample;
 using ZaminX.BuildingBlocks.Application.WebApiSample.Behaviors;
-using ZaminX.BuildingBlocks.Application.WebApiSample.Features.Handlers;
+using ZaminX.BuildingBlocks.Application.WebApiSample.Infrastructure;
 
-namespace ZaminX.BuildingBlocks.Application.WebApiSample.Infrastructure;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddRelaySample(this IServiceCollection services)
     {
+        ArgumentNullException.ThrowIfNull(services);
+
         services.AddHttpContextAccessor();
 
         services.AddSingleton<InMemoryOrderStore>();
 
-        services.AddScoped<IMediator, Mediator>();
+        services.AddZaminXApplication(options =>
+        {
+            options.EnableRequestTelemetryBehavior = true;
+            options.EnableValidationBehavior = true;
+            options.EnableExceptionToResultBehavior = true;
 
-        services.AddScoped<ICommandHandler<CreateOrderCommand, Guid>, CreateOrderCommandHandler>();
-        services.AddScoped<IQueryHandler<GetOrderByIdQuery, OrderDto>, GetOrderByIdQueryHandler>();
-        services.AddScoped<IEventHandler<OrderCreatedEvent>, OrderCreatedEventHandler>();
+            options.AddOpenBehavior(typeof(HeaderLoggingBehavior<,>));
+        });
 
-        services.AddValidatorsFromAssemblyContaining<Program>();
+        services.AddZaminXApplicationHandlers(typeof(SampleAssemblyMarker).Assembly);
+
+        services.AddValidatorsFromAssemblyContaining<SampleAssemblyMarker>();
 
         services.AddScoped<IMessageValidator<CreateOrderCommand>, FluentValidationMessageValidatorAdapter<CreateOrderCommand>>();
-
-        services.AddScoped<IMessageBehavior<CreateOrderCommand, Result<Guid>>, RequestTelemetryBehavior<CreateOrderCommand, Result<Guid>>>();
-        services.AddScoped<IMessageBehavior<CreateOrderCommand, Result<Guid>>, ValidationBehavior<CreateOrderCommand, Result<Guid>>>();
-        services.AddScoped<IMessageBehavior<CreateOrderCommand, Result<Guid>>, HeaderLoggingBehavior<CreateOrderCommand, Result<Guid>>>();
-        services.AddScoped<IMessageBehavior<CreateOrderCommand, Result<Guid>>, ExceptionToResultBehavior<CreateOrderCommand, Result<Guid>>>();
-
-        services.AddScoped<IMessageBehavior<GetOrderByIdQuery, Result<OrderDto>>, RequestTelemetryBehavior<GetOrderByIdQuery, Result<OrderDto>>>();
-        services.AddScoped<IMessageBehavior<GetOrderByIdQuery, Result<OrderDto>>, ValidationBehavior<GetOrderByIdQuery, Result<OrderDto>>>();
-        services.AddScoped<IMessageBehavior<GetOrderByIdQuery, Result<OrderDto>>, HeaderLoggingBehavior<GetOrderByIdQuery, Result<OrderDto>>>();
-        services.AddScoped<IMessageBehavior<GetOrderByIdQuery, Result<OrderDto>>, ExceptionToResultBehavior<GetOrderByIdQuery, Result<OrderDto>>>();
 
         return services;
     }
