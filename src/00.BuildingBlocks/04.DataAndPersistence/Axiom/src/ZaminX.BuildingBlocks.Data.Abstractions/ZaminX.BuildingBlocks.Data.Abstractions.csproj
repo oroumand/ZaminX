@@ -4,4 +4,8 @@
 		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Folder Include="Configurations\" />
+	</ItemGroup>
+
 </Project>
