@@ -60,27 +60,34 @@ where TDbContext : DbContext
     // 👇 internal helper
     private static IQueryable<TEntity> TryApplyIdDescending(IQueryable<TEntity> query)
     {
-        var property = typeof(TEntity)
-            .GetProperty("Id", BindingFlags.Public | BindingFlags.Instance);
+        var entityType = typeof(TEntity);
+
+
+        var property =
+            entityType.GetProperty("Id", BindingFlags.Public | BindingFlags.Instance)
+            ?? entityType.GetProperty($"{entityType.Name}Id", BindingFlags.Public | BindingFlags.Instance);
 
         if (property is null)
         {
             return query;
         }
 
-        var parameter = Expression.Parameter(typeof(TEntity), "entity");
+        var parameter = Expression.Parameter(entityType, "entity");
         var propertyAccess = Expression.Property(parameter, property);
         var lambda = Expression.Lambda(propertyAccess, parameter);
 
         var methodCall = Expression.Call(
             typeof(Queryable),
             "OrderByDescending",
-            [typeof(TEntity), property.PropertyType],
+            [entityType, property.PropertyType],
             query.Expression,
             Expression.Quote(lambda));
 
         return query.Provider.CreateQuery<TEntity>(methodCall);
+
+
     }
+
 
 
 }
