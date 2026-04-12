@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZaminX.BuildingBlocks.Data.Write.Abstractions.Contracts;
+﻿namespace ZaminX.BuildingBlocks.Data.Write.Abstractions.Contracts;
 
 public interface IUnitOfWork
 {

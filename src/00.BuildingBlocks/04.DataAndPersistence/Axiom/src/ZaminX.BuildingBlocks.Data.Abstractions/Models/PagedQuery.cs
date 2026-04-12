@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZaminX.BuildingBlocks.Data.Abstractions.Models;
+﻿namespace ZaminX.BuildingBlocks.Data.Abstractions.Models;
 
 public class PagedQuery
 {
