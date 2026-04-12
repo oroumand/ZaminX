@@ -10,8 +10,6 @@
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Configurations\" />
-	  <Folder Include="Extensions\" />
-	  <Folder Include="Mediation\" />
+	  <ProjectReference Include="..\ZaminX.BuildingBlocks.Application\ZaminX.BuildingBlocks.Application.csproj" />
 	</ItemGroup>
 </Project>
