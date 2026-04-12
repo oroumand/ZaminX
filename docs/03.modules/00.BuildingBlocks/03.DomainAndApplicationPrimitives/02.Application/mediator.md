@@ -212,17 +212,22 @@ public interface IOrderedMessageBehavior<in TMessage, TResponse>
 
 ---
 
-### 2. ValidationBehavior
+### 2. Validation
 
-مسئول:
+در نسخه فعلی، validation بخشی از core Application نیست.
 
-* اجرای validatorهای request قبل از handler
+Validation به‌صورت integration جدا ارائه می‌شود:
 
-ویژگی‌ها:
+ZaminX.BuildingBlocks.Application.FluentValidation
 
-* اگر validator وجود نداشته باشد، request را عبور می‌دهد
-* اگر validation error وجود داشته باشد، failure result برمی‌گرداند
-* اگر validation موفق باشد، request را به handler می‌رساند
+این integration:
+
+* FluentValidationBehavior را به pipeline اضافه می‌کند
+* validatorها را از DI resolve می‌کند
+* failure را به Result تبدیل می‌کند
+
+Core Application هیچ وابستگی‌ای به FluentValidation ندارد.
+
 
 ---
 

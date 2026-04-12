@@ -48,7 +48,6 @@
 ### Built-in Behaviors
 
 * RequestTelemetry
-* Validation
 * ExceptionToResult
 
 ---
@@ -61,7 +60,6 @@
 services.AddZaminXApplication(options =>
 {
     options.EnableRequestTelemetryBehavior = true;
-    options.EnableValidationBehavior = true;
     options.EnableExceptionToResultBehavior = true;
 });
 ```
@@ -143,17 +141,14 @@ services.AddScoped<IMyService, MyService>();
 
 ## Validation
 
-این ماژول به FluentValidation وابسته نیست.
+Validation در core وجود ندارد.
 
-از abstraction زیر استفاده می‌کند:
+برای فعال‌سازی:
 
-```csharp
-IMessageValidator<TMessage>
-```
-
-در صورت نیاز می‌توانید adapter برای FluentValidation بنویسید.
-
----
+services.AddZaminXApplicationFluentValidation(options =>
+{
+    options.AddAssembly(typeof(ModuleMarker).Assembly);
+});
 
 ## Modular Monolith
 
