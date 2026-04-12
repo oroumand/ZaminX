@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/ZaminX.BuildingBlocks.Application.AspNetCore/ZaminX.BuildingBlocks.Application.AspNetCore.csproj" Id="1bd5b263-d652-4efe-9a05-3d077143066c" />
+    <Project Path="src/ZaminX.BuildingBlocks.Application.FluentValidation/ZaminX.BuildingBlocks.Application.FluentValidation.csproj" Id="528724c2-2a05-4d7f-bfcb-01969b506e2e" />
     <Project Path="src/ZaminX.BuildingBlocks.Application/ZaminX.BuildingBlocks.Application.csproj" />
   </Folder>
   <Folder Name="/tests/">
