@@ -19,4 +19,8 @@ public class PagedQuery
 
     public bool IncludeTotalCount { get; init; } = true;
 
+
+    public string? SortBy { get; init; }
+    public bool SortDescending { get; init; }
+
 }

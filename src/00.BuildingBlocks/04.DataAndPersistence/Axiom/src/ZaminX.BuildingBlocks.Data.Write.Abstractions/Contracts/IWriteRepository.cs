@@ -6,7 +6,7 @@ public interface IWriteRepository<TAggregate, TId>
 
     Task AddAsync(TAggregate aggregate, CancellationToken cancellationToken = default);
 
-    Task RemoveAsync(TAggregate aggregate);
+    void Remove(TAggregate aggregate);
 
     Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
 
