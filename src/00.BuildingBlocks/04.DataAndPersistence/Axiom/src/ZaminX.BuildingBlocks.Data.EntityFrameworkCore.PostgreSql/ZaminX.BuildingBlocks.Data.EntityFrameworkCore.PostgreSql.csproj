@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ZaminX.BuildingBlocks.Data.EntityFrameworkCore\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write.csproj" />
+		<ProjectReference Include="..\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read.csproj" />
+	</ItemGroup>
+
+
+
+</Project>

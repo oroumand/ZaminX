@@ -6,11 +6,12 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <!--Auto Mapper-->
     <PackageVersion Include="AutoMapper" Version="16.1.1" />
-    <!--ASP.NET Projects-->
-    <PackageVersion Include="FluentAssertions" Version="8.9.0" />
+    <!--Fluent Validation-->
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <!--ASP.NET Projects-->
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="10.0.5" />
@@ -24,10 +25,22 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.5" />
+
+    <!--Entity Framework-->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.5" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
+    
+    <!--Serializer-->
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
+    
+    <!--OpenApi-->
     <PackageVersion Include="Scalar.AspNetCore" Version="2.13.22" />
     <PackageVersion Include="Swashbuckle.AspNetCore.ReDoc" Version="10.1.5" />
     <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.5" />
+    <!--Serilog-->
     <PackageVersion Include="Serilog" Version="4.3.1" />
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="Serilog.Settings.Configuration" Version="10.0.0" />

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk"  />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.Abstractions\ZaminX.BuildingBlocks.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.Write.Abstractions\ZaminX.BuildingBlocks.Data.Write.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.Read.Abstractions\ZaminX.BuildingBlocks.Data.Read.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

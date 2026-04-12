@@ -1,0 +1,6 @@
+@ZaminX.Samples.Data.PostgreSql_HostAddress = http://localhost:5074
+
+GET {{ZaminX.Samples.Data.PostgreSql_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

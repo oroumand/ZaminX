@@ -1,0 +1,6 @@
+@ZaminX.Samples.Data.SqlServer_HostAddress = http://localhost:5081
+
+GET {{ZaminX.Samples.Data.SqlServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

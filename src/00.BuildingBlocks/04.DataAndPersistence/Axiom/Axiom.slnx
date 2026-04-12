@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/ZaminX.Samples.Data.PostgreSql/ZaminX.Samples.Data.PostgreSql.csproj" />
+    <Project Path="samples/ZaminX.Samples.Data.SqlServer/ZaminX.Samples.Data.SqlServer.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ZaminX.BuildingBlocks.Data.Abstractions/ZaminX.BuildingBlocks.Data.Abstractions.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.PostgreSql/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.PostgreSql.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.SqlServer/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.SqlServer.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.EntityFrameworkCore/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.Read.Abstractions/ZaminX.BuildingBlocks.Data.Read.Abstractions.csproj" />
+    <Project Path="src/ZaminX.BuildingBlocks.Data.Write.Abstractions/ZaminX.BuildingBlocks.Data.Write.Abstractions.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ZaminX.BuildingBlocks.Data.Abstractions.Tests/ZaminX.BuildingBlocks.Data.Abstractions.Tests.csproj" />
+    <Project Path="tests/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Tests/ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Tests.csproj" />
+  </Folder>
+</Solution>

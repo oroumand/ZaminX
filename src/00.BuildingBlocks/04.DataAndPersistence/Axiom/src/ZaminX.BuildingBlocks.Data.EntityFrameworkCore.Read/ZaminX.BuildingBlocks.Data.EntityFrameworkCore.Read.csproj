@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ZaminX.BuildingBlocks.Data.EntityFrameworkCore\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\ZaminX.BuildingBlocks.Data.Read.Abstractions\ZaminX.BuildingBlocks.Data.Read.Abstractions.csproj" />
+	</ItemGroup>
+
+
+</Project>

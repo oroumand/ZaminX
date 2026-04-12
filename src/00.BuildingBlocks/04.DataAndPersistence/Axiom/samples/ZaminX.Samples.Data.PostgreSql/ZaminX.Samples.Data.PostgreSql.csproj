@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.Abstractions\ZaminX.BuildingBlocks.Data.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.Write.Abstractions\ZaminX.BuildingBlocks.Data.Write.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.Read.Abstractions\ZaminX.BuildingBlocks.Data.Read.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.EntityFrameworkCore\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.PostgreSql\ZaminX.BuildingBlocks.Data.EntityFrameworkCore.PostgreSql.csproj" />
+	</ItemGroup>
+
+</Project>
