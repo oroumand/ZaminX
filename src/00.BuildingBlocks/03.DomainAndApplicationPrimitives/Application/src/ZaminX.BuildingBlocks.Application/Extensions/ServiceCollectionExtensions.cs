@@ -65,12 +65,6 @@ public static class ServiceCollectionExtensions
                 typeof(RequestTelemetryBehavior<,>));
         }
 
-        if (configuration.EnableValidationBehavior)
-        {
-            services.AddScoped(
-                typeof(IMessageBehavior<,>),
-                typeof(ValidationBehavior<,>));
-        }
 
         if (configuration.EnableExceptionToResultBehavior)
         {

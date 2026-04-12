@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using Relay.SampleWebApi.Features.Orders.Contracts;
-using ZaminX.BuildingBlocks.Application.Validation;
 using ZaminX.BuildingBlocks.Application.WebApiSample;
 using ZaminX.BuildingBlocks.Application.WebApiSample.Behaviors;
 using ZaminX.BuildingBlocks.Application.WebApiSample.Infrastructure;
@@ -20,7 +18,6 @@ public static class DependencyInjection
         services.AddZaminXApplication(options =>
         {
             options.EnableRequestTelemetryBehavior = true;
-            options.EnableValidationBehavior = true;
             options.EnableExceptionToResultBehavior = true;
 
             options.AddOpenBehavior(typeof(HeaderLoggingBehavior<,>));
@@ -30,7 +27,6 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssemblyContaining<SampleAssemblyMarker>();
 
-        services.AddScoped<IMessageValidator<CreateOrderCommand>, FluentValidationMessageValidatorAdapter<CreateOrderCommand>>();
 
         return services;
     }

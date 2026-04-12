@@ -8,8 +8,6 @@ public sealed class RelayConfiguration
 
     public bool EnableRequestTelemetryBehavior { get; set; } = true;
 
-    public bool EnableValidationBehavior { get; set; } = true;
-
     public bool EnableExceptionToResultBehavior { get; set; } = true;
 
     public RelayConfiguration AddOpenBehavior(Type openBehaviorType)
