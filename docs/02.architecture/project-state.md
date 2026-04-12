@@ -317,12 +317,212 @@ Logging capability مربوط به:
 
 ➡️ ورود به Application Primitives (Relay)
 
+---
+
+## 🆕 Application Primitives (Relay)
+
+وضعیت: ✅ پیاده‌سازی شده (نسخه اول کامل)
+
+این خانواده شامل primitiveهای لایه Application است که برای orchestration و اجرای use caseها استفاده می‌شوند.
+
+---
+
+### تعریف Relay
+
+Relay مجموعه‌ای از primitiveهای Application برای:
+
+* Message-based architecture
+* Command / Query / Event handling
+* Mediator pattern
+* Pipeline processing
+
+است.
+
+---
+
+### اجزای اصلی
+
+#### Messaging
+
+* ICommand
+* IQuery
+* IEvent
+* IMessage (base contract)
+
+---
+
+#### Handlers
+
+* ICommandHandler
+* IQueryHandler
+* IEventHandler
+
+---
+
+#### Result Pattern
+
+* Result
+* Result<T>
+* پشتیبانی از چندین error
+* حذف exception از flow اصلی application
+
+---
+
+#### Mediator
+
+* IMediator
+* Send برای requestها
+* Publish برای eventها
+* orchestration کامل execution
+
+---
+
+#### Pipeline Behaviors
+
+پشتیبانی از:
+
+* pre-processing
+* post-processing
+* short-circuit execution
+
+---
+
+### Built-in Behaviors
+
+نسخه اول شامل:
+
+* RequestTelemetryBehavior
+* ValidationBehavior
+* ExceptionToResultBehavior
+
+ویژگی‌ها:
+
+* فعال به‌صورت پیش‌فرض
+* قابل فعال/غیرفعال شدن
+* ordering قابل کنترل
+
+---
+
+### Custom Behavior
+
+پشتیبانی از:
+
+```csharp
+options.AddOpenBehavior(typeof(MyBehavior<,>));
+```
+
+ویژگی‌ها:
+
+* بدون نیاز به registration دستی
+* ثبت خودکار در DI
+* اضافه شدن خودکار به pipeline
+
+---
+
+### Dependency Injection
+
+Relay شامل registration استاندارد است:
+
+#### AddZaminXApplication
+
+مسئول:
+
+* ثبت IMediator
+* ثبت built-in behaviorها
+* ثبت custom behaviorها
+
+---
+
+#### AddZaminXApplicationHandlers
+
+مسئول:
+
+* scan و register handlerها از assembly
+
+---
+
+### Modular Monolith Support
+
+طراحی به‌صورت کامل سازگار با:
+
+* modular monolith
+
+الگو:
+
+```csharp
+services.AddZaminXApplication();
+
+services.AddZaminXApplicationHandlers(typeof(ModuleMarker).Assembly);
+```
+
+هر ماژول:
+
+* handlerهای خودش را register می‌کند
+* dependencyهای خودش را مدیریت می‌کند
+
+---
+
+### Validation
+
+Relay از abstraction داخلی استفاده می‌کند:
+
+```csharp
+IMessageValidator<TMessage>
+```
+
+ویژگی‌ها:
+
+* بدون وابستگی مستقیم به FluentValidation
+* امکان استفاده از adapter
+
+---
+
+### Exception Handling
+
+* exceptionها به Result تبدیل می‌شوند
+* exception خام از Application خارج نمی‌شود
+
+---
+
+### ASP.NET Core Integration
+
+در پروژه جدا:
+
+* ZaminX.BuildingBlocks.Application.AspNetCore
+
+ویژگی:
+
+* تبدیل Result به HTTP Response
+
+---
+
+### ویژگی‌های کلیدی
+
+* طراحی minimal و بدون over-engineering
+* pipeline قابل توسعه
+* ordering deterministic
+* separation بین infrastructure و module registration
+* سازگار با Clean Architecture
+
+---
+
+### Non-goals
+
+* message bus
+* distributed messaging
+* retry policy
+* transaction management
+* caching
+* event pipeline (در این نسخه)
+
+---
+
 ## مسیر آینده
 
 * تثبیت Lumen
 * تثبیت Logging
 * بهبود docs
-* ورود به Application Primitives (Relay)
+* شروع Application Services (UseCase layer)
 
 ---
 
@@ -336,4 +536,4 @@ Logging capability مربوط به:
 
 است.
 
-Logging نقش مهمی در استانداردسازی logging در این مسیر دارد.
+Application Primitives (Relay) به‌عنوان foundation لایه Application به‌طور کامل پیاده‌سازی شده و پروژه آماده ورود به فاز Application Services است.

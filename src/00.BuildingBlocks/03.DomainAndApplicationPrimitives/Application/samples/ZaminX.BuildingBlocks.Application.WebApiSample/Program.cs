@@ -1,8 +1,7 @@
 using Relay.SampleWebApi.Features.Orders.Contracts;
-using Relay.SampleWebApi.Infrastructure;
 using Scalar.AspNetCore;
+using ZaminX.BuildingBlocks.Application.AspNetCore.HttpResults;
 using ZaminX.BuildingBlocks.Application.Mediation;
-using ZaminX.BuildingBlocks.Application.WebApiSample.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
