@@ -267,6 +267,39 @@ Logging capability مربوط به:
 * sinkهای متعدد خارج از scope
 
 ---
+## Axiom (Data & Persistence)
+
+**وضعیت:** 🟢 طراحی و پیاده‌سازی اولیه کامل شده
+**دسته‌بندی:** BuildingBlocks / DataAndPersistence
+
+Axiom capability مربوط به لایه Data در زمین X است و یک foundation استاندارد برای abstraction و implementation دسترسی به داده ارائه می‌دهد.
+
+### اجزای اصلی
+
+* Data.Abstractions (Paging + Audit Context)
+* Data.Write.Abstractions (Repository + UnitOfWork)
+* Data.Read.Abstractions (Read Repository)
+* EF Core Shared Infrastructure
+* EF Core Read / Write Implementation
+* SQL Server Provider
+* PostgreSQL Provider
+
+### ویژگی‌ها
+
+* جداسازی کامل Read و Write (CQRS-ready)
+* abstraction حداقلی و هدفمند
+* paging و sorting استاندارد
+* default sorting fallback
+* repository scanning بدون dependency خارجی
+* provider-agnostic design
+* auditing پایه با shadow property + interceptor
+
+### وضعیت فعلی
+
+* implementation نسخه اول کامل شده
+* sampleهای SQL Server و PostgreSQL آماده هستند
+* registration flow تثبیت شده
+* مستندسازی انجام شده
 
 ## تصمیم‌های اخیر
 
@@ -277,6 +310,7 @@ Logging capability مربوط به:
 * تعریف Logging
 * استانداردسازی Options usage
 * حذف over-engineering در runtime capabilityها
+* تعریف و تثبیت Axiom به‌عنوان capability لایه Data در BuildingBlocks
 
 ---
 

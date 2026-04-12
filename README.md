@@ -1,10 +1,10 @@
 # زمین X
 
-زمین X نسل جدیدی از فریم‌ورک زمین است که با تمرکز بر سادگی، ماژولار بودن، بازاستفاده و توسعه‌پذیری بازطراحی شده است.
+زمین X نسل جدیدی از فریم‌ورک زمین است که با تمرکز بر **سادگی، ماژولار بودن، بازاستفاده، توسعه‌پذیری و یکدستی معماری** بازطراحی شده است.
 
-این پروژه با هدف ارائه مجموعه‌ای از BuildingBlockها، الگوهای کاربردی، یکپارچه‌سازی‌ها، ساختارهای آماده و اپلیکیشن‌های کوچک قابل استفاده برای ساخت سیستم‌های مدرن بر پایه .NET طراحی شده است.
+این پروژه با هدف ارائه مجموعه‌ای از **BuildingBlockها، الگوهای کاربردی، یکپارچه‌سازی‌ها، ساختارهای آماده و اپلیکیشن‌های قابل اجرا** برای ساخت سیستم‌های مدرن بر پایه .NET طراحی شده است.
 
-زمین X تلاش می‌کند بین **سادگی در استفاده** و **قدرت در توسعه‌پذیری** تعادل ایجاد کند و به توسعه‌دهندگان اجازه دهد بدون درگیر شدن با پیچیدگی‌های تکراری، روی حل مسئله تمرکز کنند.
+زمین X تلاش می‌کند بین **سادگی در استفاده** و **قدرت در توسعه‌پذیری** تعادل ایجاد کند تا توسعه‌دهنده بتواند بدون درگیر شدن با پیچیدگی‌های تکراری، روی حل مسئله و ساخت محصول تمرکز کند.
 
 ---
 
@@ -13,11 +13,12 @@
 زمین X با اهداف زیر طراحی شده است:
 
 * کاهش پیچیدگی‌های تکراری در توسعه نرم‌افزار
-* ایجاد یک معماری یکدست و قابل توسعه
-* فراهم کردن امکان انتخاب و جایگزینی پیاده‌سازی‌ها
+* ایجاد یک معماری یکدست، قابل فهم و قابل توسعه
+* فراهم کردن امکان انتخاب و جایگزینی پیاده‌سازی‌ها در مرزهای درست
 * تسهیل توسعه سیستم‌های ماژولار
 * کاهش هزینه شروع پروژه‌های جدید
 * استانداردسازی الگوهای رایج در پروژه‌های .NET
+* ارائه capabilityهای reusable و production-ready
 
 ---
 
@@ -29,18 +30,19 @@
 
 اجزای مستقل، self-contained و قابل reuse که می‌توانند بدون وابستگی به سایر بخش‌ها استفاده شوند.
 
-ویژگی‌ها:
+ویژگی‌های BuildingBlockها:
 
 * مستقل از context اپلیکیشن
 * قابل publish به‌صورت package
 * قابل استفاده در پروژه‌های مختلف
-* تمرکز روی یک concern مشخص
+* متمرکز روی یک concern مشخص
+* قابل توسعه و جایگزینی در صورت نیاز
 
 نکته مهم:
 
 * وابستگی به تکنولوژی مانع BuildingBlock بودن نیست
 * abstraction پیش‌فرض نیست
-* معیار اصلی: **استقلال مصرف**
+* معیار اصلی، **استقلال مصرف** و **مرزبندی درست concern** است
 
 ---
 
@@ -48,16 +50,19 @@
 
 الگوهای سطح اپلیکیشن که معمولاً از چند BuildingBlock تشکیل شده‌اند و یک رفتار تکرارشونده را استاندارد می‌کنند.
 
+این بخش برای حل مسائل تکراری در سطح application طراحی می‌شود، نه برای تعریف primitiveهای فنی خام.
+
 ---
 
 ### 3. Integrations
 
-اجزایی که مسئول ارتباط با سیستم‌های خارجی هستند:
+اجزایی که مسئول ارتباط با سیستم‌های خارجی هستند، مانند:
 
 * APIها
 * سرویس‌های third-party
-* message brokers
-* storage providers
+* message brokerها
+* storage providerها
+* providerهای بیرونی که application برای کارکرد خود به آن‌ها متکی است
 
 ---
 
@@ -65,11 +70,13 @@
 
 ساختارهای آماده و opinionated برای شروع سریع پروژه‌ها.
 
-نمونه‌ها:
+نمونه‌های این بخش:
 
 * MonolithStructure
 * ModularMonolith
-* (در آینده) MicroserviceModule
+* MicroserviceModule (در آینده)
+
+Foundationها معمولاً از چند capability مختلف استفاده می‌کنند و یک نقطه شروع آماده برای ساخت application فراهم می‌کنند.
 
 ---
 
@@ -77,24 +84,25 @@
 
 اپلیکیشن‌های آماده، قابل اجرا و ارزشمند که با استفاده از زمین X ساخته می‌شوند.
 
+این بخش جایی است که BuildingBlockها، Patternها، Foundationها و Integrationها در کنار هم به یک محصول واقعی تبدیل می‌شوند.
+
 ---
 
 ## فلسفه طراحی
 
 ### استقلال اجزا
 
-هر capability باید تا حد امکان self-contained باشد.
-
----
+هر capability باید تا حد امکان self-contained باشد و در مرز concern خودش بماند.
 
 ### انتزاع فقط در صورت نیاز
 
 abstraction زمانی ایجاد می‌شود که:
 
 * چند پیاده‌سازی واقعی وجود داشته باشد
-* یا نیاز به decoupling وجود داشته باشد
+* یا نیاز واقعی به decoupling وجود داشته باشد
+* یا application نباید به implementation خاصی گره بخورد
 
----
+در غیر این صورت wrapper و abstraction اضافه تولید نمی‌شود.
 
 ### سادگی در استفاده
 
@@ -103,77 +111,61 @@ APIها باید:
 * قابل فهم باشند
 * predictable باشند
 * کم‌پیچیدگی باشند
-
----
+* رفتارهای پنهان و surprising نداشته باشند
 
 ### قابلیت توسعه
 
-در صورت نیاز، امکان replace یا extend کردن behavior وجود داشته باشد.
-
----
+در صورت نیاز، امکان replace یا extend کردن behavior باید وجود داشته باشد، اما این توسعه‌پذیری نباید از ابتدا باعث over-engineering شود.
 
 ### مستندسازی به‌عنوان بخشی از محصول
 
-docs بخشی از خود capability است، نه چیز جداگانه.
+در زمین X مستندات بخشی از خود capability هستند، نه چیزی جدا از آن.
+
+هر capability باید علاوه بر کد، توضیح معماری، مرز concern، مدل استفاده و تصمیم‌های طراحی خود را نیز داشته باشد.
 
 ---
 
-## نمونه capabilityها
+## خانواده‌های فعلی در BuildingBlocks
 
-### CrossCutting
+### 01. CrossCutting
 
-* Object Mapper (مرجع طراحی)
-* Serializer (Prism)
-* Translator (Parrot)
-* Logger
-* ApplicationPartDetector
+Capabilityهایی که concernهای عمومی و reusable را پوشش می‌دهند.
 
-این capabilityها:
+نمونه‌ها:
 
-* reusable هستند
-* runtime dependency ندارند
-* abstraction در آن‌ها در صورت نیاز استفاده شده
+* Object Mapper
+* Serializer
+* Translator
+* Caching
 
----
-
-## RuntimeAndRegistration
-
-این خانواده شامل capabilityهایی است که مربوط به:
-
-* runtime composition
-* service registration
-* startup setup
-
-هستند.
+این دسته معمولاً concernهایی را شامل می‌شود که در لایه‌های مختلف application قابل استفاده هستند و به context خاصی وابسته نیستند.
 
 ---
 
-### DependencyInjection (Axon)
+### 02. RuntimeAndRegistration
 
-Axon capability مربوط به DI است.
+Capabilityهایی که مربوط به runtime composition، service registration و startup behavior هستند.
 
-مسئولیت‌ها:
+نمونه‌های فعلی:
+
+#### DependencyInjection (Axon)
+
+Capability مربوط به DI در زمین X با تمرکز بر:
 
 * حذف wiring دستی
 * استانداردسازی registration
 * assembly scanning
 * ساده‌سازی startup
 
-ویژگی مهم:
+نکته مهم:
 
-Axon abstraction جدید ایجاد نمی‌کند و روی `IServiceCollection` کار می‌کند.
+Axon abstraction جدید غیرضروری ایجاد نمی‌کند و روی `IServiceCollection` کار می‌کند.
 
----
+#### OpenApi (Lumen)
 
-### OpenApi (Lumen)
+Capability مربوط به OpenAPI و API documentation در زمین X.
 
-**Lumen** capability مربوط به OpenAPI در زمین X است.
-
----
-
-## تعریف Lumen
-
-Lumen مسئول این موارد است:
+مسئولیت‌های Lumen:
 
 * ثبت OpenAPI در ASP.NET Core
 * expose کردن document endpoint
@@ -181,73 +173,38 @@ Lumen مسئول این موارد است:
 * ترکیب UIهای مختلف برای نمایش API
 * ساده‌سازی setup برای API documentation
 
----
-
-## ویژگی‌های Lumen
+ویژگی‌ها:
 
 * استفاده از OpenAPI built-in در ASP.NET Core (.NET 10)
-* استفاده کامل از Options pattern استاندارد
-* عدم استفاده از hackهایی مثل:
+* استفاده از Options pattern استاندارد
+* عدم استفاده از hackهایی مانند:
 
-  * OptionsWrapper
-  * Options.Create
-  * Replace
+  * `OptionsWrapper`
+  * `Options.Create`
+  * `Replace`
 * طراحی minimal و قابل توسعه
-* امکان فعال‌سازی چند UI به‌صورت همزمان
-* separation کامل بین registration و runtime
+* امکان فعال‌سازی چند UI به‌صورت هم‌زمان
+* جداسازی روشن بین registration و runtime
 
----
-
-## UIهای پشتیبانی‌شده
-
-Lumen از UIهای زیر پشتیبانی می‌کند:
+UIهای پشتیبانی‌شده:
 
 * Scalar
 * Swagger UI
 * ReDoc
 
----
+نکته مهم:
 
-## مدل طراحی Lumen
+UIها capability مستقل نیستند؛ آن‌ها بخشی از Lumen و presentation layer آن هستند.
 
-### Core + UI Integration
-
-Lumen شامل:
-
-* یک Core capability
-* چند UI integration
-
----
-
-### نکته مهم
-
-UIها capability مستقل نیستند.
-
-بلکه:
-
-* بخشی از Lumen هستند
-* فقط presentation layer محسوب می‌شوند
-* concern اصلی Lumen نیستند
-
----
-
-## 🆕 Logging
+#### Logging
 
 Capability مربوط به Logging در زمین X با تمرکز بر:
 
 * setup و registration ساده Serilog
 * استانداردسازی logging در سطح application
-* فراهم کردن تجربه یکپارچه برای:
+* فراهم کردن تجربه یکپارچه برای sinks، enrichers و contextual logging
 
-  * sinks
-  * enrichers
-  * contextual logging
-  * request logging
-  * startup logging
-
-طراحی شده است.
-
-### ویژگی‌ها
+ویژگی‌ها:
 
 * استفاده از Serilog به‌عنوان implementation اصلی
 * بدون abstraction اضافی
@@ -266,47 +223,205 @@ Capability مربوط به Logging در زمین X با تمرکز بر:
 
   * UserId / UserName
   * properties سفارشی
-* startup logging ساده‌شده (bootstrap + run)
+* startup logging ساده‌شده
 
-### نکته مهم
+نکته مهم:
 
-Logging در این فاز:
+Logging در این فاز provider-based نیست و به‌صورت setup-oriented و minimal طراحی شده است.
 
-* provider-based نیست
-* abstraction جدید معرفی نمی‌کند
-* minimal و setup-oriented است
+---
+
+### 03. DomainAndApplicationPrimitives
+
+این خانواده primitiveهای پایه دامنه و اپلیکیشن را نگه می‌دارد.
+
+نمونه‌ها:
+
+* Entity
+* AggregateRoot
+* ValueObject
+* DomainEvent
+* DomainException
+* Result Pattern
+* Application primitiveهای پایه
+
+این بخش سنگ‌بنای طراحی applicationها و capabilityهای دامنه‌محور در زمین X است.
+
+---
+
+### 04. DataAndPersistence
+
+این خانواده capabilityهای مربوط به داده، persistence و رفتارهای تکرارشونده لایه data را نگه می‌دارد.
+
+#### Axiom
+
+Axiom capability مربوط به لایه Data در زمین X است و یک foundation استاندارد برای abstraction و implementation دسترسی به داده ارائه می‌دهد.
+
+Axiom با این اهداف طراحی شده است:
+
+* جدا نگه داشتن application از implementationهای persistence
+* پشتیبانی از read side و write side از ابتدا
+* آماده بودن برای CQRS در صورت نیاز
+* استانداردسازی paging و sorting
+* ارائه implementation پایه برای EF Core
+* پشتیبانی از providerهای مختلف
+* ارائه audit پایه به‌صورت reusable
+
+##### اجزای Axiom
+
+**1. Data.Abstractions**
+
+مدل‌ها و قراردادهای مشترک:
+
+* `IDataAuditContext`
+* `DefaultDataAuditContext`
+* `PagedQuery`
+* `PagedQuery<TSearch>`
+* `PagedResult<TData>`
+
+**2. Data.Write.Abstractions**
+
+قراردادهای write side:
+
+* `IWriteRepository<TAggregate, TId>`
+* `IUnitOfWork`
+
+**3. Data.Read.Abstractions**
+
+قراردادهای read side:
+
+* `IReadRepository<TEntity, TId>`
+
+**4. Data.EntityFrameworkCore**
+
+هسته مشترک EF Core:
+
+* registration entry point
+* builderهای پایه
+* provider validation
+* interceptor registration
+* auditing infrastructure
+* model configuration helperهای مشترک
+
+**5. Data.EntityFrameworkCore.Write**
+
+پیاده‌سازی write side روی EF Core:
+
+* `EfUnitOfWork<TDbContext>`
+* `EfWriteRepository<TEntity, TId, TDbContext>`
+* graph loading hook با `CreateAggregateQuery()`
+* write repository scanning
+
+**6. Data.EntityFrameworkCore.Read**
+
+پیاده‌سازی read side روی EF Core:
+
+* `EfReadRepository<TEntity, TId, TDbContext>`
+* paging helper
+* sorting helper
+* default sorting fallback
+* read repository scanning
+
+**7. Providerها**
+
+در نسخه فعلی providerهای زیر ارائه شده‌اند:
+
+* SQL Server
+* PostgreSQL
+
+##### مدل طراحی Axiom
+
+Axiom از ابتدا read و write را جدا می‌بیند تا:
+
+* CQRS در صورت نیاز به‌راحتی قابل استفاده باشد
+* behaviorهای read و write روشن و مستقل بمانند
+* registration و implementation هر سمت ساده و قابل فهم باشد
+
+Axiom فقط در مرزهای لازم abstraction ارائه می‌دهد؛ یعنی جایی که application نباید به EF Core یا provider خاص وابسته شود.
+
+##### Paging و Sorting در Axiom
+
+Axiom برای query side یک مدل یکدست برای paging ارائه می‌دهد:
+
+* `PagedQuery`
+* `PagedQuery<TSearch>`
+* `PagedResult<TData>`
+
+ویژگی‌های این مدل:
+
+* شماره صفحه و اندازه صفحه
+* امکان کنترل `IncludeTotalCount`
+* sorting با `SortBy` و `SortDescending`
+* fallback sorting در implementation
+* helper مرکزی برای ساخت خروجی page شده
+
+##### Audit در Axiom
+
+مدل فعلی audit:
+
+* `CreatedAt`
+* `CreatedBy`
+* `ModifiedAt`
+* `ModifiedBy`
+
+ویژگی‌ها:
+
+* propertyها به‌صورت shadow property تعریف می‌شوند
+* مقداردهی از طریق `SaveChangesInterceptor` انجام می‌شود
+* user/time از `IDataAuditContext` گرفته می‌شود
+* وابستگی مستقیم به user management یا business concern وجود ندارد
+
+##### Sampleهای Axiom
+
+نسخه فعلی Axiom شامل دو sample end-to-end است:
+
+* SQL Server sample
+* PostgreSQL sample
+
+این sampleها برای validate کردن این flowها استفاده می‌شوند:
+
+* registration کامل
+* read/write DbContext
+* repository scanning
+* paging و sorting
+* auditing
+* provider behavior
 
 ---
 
 ## ساختار پروژه
 
-```
+ساختار فعلی ریپو به‌صورت کلی به شکل زیر است:
+
+```text
 src/
   00.BuildingBlocks/
-    01.CrossCutting
-      Caching
-        Abstractions
-        Inmemory
-        Redis
-        SqlServer
-      ObjectMapper
-        Abstractions
-        AutoMapper    
-      Serializer
-        Abstractions
-        Microsoft
-        Newtonsoft    
-      Translations
-        Abstractions
-        Parrot
-        SqlServer             
-    02.RuntimeAndRegistration
-      OpenApi
-        Lumen
-        Scalar
-        Swagger
-        Redoc
-      Logging
+    01.CrossCutting/
+      Caching/
+        Abstractions/
+        Inmemory/
+        Redis/
+        SqlServer/
+      ObjectMapper/
+        Abstractions/
+        AutoMapper/
+      Serializer/
+        Abstractions/
+        Microsoft/
+        Newtonsoft/
+      Translations/
+        Abstractions/
+        Parrot/
+        SqlServer/
+
+    02.RuntimeAndRegistration/
+      OpenApi/
+        Lumen/
+        Scalar/
+        Swagger/
+        Redoc/
+      Logging/
+
     03.DomainAndApplicationPrimitives/
       01.Domain/
         Kernel.slnx
@@ -314,16 +429,25 @@ src/
           ZaminX.BuildingBlocks.Domain/
         tests/
           ZaminX.BuildingBlocks.Domain.Tests/
-```
 
-این بخش شامل primitiveهای پایه دامنه است:
-
-* Entity
-* AggregateRoot
-* ValueObject
-* DomainEvent
-* DomainException
-
+    04.DataAndPersistence/
+      Axiom/
+        Axiom.slnx
+        src/
+          ZaminX.BuildingBlocks.Data.Abstractions/
+          ZaminX.BuildingBlocks.Data.Write.Abstractions/
+          ZaminX.BuildingBlocks.Data.Read.Abstractions/
+          ZaminX.BuildingBlocks.Data.EntityFrameworkCore/
+          ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Write/
+          ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Read/
+          ZaminX.BuildingBlocks.Data.EntityFrameworkCore.SqlServer/
+          ZaminX.BuildingBlocks.Data.EntityFrameworkCore.PostgreSql/
+        tests/
+          ZaminX.BuildingBlocks.Data.Abstractions.Tests/
+          ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Tests/
+        samples/
+          ZaminX.Samples.Data.SqlServer/
+          ZaminX.Samples.Data.PostgreSql/
 ```
 
 ---
@@ -332,17 +456,20 @@ src/
 
 تمام مستندات در مسیر زیر قرار دارند:
 
-```
+```text
 docs/
 ```
 
-ساختار docs:
+ساختار docs شامل این بخش‌ها است:
 
 * vision
 * architecture
 * modules
 * decisions
 * project-state
+
+در زمین X، docs مرجع اصلی توضیح capabilityها، تصمیم‌های طراحی و وضعیت پروژه هستند.
+README نقش نمای کلی و entry point را دارد، نه جایگزین کامل docs.
 
 ---
 
@@ -353,29 +480,61 @@ docs/
 * تثبیت معماری
 * توسعه capabilityهای اصلی
 * ایجاد consistency در design
-
-قرار دارد.
+* ساخت foundationهای reusable برای استفاده در پروژه‌های واقعی
 
 ---
 
 ## تمرکز فعلی
 
-* تثبیت CrossCutting
-* تکمیل Axon
+تمرکز فعلی پروژه روی این موارد است:
+
+* تثبیت CrossCutting capabilityها
+* تکمیل و تثبیت Axon
 * طراحی و تثبیت Lumen
 * طراحی و تثبیت Logging
-- تثبیت Domain primitives (Kernel)
-* تعریف ApplicationPatterns
+* تثبیت Domain primitives
+* تثبیت capability داده (Axiom) شامل abstraction، implementation و providerها
+* تعریف و توسعه ApplicationPatterns
+* تکمیل مستندات و هم‌راستاسازی آن‌ها با کد
 
 ---
 
 ## نقشه راه کوتاه‌مدت
 
 * تثبیت کامل taxonomy
-* تکمیل BuildingBlockها
-* توسعه Foundations
-* توسعه Applications اولیه
+* تکمیل BuildingBlockهای اصلی
+* تثبیت و گسترش Data & Persistence (Axiom)
+* توسعه Foundationهای اولیه
+* توسعه Applicationهای اولیه
 * publish اولیه capabilityها
+* افزایش پوشش تست و بهبود developer experience
+
+---
+
+## موارد خارج از scope فعلی
+
+در فاز فعلی، تمرکز پروژه روی ساخت capabilityهای پایه است. بنابراین برخی concerns عمداً خارج از scope نگه داشته شده‌اند یا هنوز در مرحله بعدی قرار دارند، مانند:
+
+* outbox و integration persistence patternها
+* soft delete عمومی
+* multi-tenancy عمومی
+* query DSL عمومی
+* providerهای بیشتر برای Axiom
+* advanced transaction orchestration
+* applicationهای نهایی گسترده
+
+---
+
+## جهت کلی پروژه
+
+زمین X قرار نیست صرفاً یک مجموعه helper و utility باشد.
+هدف آن ساخت یک ecosystem منسجم از capabilityهای reusable است که:
+
+* معماری تمیز را به‌صورت عملی enforce کند
+* هزینه شروع پروژه را کاهش دهد
+* تکرارهای رایج را حذف کند
+* توسعه را سریع‌تر و قابل پیش‌بینی‌تر کند
+* و در عین حال flexibility لازم برای توسعه سیستم‌های واقعی را حفظ کند
 
 ---
 
