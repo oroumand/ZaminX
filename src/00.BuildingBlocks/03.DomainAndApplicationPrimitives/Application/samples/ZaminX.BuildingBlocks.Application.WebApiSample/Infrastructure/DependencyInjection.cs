@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using ZaminX.BuildingBlocks.Application.WebApiSample;
+﻿using ZaminX.BuildingBlocks.Application.WebApiSample;
 using ZaminX.BuildingBlocks.Application.WebApiSample.Behaviors;
 using ZaminX.BuildingBlocks.Application.WebApiSample.Infrastructure;
 
@@ -25,8 +24,10 @@ public static class DependencyInjection
 
         services.AddZaminXApplicationHandlers(typeof(SampleAssemblyMarker).Assembly);
 
-        services.AddValidatorsFromAssemblyContaining<SampleAssemblyMarker>();
-
+        services.AddZaminXApplicationFluentValidation(options =>
+        {
+            options.AddAssembly(typeof(SampleAssemblyMarker).Assembly);
+        });
 
         return services;
     }
