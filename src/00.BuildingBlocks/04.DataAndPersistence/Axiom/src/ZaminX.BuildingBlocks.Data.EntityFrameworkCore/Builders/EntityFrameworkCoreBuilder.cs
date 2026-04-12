@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Enums;
 
@@ -8,7 +8,10 @@ namespace ZaminX.BuildingBlocks.Data.EntityFrameworkCore.Builders;
 public sealed class EntityFrameworkCoreBuilder<TDbContext>
 where TDbContext : DbContext
 {
-    private Action<IServiceProvider, DbContextOptionsBuilder>? _providerConfiguration;
+    private readonly List<Type> _interceptorTypes = [];
+
+
+private Action<IServiceProvider, DbContextOptionsBuilder>? _providerConfiguration;
 
     internal bool ProviderConfigured => _providerConfiguration is not null;
 
@@ -37,6 +40,14 @@ where TDbContext : DbContext
         _providerConfiguration = providerConfiguration;
     }
 
+    public EntityFrameworkCoreBuilder<TDbContext> AddInterceptor<TInterceptor>()
+        where TInterceptor : class, IInterceptor
+    {
+        _interceptorTypes.Add(typeof(TInterceptor));
+
+        return this;
+    }
+
     internal void ValidateProviderConfigured()
     {
         if (!ProviderConfigured)
@@ -57,9 +68,31 @@ where TDbContext : DbContext
 
         _providerConfiguration(serviceProvider, optionsBuilder);
 
+        AddRegisteredInterceptors(serviceProvider, optionsBuilder);
+
         if (RegistrationKind == DataAccessRegistrationKind.Read)
         {
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        }
+    }
+
+    private void AddRegisteredInterceptors(
+        IServiceProvider serviceProvider,
+        DbContextOptionsBuilder optionsBuilder)
+    {
+        if (_interceptorTypes.Count == 0)
+        {
+            return;
+        }
+
+        var interceptors = _interceptorTypes
+            .Select(interceptorType => serviceProvider.GetRequiredService(interceptorType))
+            .Cast<IInterceptor>()
+            .ToArray();
+
+        if (interceptors.Length > 0)
+        {
+            optionsBuilder.AddInterceptors(interceptors);
         }
     }
 
