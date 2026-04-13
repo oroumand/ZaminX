@@ -148,6 +148,29 @@ UIها:
 * multi-document پیچیده
 * customization عمیق
 
+### Pulse
+
+وضعیت: ✅ تکمیل شده (Initial Version)
+
+شرح:
+
+Capability مربوط به utilityهای عمومی شامل:
+
+* Persian DateTime
+* Guard Clauses
+* Extension Methods منتخب
+
+ویژگی‌ها:
+
+* بدون abstraction
+* static-first
+* بدون dependency خارجی
+* تمرکز بر سادگی و usability
+
+جایگزین:
+
+* Zamin.Utilities (deprecated)
+
 ---
 
 ## 🆕 Logging

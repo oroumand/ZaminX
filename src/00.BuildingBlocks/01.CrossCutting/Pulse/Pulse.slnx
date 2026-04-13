@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/samples/" />
+  <Folder Name="/src/">
+    <Project Path="src/ZaminX.BuildingBlocks.CrossCutting.Pulse/ZaminX.BuildingBlocks.CrossCutting.Pulse.csproj" Id="6ad79ee0-fd5f-4169-8032-6ea0cf8f3592" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
