@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/AspNetCore/ZaminX.Samples.IdentityAndUsers.Persona.AspNetCore.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Abstractions/ZaminX.BuildingBlocks.IdentityAndUsers.Persona.Abstractions.csproj" />
+    <Project Path="src/AspNetCore/ZaminX.BuildingBlocks.IdentityAndUsers.Persona.AspNetCore.csproj" />
+  </Folder>
+</Solution>

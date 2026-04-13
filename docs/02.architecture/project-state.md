@@ -571,3 +571,116 @@ IMessageValidator<TMessage>
 است.
 
 Application Primitives (Relay) به‌عنوان foundation لایه Application به‌طور کامل پیاده‌سازی شده و پروژه آماده ورود به فاز Application Services است.
+
+---
+
+## 🆕 IdentityAndUsers
+
+### وضعیت فعلی
+
+* family تعریف شده
+* Persona به‌عنوان capability اولیه این خانواده طراحی شده
+* scope و naming نهایی شده
+* structure اولیه solution و projectها مشخص شده
+* implementation اولیه در حال تثبیت است
+* sample اولیه تعریف شده
+* docs capability آماده شده‌اند
+
+---
+
+### تعریف Persona
+
+Persona capability مربوط به:
+
+* current user access
+* claim reading
+* authentication state inspection
+* web request user metadata access
+
+است.
+
+Persona در نسخه فعلی یک BuildingBlock برای **دسترسی به اطلاعات کاربر جاری** است، نه یک سیستم کامل برای UsersManagement، Authentication یا Authorization.
+
+---
+
+### تصمیم‌های معماری Persona
+
+#### 1. جایگاه
+
+* خانواده: `06.IdentityAndUsers`
+* دلیل: concern این capability به semantics کاربر جاری و identity-adjacent behavior مربوط است و CrossCutting خالص یا Runtime setup صرف نیست
+
+---
+
+#### 2. مدل طراحی
+
+* contract + implementation
+* یک contract پایه
+* یک contract وبی
+* یک implementation روشن برای ASP.NET Core
+* بدون provider model
+* بدون abstraction اضافه خارج از مرز لازم
+
+---
+
+#### 3. قراردادها
+
+قراردادهای نسخه اول:
+
+* `ICurrentUser`
+* `IWebCurrentUser`
+
+`ICurrentUser` اطلاعات پایه current user را ارائه می‌دهد و `IWebCurrentUser` metadata وبی مانند `IpAddress` و `UserAgent` را اضافه می‌کند.
+
+---
+
+#### 4. ساختار
+
+ساختار نسخه اول Persona:
+
+* `Persona.Abstractions`
+* `Persona.AspNetCore`
+* `ZaminX.Samples.IdentityAndUsers.Persona.AspNetCore`
+
+---
+
+#### 5. Options
+
+Persona از Options pattern استاندارد استفاده می‌کند:
+
+* Bind از IConfiguration
+* Configure از code
+* بدون الگوهای hacky
+* بدون configuration model سنگین
+
+Options در این capability برای mapping claim typeها و fallback valueها استفاده می‌شود.
+
+---
+
+#### 6. اهداف نسخه اول
+
+* استانداردسازی current user access
+* حذف وابستگی مستقیم مصرف‌کننده به `HttpContext`
+* ارائه API ساده و قابل‌فهم
+* پشتیبانی از metadata وبی پرکاربرد
+* ارائه registration روشن و minimal
+
+---
+
+#### 7. Non-goals
+
+* authentication flow
+* authorization policy engine
+* user CRUD
+* profile management
+* account lifecycle
+* external identity provider integration
+* provider model پیچیده
+
+---
+
+### جمع‌بندی
+
+Persona اولین capability خانواده `IdentityAndUsers` در زمین X است و مرز این خانواده را از همان ابتدا روی concernهای روشن و reusable نگه می‌دارد.
+
+نسخه فعلی Persona بر حل مسئله current user access متمرکز است و عمداً وارد concernهای بزرگ‌تر identity subsystem نمی‌شود.

@@ -388,6 +388,36 @@ Axiom برای query side یک مدل یکدست برای paging ارائه می
 * provider behavior
 
 ---
+### 06. IdentityAndUsers
+
+این خانواده capabilityهای مربوط به هویت جاری کاربر، مرزهای identity-adjacent و concernهای reusable مرتبط با user context را نگه می‌دارد.
+
+#### Persona
+
+Persona capability مربوط به دسترسی استاندارد به اطلاعات کاربر جاری در زمین X است.
+
+مسئولیت‌های Persona:
+
+* ارائه contract برای current user
+* ارائه contract وبی برای current user
+* خواندن claimها
+* تشخیص `IsAuthenticated`
+* دسترسی به `IpAddress`
+* دسترسی به `UserAgent`
+* ارائه registration ساده برای ASP.NET Core
+
+مدل طراحی Persona:
+
+* یک پروژه Abstractions
+* یک پروژه AspNetCore
+* یک Sample
+* بدون provider model
+* با Options pattern استاندارد
+* با جداسازی روشن بین contract و implementation
+
+نکته مهم:
+
+Persona در نسخه فعلی یک capability برای **Current User Access** است، نه یک سیستم کامل برای authentication، authorization یا user lifecycle management.
 
 ## ساختار پروژه
 
@@ -448,7 +478,20 @@ src/
         samples/
           ZaminX.Samples.Data.SqlServer/
           ZaminX.Samples.Data.PostgreSql/
+
+    06.IdentityAndUsers/
+      Persona/
+        Persona.slnx
+        src/
+          Abstractions/
+            ZaminX.BuildingBlocks.IdentityAndUsers.Persona.Abstractions/
+          AspNetCore/
+            ZaminX.BuildingBlocks.IdentityAndUsers.Persona.AspNetCore/
+        samples/
+          ZaminX.Samples.IdentityAndUsers.Persona.AspNetCore/
 ```
+          
+
 
 ---
 

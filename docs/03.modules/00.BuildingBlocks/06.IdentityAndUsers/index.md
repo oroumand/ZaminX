@@ -1,221 +1,328 @@
-# نمای کلی هویت و کاربران
+# IdentityAndUsers
 
-## هدف این سند
-این سند خانواده «هویت و کاربران» را در دسته BuildingBlocks تعریف می‌کند.
+## معرفی
 
-نقش این سند:
-- تعریف دقیق این خانواده
-- مشخص کردن مرز آن با سایر خانواده‌ها
-- معرفی اعضای این خانواده
-- ثبت تصمیم‌های مشترک
-- ایجاد ورودی برای مستندات مستقل هر ماژول
+خانواده `IdentityAndUsers` در زمین X مسئول capabilityهایی است که به **هویت کاربر جاری، context کاربر و concernهای identity-adjacent** مربوط می‌شوند.
 
-این سند وارد جزئیات تفصیلی هر ماژول نمی‌شود.
+این خانواده در مرز بین:
 
----
+* application concerns
+* security concerns
+* user context
 
-## تعریف این خانواده
-
-این خانواده شامل capabilityهایی است که:
-
-- به شناسایی کاربر مربوط می‌شوند
-- به مدیریت اطلاعات کاربران مربوط می‌شوند
-- به مفاهیم هویت و دسترسی مرتبط هستند
-- برای استفاده در سناریوهای مختلف قابل بازاستفاده‌اند
-
-این خانواده تمرکز دارد روی:
-
-- مفهوم کاربر
-- احراز هویت
-- اطلاعات پایه کاربران
-- فراهم‌سازی پایه برای سناریوهای امنیتی
+قرار دارد و تلاش می‌کند بدون تبدیل شدن به یک identity subsystem سنگین، مجموعه‌ای از BuildingBlockهای reusable و قابل‌استفاده در پروژه‌های مختلف فراهم کند.
 
 ---
 
-## چرا این خانواده در BuildingBlocks قرار می‌گیرد
+## هدف این خانواده
 
-اعضای این خانواده:
+هدف اصلی این خانواده این است که:
 
-- به‌صورت مستقل قابل استفاده‌اند
-- self-contained هستند
-- وابسته به یک flow خاص اپلیکیشن نیستند
-- در پروژه‌های مختلف قابل بازاستفاده هستند
-
-بنابراین این خانواده capability پایه ارائه می‌دهد،  
-نه flow یا product کامل امنیتی.
+* دسترسی به اطلاعات کاربر جاری را استاندارد کند
+* وابستگی مستقیم به frameworkها (مثل ASP.NET Core) را در مصرف‌کننده کاهش دهد
+* مرز بین **مصرف identity** و **مدیریت identity** را شفاف نگه دارد
+* capabilityهای identity-adjacent را به‌صورت modular و قابل reuse ارائه دهد
+* از تبدیل شدن به یک سیستم monolithic برای identity جلوگیری کند
 
 ---
 
-## مرز این خانواده با سایر خانواده‌ها
+## جایگاه در taxonomy
 
-### تفاوت با Domain و Application Primitives
-- Domain primitives مفاهیم عمومی مدل‌سازی را تعریف می‌کنند
-- این خانواده مفاهیم مشخص حوزه «کاربر و هویت» را ارائه می‌دهد
+* دسته: `BuildingBlocks`
+* خانواده: `06.IdentityAndUsers`
 
----
+این خانواده:
 
-### تفاوت با Data و Persistence
-- Data مربوط به نحوه ذخیره داده است
-- این خانواده مفهوم کاربر و هویت را تعریف می‌کند
+* CrossCutting خالص نیست (چون به semantics کاربر نزدیک است)
+* Runtime صرف نیست (چون فقط registration یا setup نیست)
+* Domain primitive هم نیست (چون behavior کاربردی دارد)
 
----
-
-### تفاوت با CrossCutting
-- CrossCutting ابزارهای عمومی هستند
-- این خانواده به حوزه مشخص هویت و کاربران مربوط است
+بنابراین در یک خانواده مستقل نگه داشته شده است.
 
 ---
 
-### تفاوت با Messaging
-- Messaging مربوط به انتقال پیام است
-- این خانواده مربوط به مفهوم کاربر و دسترسی است
+## مرزبندی مفهومی
+
+برای جلوگیری از drift و over-engineering، این خانواده مرزهای مشخصی دارد.
+
+### در scope این خانواده
+
+* current user access
+* claim access
+* authentication state inspection
+* identity-adjacent context
+* user metadata در سطح request
+* abstractionهای سبک برای مصرف identity
 
 ---
 
-### تفاوت با ApplicationPatterns
-- این خانواده capability پایه ارائه می‌دهد
-- ApplicationPatterns می‌توانند flowهای امنیتی بسازند
+### خارج از scope این خانواده (در نسخه فعلی)
 
-مثال:
-- Auth در این خانواده است
-- flow کامل authentication ممکن است در سطح بالاتر تعریف شود
+* authentication flow (login / logout orchestration)
+* token issuing
+* identity provider integration (OAuth, OIDC, …)
+* authorization policy engine
+* permission system
+* role management
+* user CRUD
+* profile management
+* account lifecycle
 
----
-
-### تفاوت با Integrations
-- این خانواده مفاهیم پایه identity را ارائه می‌دهد
-- Integrations اتصال به providerهای بیرونی را فراهم می‌کند
-
-مثال:
-- تعریف user در این خانواده است
-- اتصال به OAuth / IdentityServer در Integrations است
+این موارد یا در capabilityهای جداگانه طراحی می‌شوند یا در سطح application و integration قرار می‌گیرند.
 
 ---
 
-## اعضای این خانواده
+## capabilityهای فعلی
 
-در وضعیت فعلی، این خانواده شامل این ماژول‌هاست:
+در وضعیت فعلی، این خانواده شامل capability زیر است:
 
-- `Auth`
-- `UsersManagement`
+* `Persona`
 
-این فهرست اولیه است و در ادامه ممکن است توسعه پیدا کند.
-
----
-
-## توضیح کوتاه اعضا
-
-### Auth
-قابلیتی برای مدیریت احراز هویت کاربران.
-
-→ `auth.md`
+این فهرست در آینده گسترش پیدا خواهد کرد.
 
 ---
 
-### UsersManagement
-قابلیتی برای مدیریت اطلاعات کاربران.
+## Persona
 
-→ `users-management.md`
+### تعریف
 
----
+Persona capability مربوط به **دسترسی استاندارد به اطلاعات کاربر جاری** است.
 
-## تصمیم‌های مشترک این خانواده
-
-در وضعیت فعلی، این تصمیم‌ها برای کل خانواده مبنا هستند:
-
-- این خانواده فقط capability پایه identity را ارائه می‌دهد
-- flowهای پیچیده authentication در این سطح تعریف نمی‌شوند
-- وابستگی به provider خاص در این خانواده وجود ندارد
-- abstraction در صورت نیاز تعریف می‌شود
-- این خانواده باید قابل استفاده در سناریوهای مختلف باقی بماند
+این capability یک abstraction ساده و قابل تزریق برای current user فراهم می‌کند و implementation وبی آن برای ASP.NET Core ارائه شده است.
 
 ---
 
-## الگوی طراحی در این خانواده
+### مسئله‌ای که Persona حل می‌کند
 
-در این خانواده معمولاً این الگوها دیده می‌شود:
+در applicationهای واقعی، بخش‌های مختلف سیستم نیاز دارند:
 
-### تعریف مدل کاربر
-ساختار پایه برای نمایش user
+* بدانند کاربر جاری چه کسی است
+* وضعیت احراز هویت را بررسی کنند
+* claimها را بخوانند
+* metadata وبی مانند IP و UserAgent را دریافت کنند
 
----
+اگر این نیازها مستقیماً با `HttpContext` یا `ClaimsPrincipal` حل شوند:
 
-### احراز هویت
-مکانیزم شناسایی کاربر
+* coupling به framework افزایش می‌یابد
+* تست‌پذیری کاهش می‌یابد
+* logic تکراری می‌شود
+* API یکدست از بین می‌رود
 
----
-
-### مدیریت کاربران
-ایجاد، تغییر و مدیریت اطلاعات کاربران
-
----
-
-### abstraction در صورت نیاز
-برای جدا کردن implementation از provider
+Persona این مشکل را با یک contract ساده و یک implementation استاندارد حل می‌کند.
 
 ---
 
-## نسبت با سایر دسته‌ها
+### قراردادها
 
-### نسبت با ApplicationPatterns
-ApplicationPatterns می‌توانند flowهای authentication و authorization را بسازند
+Persona دو contract اصلی ارائه می‌دهد:
 
----
+#### ICurrentUser
 
-### نسبت با Integrations
-Integrations این خانواده را به providerهای واقعی متصل می‌کنند
+برای دسترسی به اطلاعات پایه کاربر جاری:
 
-مثال:
-- OAuth
-- IdentityServer
-- External login providers
-
----
-
-### نسبت با Foundations
-Foundations ممکن است setup اولیه identity را فراهم کنند
+* `UserId`
+* `UserName`
+* `FirstName`
+* `LastName`
+* `IsAuthenticated`
+* `GetClaim(...)`
+* `GetClaims(...)`
 
 ---
 
-### نسبت با Applications
-Applications مصرف‌کننده مستقیم این capabilityها هستند
+#### IWebCurrentUser
+
+برای سناریوهای وب، با افزودن:
+
+* `IpAddress`
+* `UserAgent`
+
+این تفکیک باعث می‌شود contract پایه reusable بماند و concernهای وبی فقط در جایی expose شوند که لازم هستند.
+
+---
+
+### implementation
+
+Implementation اصلی Persona:
+
+* مبتنی بر `HttpContext`
+* استفاده از `IHttpContextAccessor`
+* خواندن claimها از `ClaimsPrincipal`
+* استخراج metadata از request
+
+نام implementation:
+
+* `HttpContextCurrentUser`
+
+---
+
+### registration
+
+Persona یک entry point ساده برای ASP.NET Core دارد:
+
+```csharp
+builder.Services.AddPersonaAspNetCore();
+```
+
+همچنین از:
+
+* configure action
+* IConfiguration binding
+
+پشتیبانی می‌کند.
+
+---
+
+### Options
+
+`PersonaAspNetCoreOptions` برای این موارد استفاده می‌شود:
+
+#### mapping
+
+* `UserIdClaimType`
+* `UserNameClaimType`
+* `FirstNameClaimType`
+* `LastNameClaimType`
+
+#### fallback
+
+* `DefaultUserId`
+* `DefaultUserName`
+* `DefaultFirstName`
+* `DefaultLastName`
+* `DefaultIpAddress`
+* `DefaultUserAgent`
+
+هدف Options در Persona:
+
+* کنترل behavior
+* نه ایجاد abstraction پیچیده
+
+---
+
+### رفتار runtime
+
+Persona در runtime:
+
+* برای نبودن user exception نمی‌دهد
+* برای نبودن claim exception نمی‌دهد
+* از fallback استفاده می‌کند
+* API predictable ارائه می‌دهد
+
+---
+
+### چرا Persona به‌جای UsersManagement
+
+نام اولیه backlog از جنس `UsersManagement` بود، اما تحلیل capability نشان داد که:
+
+مسئله واقعی نسخه اول این بخش:
+
+> دسترسی به current user
+
+است، نه مدیریت کامل کاربران.
+
+بنابراین:
+
+* نام محصولی: `Persona`
+* concern فنی: `CurrentUser`
+
+در نظر گرفته شد.
+
+---
+
+### Non-goals Persona
+
+Persona عمداً این موارد را پوشش نمی‌دهد:
+
+* authentication flow
+* authorization
+* role/permission evaluation
+* user CRUD
+* profile management
+* identity provider integration
+* provider model
+
+---
+
+### ساختار پروژه
+
+```text
+Persona/
+  Persona.slnx
+  src/
+    Abstractions/
+      ZaminX.BuildingBlocks.IdentityAndUsers.Persona.Abstractions/
+    AspNetCore/
+      ZaminX.BuildingBlocks.IdentityAndUsers.Persona.AspNetCore/
+  samples/
+    ZaminX.Samples.IdentityAndUsers.Persona.AspNetCore/
+```
+
+---
+
+## مسیر توسعه آینده
+
+این خانواده در آینده می‌تواند شامل capabilityهای زیر شود:
+
+* Auth (authentication integration)
+* identity provider integration
+* token handling abstraction (در صورت نیاز واقعی)
+* identity bridging برای سناریوهای distributed
+
+اما این توسعه‌ها باید:
+
+* grounded باشند
+* over-engineering نداشته باشند
+* با مرز Persona تداخل نکنند
+
+---
+
+## تصمیم‌های کلیدی این خانواده
+
+### 1. جداسازی مصرف از مدیریت identity
+
+Persona فقط identity را **مصرف** می‌کند، نه این‌که آن را مدیریت کند.
+
+---
+
+### 2. جلوگیری از identity subsystem شدن
+
+این خانواده عمداً به یک سیستم کامل identity تبدیل نمی‌شود.
+
+---
+
+### 3. abstraction فقط در مرز لازم
+
+Persona فقط در جایی abstraction ایجاد می‌کند که:
+
+* وابستگی به host باید قطع شود
+* reuse واقعی وجود دارد
+
+---
+
+### 4. طراحی مرحله‌ای
+
+این خانواده به‌صورت step-by-step توسعه پیدا می‌کند، نه به‌صورت big design upfront.
 
 ---
 
 ## وضعیت فعلی
 
-در وضعیت فعلی پروژه:
-
-- این خانواده در نقشه ماژول‌ها تعریف شده است
-- ساختار دقیق Auth و UsersManagement هنوز نیاز به طراحی دارد
-- مرز آن با Integrations نیاز به دقت دارد
-
----
-
-## تصمیم‌های باز
-
-- تعریف دقیق Auth
-- ساختار UsersManagement
-- مرز دقیق بین identity و access control
-- نحوه تعامل با providerهای بیرونی
-- نیاز یا عدم نیاز به abstraction
-- تعیین سطح پوشش در نسخه اول
+* Persona طراحی و پیاده‌سازی اولیه شده
+* docs آن کامل شده
+* sample اولیه وجود دارد
+* مرز capability مشخص شده
+* integration با سایر capabilityها در حال تثبیت است
 
 ---
 
-## ارتباط با سایر اسناد
+## جمع‌بندی
 
-- تعریف BuildingBlocks در `../index.md`
-- نقشه ماژول‌ها در `../../index.md`
-- تصمیم‌های کلان در `docs/02.architecture/project-state.md`
-- جزئیات هر ماژول در فایل مستقل همان ماژول
+خانواده `IdentityAndUsers` در زمین X مسئول capabilityهای مرتبط با هویت کاربر جاری است.
 
----
+Persona اولین گام این خانواده است و:
 
-## نگهداری این سند
-
-این سند باید:
-- با اضافه شدن capability جدید به‌روزرسانی شود
-- با تغییر در مرز این خانواده اصلاح شود
-- از ورود به جزئیات تفصیلی هر ماژول پرهیز کند
-- با فایل‌های مستقل ماژول‌ها هم‌راستا بماند
+* current user access را استاندارد می‌کند
+* API ساده و قابل‌فهم ارائه می‌دهد
+* وابستگی به framework را محدود می‌کند
+* و بدون ورود به scopeهای سنگین identity، یک building block کاربردی و production-friendly فراهم می‌کند.
