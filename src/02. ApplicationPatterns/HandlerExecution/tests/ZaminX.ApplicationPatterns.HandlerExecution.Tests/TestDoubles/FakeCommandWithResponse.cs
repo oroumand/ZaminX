@@ -2,4 +2,4 @@
 
 namespace ZaminX.ApplicationPatterns.HandlerExecution.Tests.TestDoubles;
 
-public sealed record FakeCommand : ICommand;
+public sealed record FakeCommandWithResponse : ICommand<string>;

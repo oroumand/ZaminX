@@ -10,10 +10,11 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="xunit" />
 		<PackageReference Include="xunit.runner.visualstudio" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\ZaminX.ApplicationPatterns.HandlerExecution\ZaminX.ApplicationPatterns.HandlerExecution.csproj" />
+		<ProjectReference Include="..\..\src\ZaminX.ApplicationPatterns.HandlerExecution\ZaminX.ApplicationPatterns.HandlerExecution.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

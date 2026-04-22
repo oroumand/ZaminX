@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ZaminX.BuildingBlocks.Domain.Entities;
 
 namespace ZaminX.ApplicationPatterns.HandlerExecution.Tests.TestDoubles;
 
-internal class FakeAggregateRoot
+public sealed class FakeAggregateRoot : AggregateRoot<int>
 {
+    public FakeAggregateRoot()
+    {
+    }
+
+    public FakeAggregateRoot(int id) : base(id)
+    {
+    }
 }

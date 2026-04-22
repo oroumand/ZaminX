@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ZaminX.BuildingBlocks.Data.Write.Abstractions.Contracts;
 
 namespace ZaminX.ApplicationPatterns.HandlerExecution.Tests.TestDoubles;
 
-internal class FakeUnitOfWork
+public sealed class FakeUnitOfWork : IUnitOfWork
 {
+    public int SaveChangesCallCount { get; private set; }
+
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        SaveChangesCallCount++;
+        return Task.FromResult(1);
+    }
 }

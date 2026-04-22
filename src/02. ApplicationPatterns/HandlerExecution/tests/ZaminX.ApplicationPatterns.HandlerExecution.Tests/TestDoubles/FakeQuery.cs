@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ZaminX.BuildingBlocks.Application.Queries;
 
 namespace ZaminX.ApplicationPatterns.HandlerExecution.Tests.TestDoubles;
 
-internal class FakeQuery
-{
-}
+public sealed record FakeQuery : IQuery<string>;

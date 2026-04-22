@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ZaminX.BuildingBlocks.Domain.Entities;
 
 namespace ZaminX.ApplicationPatterns.HandlerExecution.Tests.TestDoubles;
 
-internal class FakeEntity
+public sealed class FakeEntity : Entity<int>
 {
+    public FakeEntity()
+    {
+    }
+
+    public FakeEntity(int id) : base(id)
+    {
+    }
 }
