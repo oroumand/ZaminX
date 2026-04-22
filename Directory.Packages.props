@@ -9,6 +9,7 @@
     <!--Auto Mapper-->
     <PackageVersion Include="AutoMapper" Version="16.1.1" />
     <!--Fluent Validation-->
+    <PackageVersion Include="FluentAssertions" Version="8.9.0" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <!--ASP.NET Projects-->
