@@ -52,6 +52,9 @@
 
 این بخش برای حل مسائل تکراری در سطح application طراحی می‌شود، نه برای تعریف primitiveهای فنی خام.
 
+#### HandlerExecution
+
+HandlerExecution یک الگوی reusable برای استانداردسازی اجرای handlerها است که روی BuildingBlockهای موجود سوار می‌شود و بدون افزودن abstraction غیرضروری، base classها و helperهای کاربردی برای command handlerها و query handlerها ارائه می‌دهد.
 ---
 
 ### 3. Integrations
@@ -490,6 +493,13 @@ src/
             ZaminX.BuildingBlocks.IdentityAndUsers.Persona.AspNetCore/
         samples/
           ZaminX.Samples.IdentityAndUsers.Persona.AspNetCore/
+  01.ApplicationPatterns/
+    HandlerExecution/
+      HandlerExecution.slnx
+      src/
+        ZaminX.ApplicationPatterns.HandlerExecution/
+      tests/
+        ZaminX.ApplicationPatterns.HandlerExecution.Tests/        
 ```
           
 

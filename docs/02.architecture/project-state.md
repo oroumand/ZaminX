@@ -707,3 +707,52 @@ Options در این capability برای mapping claim typeها و fallback value
 Persona اولین capability خانواده `IdentityAndUsers` در زمین X است و مرز این خانواده را از همان ابتدا روی concernهای روشن و reusable نگه می‌دارد.
 
 نسخه فعلی Persona بر حل مسئله current user access متمرکز است و عمداً وارد concernهای بزرگ‌تر identity subsystem نمی‌شود.
+
+
+### ApplicationPatterns
+وضعیت ApplicationPatterns
+
+این دسته شامل الگوهای reusable سطح application است که روی BuildingBlockهای موجود سوار می‌شوند و رفتارهای تکرارشونده را استاندارد می‌کنند.
+
+HandlerExecution
+
+وضعیت:
+
+طراحی نهایی انجام شده
+ساختار سلوشن و پروژه‌ها تعریف شده
+implementation اولیه انجام شده
+تست‌های پایه نوشته شده
+مستندات capability آماده شده
+تعریف HandlerExecution
+
+HandlerExecution یک Application Pattern reusable برای استانداردسازی تجربه پیاده‌سازی handlerها در زمین X است.
+
+این capability:
+
+primitive جدید برای handler تعریف نمی‌کند
+abstraction جدید غیرضروری اضافه نمی‌کند
+mediator جدید یا pipeline جدید ارائه نمی‌دهد
+روی capabilityهای موجود مانند Application، Axiom، ObjectMapper، Serializer، Translator و Persona سوار می‌شود
+
+هدف آن:
+
+کاهش boilerplate در handlerها
+یکدست‌سازی ساخت Result
+ارائه dependency bundle تایپ‌شده برای dependencyهای پرتکرار
+ارائه base classهای ساده برای command handlerها و query handlerها
+نگه‌داری context محدود و کنترل‌شده برای execution هر handler
+اجزای نسخه فعلی
+HandlerServices
+ResultContext
+ApplicationHandlerBase
+CommandHandlerBase
+QueryHandlerBase
+نکات مهم طراحی
+پروژه Abstractions جدا برای این capability نداریم
+service locator استفاده نشده است
+dependencyها explicit و constructor-based هستند
+current user به‌صورت optional و از Persona استفاده می‌شود
+logger از طریق ILoggerFactory در base class و به‌صورت lazy ساخته می‌شود
+ResultContext eager نیست و فقط در صورت نیاز materialize می‌شود
+command handlerها به write repository و IUnitOfWork وابسته‌اند
+query handlerها به read repository وابسته‌اند
