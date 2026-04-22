@@ -5,6 +5,7 @@
   </PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\03.DomainAndApplicationPrimitives\Application\src\ZaminX.BuildingBlocks.Application\ZaminX.BuildingBlocks.Application.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\03.DomainAndApplicationPrimitives\Domain\src\ZaminX.BuildingBlocks.Domain\ZaminX.BuildingBlocks.Domain.csproj" />
 		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\04.DataAndPersistence\Axiom\src\ZaminX.BuildingBlocks.Data.Read.Abstractions\ZaminX.BuildingBlocks.Data.Read.Abstractions.csproj" />
 		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\04.DataAndPersistence\Axiom\src\ZaminX.BuildingBlocks.Data.Write.Abstractions\ZaminX.BuildingBlocks.Data.Write.Abstractions.csproj" />
 		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\01.CrossCutting\ObjectMapper\src\Abstractions\ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.csproj" />
