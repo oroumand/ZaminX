@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <IsPackable>true</IsPackable>
+  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\03.DomainAndApplicationPrimitives\Application\src\ZaminX.BuildingBlocks.Application\ZaminX.BuildingBlocks.Application.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\04.DataAndPersistence\Axiom\src\ZaminX.BuildingBlocks.Data.Read.Abstractions\ZaminX.BuildingBlocks.Data.Read.Abstractions.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\04.DataAndPersistence\Axiom\src\ZaminX.BuildingBlocks.Data.Write.Abstractions\ZaminX.BuildingBlocks.Data.Write.Abstractions.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\01.CrossCutting\ObjectMapper\src\Abstractions\ZaminX.BuildingBlocks.CrossCutting.ObjectMapper.Abstractions.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\01.CrossCutting\Serializer\src\Abstractions\ZaminX.BuildingBlocks.CrossCutting.Serializer.Abstractions.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\01.CrossCutting\Translator\src\Abstractions\ZaminX.BuildingBlocks.CrossCutting.Translator.Abstractions.csproj" />
+		<ProjectReference Include="..\..\..\..\00.BuildingBlocks\05.IdentityAndUsers\Persona\src\Abstractions\ZaminX.BuildingBlocks.IdentityAndUsers.Persona.Abstractions.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+	</ItemGroup>
+</Project>

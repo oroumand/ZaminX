@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ZaminX.ApplicationPatterns.HandlerExecution/ZaminX.ApplicationPatterns.HandlerExecution.csproj" Id="fdee01b8-c871-4806-a4c8-a7a6c2fac577" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ZaminX.ApplicationPatterns.HandlerExecution.Tests/ZaminX.ApplicationPatterns.HandlerExecution.Tests.csproj" Id="b526ccc7-79f4-4406-bd96-1af908c88324" />
+  </Folder>
+</Solution>
